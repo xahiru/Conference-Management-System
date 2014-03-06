@@ -16,7 +16,7 @@ public class HashUtil {
     }
      public static void main(String[] args){
         
-        new HashUtil().setHex("admin");
+        new HashUtil().setHex("abc");
     }
  
 
@@ -56,8 +56,9 @@ public class HashUtil {
     }
     
     public void setHex2(String hex) {
-        final String hash = DigestUtils.sha256Hex(hex);
-        System.out.println(hash);
+        final String hash = DigestUtils.sha256Hex(hex); 
+        System.out.println(hash); 
+        System.out.println("this is the correct version that has to be used with HEX");
     }
 }
 
