@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package utilpack;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -10,56 +11,53 @@ import java.util.logging.Logger;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 
-
 public class HashUtil {
+
     public HashUtil() {
     }
-     public static void main(String[] args){
-        
-        new HashUtil().setHex("abc");
-    }
- 
 
-    private String hex;
+//    public static void main(String[] args) {
+//
+//         new HashUtil().printHash("abc");
+//    }
 
-    /**
-     * Get the value of hex
-     *
-     * @return the value of hex
-     */
-    public String getHex() {
-        return hex;
+    private String sha256Hex;
+    private String base64;
+
+    public String getSha256Hex() {
+        return sha256Hex;
     }
 
-    /**
-     * Set the value of hex
-     *
-     * @param hex new value of hex
-     */
-    public void setHex(String hex) {
-       
-      MessageDigest m;
+    public void setSha256Hex(String sha256Hex) {
+        final String hash = DigestUtils.sha256Hex(sha256Hex);
+        this.sha256Hex = hash;
+    }
+
+    public String getBase64() {
+        return base64;
+    }
+
+    public void setBase64(String base64) {
+
+        MessageDigest m;
         try {
             m = java.security.MessageDigest.getInstance("SHA-256");
-            final byte bin[] = m.digest((hex).getBytes());
-            
-            this.hex = Base64.encodeBase64String(bin);
-            System.out.println(this.hex);
-             System.out.println(m.digest((hex).getBytes()));
-            
+            final byte bin[] = m.digest((base64).getBytes());
+
+            this.base64 = Base64.encodeBase64String(bin);
+
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(HashUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-  setHex2(hex);
-        
+
     }
     
-    public void setHex2(String hex) {
-        final String hash = DigestUtils.sha256Hex(hex); 
-        System.out.println(hash); 
-        System.out.println("this is the correct version that has to be used with HEX");
-    }
+   public void printHash(String testString){
+       System.out.println("Passed String is: "+testString);
+       setSha256Hex(testString);
+       System.out.println("SHA-256 Hex is: "+getSha256Hex());
+       setBase64(testString);
+       System.out.println("base64 is: "+getBase64());
+   }
+
 }
-
-
