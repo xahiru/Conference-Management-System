@@ -17,11 +17,13 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import utilpack.HashUtil;
 
 @Named("usersController")
 @SessionScoped
 public class UsersController implements Serializable {
 
+    private HashUtil hashUtil;
     private Users current;
     private DataModel items = null;
     @EJB
@@ -81,6 +83,9 @@ public class UsersController implements Serializable {
 
     public String create() {
         try {
+            hashUtil = new HashUtil();
+            hashUtil.setBase64(current.getPassword());
+            current.setPassword(hashUtil.getBase64());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
             return prepareCreate();
@@ -98,6 +103,9 @@ public class UsersController implements Serializable {
 
     public String update() {
         try {
+            hashUtil = new HashUtil();
+            hashUtil.setBase64(current.getPassword());
+            current.setPassword(hashUtil.getBase64());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
             return "View";
