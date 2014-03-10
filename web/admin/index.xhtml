@@ -10,6 +10,10 @@
          
  
         <h:link outcome="/index" value="Back to Homepage" />
+           <br />
+           <h:form>
+           <h:commandLink action="#{loginController.logout()}" value="Logout"></h:commandLink>
+      </h:form>
     </h:body>
 </html>
 
