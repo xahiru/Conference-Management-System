@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewScheduleViewTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewScheduleViewLabel_idtable1}"/>
+                    <h:outputText value="#{scheduleViewController.selected.idtable1}" title="#{bundle.ViewScheduleViewTitle_idtable1}"/>
+                    <h:outputText value="#{bundle.ViewScheduleViewLabel_date}"/>
+                    <h:outputText value="#{scheduleViewController.selected.date}" title="#{bundle.ViewScheduleViewTitle_date}"/>
+                    <h:outputText value="#{bundle.ViewScheduleViewLabel_status}"/>
+                    <h:outputText value="#{scheduleViewController.selected.status}" title="#{bundle.ViewScheduleViewTitle_status}"/>
+                    <h:outputText value="#{bundle.ViewScheduleViewLabel_bookingBookingRef}"/>
+                    <h:outputText value="#{scheduleViewController.selected.bookingBookingRef}" title="#{bundle.ViewScheduleViewTitle_bookingBookingRef}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{scheduleViewController.destroyAndView}" value="#{bundle.ViewScheduleViewDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewScheduleViewEditLink}"/>
+                <br />
+                <h:commandLink action="#{scheduleViewController.prepareCreate}" value="#{bundle.ViewScheduleViewCreateLink}" />
+                <br />
+                <h:commandLink action="#{scheduleViewController.prepareList}" value="#{bundle.ViewScheduleViewShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewScheduleViewIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

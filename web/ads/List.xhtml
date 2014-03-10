@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAdsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAdsEmpty}" rendered="#{adsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{adsController.items.rowCount > 0}">
+                    <h:outputText value="#{adsController.pagination.pageFirstItem + 1}..#{adsController.pagination.pageLastItem + 1}/#{adsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{adsController.previous}" value="#{bundle.Previous} #{adsController.pagination.pageSize}" rendered="#{adsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{adsController.next}" value="#{bundle.Next} #{adsController.pagination.pageSize}" rendered="#{adsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{adsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAdsTitle_idads}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idads}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAdsTitle_photo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.photo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAdsTitle_video}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.video}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAdsTitle_date}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{adsController.prepareView}" value="#{bundle.ListAdsViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{adsController.prepareEdit}" value="#{bundle.ListAdsEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{adsController.destroy}" value="#{bundle.ListAdsDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{adsController.prepareCreate}" value="#{bundle.ListAdsCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAdsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

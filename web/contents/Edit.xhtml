@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditContentsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditContentsLabel_idcontents}" for="idcontents" />
+                    <h:inputText id="idcontents" value="#{contentsController.selected.idcontents}" title="#{bundle.EditContentsTitle_idcontents}" required="true" requiredMessage="#{bundle.EditContentsRequiredMessage_idcontents}"/>
+                    <h:outputLabel value="#{bundle.EditContentsLabel_paticipantNotes}" for="paticipantNotes" />
+                    <h:inputText id="paticipantNotes" value="#{contentsController.selected.paticipantNotes}" title="#{bundle.EditContentsTitle_paticipantNotes}" />
+                    <h:outputLabel value="#{bundle.EditContentsLabel_eventIdevent}" for="eventIdevent" />
+                    <h:selectOneMenu id="eventIdevent" value="#{contentsController.selected.eventIdevent}" title="#{bundle.EditContentsTitle_eventIdevent}" required="true" requiredMessage="#{bundle.EditContentsRequiredMessage_eventIdevent}">
+                        <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{contentsController.update}" value="#{bundle.EditContentsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditContentsViewLink}"/>
+                <br />
+                <h:commandLink action="#{contentsController.prepareList}" value="#{bundle.EditContentsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditContentsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

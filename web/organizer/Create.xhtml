@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOrganizerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_idorganizer}" for="idorganizer" />
+                    <h:inputText id="idorganizer" value="#{organizerController.selected.idorganizer}" title="#{bundle.CreateOrganizerTitle_idorganizer}" required="true" requiredMessage="#{bundle.CreateOrganizerRequiredMessage_idorganizer}"/>
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_companyName}" for="companyName" />
+                    <h:inputText id="companyName" value="#{organizerController.selected.companyName}" title="#{bundle.CreateOrganizerTitle_companyName}" />
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_contactPersonName}" for="contactPersonName" />
+                    <h:inputText id="contactPersonName" value="#{organizerController.selected.contactPersonName}" title="#{bundle.CreateOrganizerTitle_contactPersonName}" />
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_contactNumber}" for="contactNumber" />
+                    <h:inputText id="contactNumber" value="#{organizerController.selected.contactNumber}" title="#{bundle.CreateOrganizerTitle_contactNumber}" />
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{organizerController.selected.email}" title="#{bundle.CreateOrganizerTitle_email}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{organizerController.create}" value="#{bundle.CreateOrganizerSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{organizerController.prepareList}" value="#{bundle.CreateOrganizerShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOrganizerIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

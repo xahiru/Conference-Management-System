@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditRoomTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditRoomLabel_idroom}" for="idroom" />
+                    <h:inputText id="idroom" value="#{roomController.selected.idroom}" title="#{bundle.EditRoomTitle_idroom}" required="true" requiredMessage="#{bundle.EditRoomRequiredMessage_idroom}"/>
+                    <h:outputLabel value="#{bundle.EditRoomLabel_number}" for="number" />
+                    <h:inputText id="number" value="#{roomController.selected.number}" title="#{bundle.EditRoomTitle_number}" required="true" requiredMessage="#{bundle.EditRoomRequiredMessage_number}"/>
+                    <h:outputLabel value="#{bundle.EditRoomLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.EditRoomTitle_name}" />
+                    <h:outputLabel value="#{bundle.EditRoomLabel_area}" for="area" />
+                    <h:inputText id="area" value="#{roomController.selected.area}" title="#{bundle.EditRoomTitle_area}" />
+                    <h:outputLabel value="#{bundle.EditRoomLabel_capacity}" for="capacity" />
+                    <h:inputText id="capacity" value="#{roomController.selected.capacity}" title="#{bundle.EditRoomTitle_capacity}" />
+                    <h:outputLabel value="#{bundle.EditRoomLabel_type}" for="type" />
+                    <h:inputText id="type" value="#{roomController.selected.type}" title="#{bundle.EditRoomTitle_type}" />
+                    <h:outputLabel value="#{bundle.EditRoomLabel_furnitureMobility}" for="furnitureMobility" />
+                    <h:inputText id="furnitureMobility" value="#{roomController.selected.furnitureMobility}" title="#{bundle.EditRoomTitle_furnitureMobility}" />
+                    <h:outputLabel value="#{bundle.EditRoomLabel_furnitureType}" for="furnitureType" />
+                    <h:inputText id="furnitureType" value="#{roomController.selected.furnitureType}" title="#{bundle.EditRoomTitle_furnitureType}" />
+                    <h:outputLabel value="#{bundle.EditRoomLabel_orientation}" for="orientation" />
+                    <h:inputText id="orientation" value="#{roomController.selected.orientation}" title="#{bundle.EditRoomTitle_orientation}" />
+                    <h:outputLabel value="#{bundle.EditRoomLabel_floorPlan}" for="floorPlan" />
+                    <h:inputText id="floorPlan" value="#{roomController.selected.floorPlan}" title="#{bundle.EditRoomTitle_floorPlan}" />
+                </h:panelGrid>
+                <h:commandLink action="#{roomController.update}" value="#{bundle.EditRoomSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditRoomViewLink}"/>
+                <br />
+                <h:commandLink action="#{roomController.prepareList}" value="#{bundle.EditRoomShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditRoomIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

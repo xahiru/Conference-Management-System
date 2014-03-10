@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRoomTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_idroom}" for="idroom" />
+                    <h:inputText id="idroom" value="#{roomController.selected.idroom}" title="#{bundle.CreateRoomTitle_idroom}" required="true" requiredMessage="#{bundle.CreateRoomRequiredMessage_idroom}"/>
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_number}" for="number" />
+                    <h:inputText id="number" value="#{roomController.selected.number}" title="#{bundle.CreateRoomTitle_number}" required="true" requiredMessage="#{bundle.CreateRoomRequiredMessage_number}"/>
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.CreateRoomTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_area}" for="area" />
+                    <h:inputText id="area" value="#{roomController.selected.area}" title="#{bundle.CreateRoomTitle_area}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_capacity}" for="capacity" />
+                    <h:inputText id="capacity" value="#{roomController.selected.capacity}" title="#{bundle.CreateRoomTitle_capacity}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_type}" for="type" />
+                    <h:inputText id="type" value="#{roomController.selected.type}" title="#{bundle.CreateRoomTitle_type}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_furnitureMobility}" for="furnitureMobility" />
+                    <h:inputText id="furnitureMobility" value="#{roomController.selected.furnitureMobility}" title="#{bundle.CreateRoomTitle_furnitureMobility}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_furnitureType}" for="furnitureType" />
+                    <h:inputText id="furnitureType" value="#{roomController.selected.furnitureType}" title="#{bundle.CreateRoomTitle_furnitureType}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_orientation}" for="orientation" />
+                    <h:inputText id="orientation" value="#{roomController.selected.orientation}" title="#{bundle.CreateRoomTitle_orientation}" />
+                    <h:outputLabel value="#{bundle.CreateRoomLabel_floorPlan}" for="floorPlan" />
+                    <h:inputText id="floorPlan" value="#{roomController.selected.floorPlan}" title="#{bundle.CreateRoomTitle_floorPlan}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{roomController.create}" value="#{bundle.CreateRoomSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{roomController.prepareList}" value="#{bundle.CreateRoomShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRoomIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -36,6 +36,8 @@
             <web-resource-name>Protected Admin Area</web-resource-name>
             <description></description>
             <url-pattern>/faces/admin/*</url-pattern>
+            <url-pattern>/faces/users/*</url-pattern>
+            <url-pattern>/faces/usersGroup/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>

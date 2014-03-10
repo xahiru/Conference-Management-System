@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOrganizerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOrganizerLabel_idorganizer}"/>
+                    <h:outputText value="#{organizerController.selected.idorganizer}" title="#{bundle.ViewOrganizerTitle_idorganizer}"/>
+                    <h:outputText value="#{bundle.ViewOrganizerLabel_companyName}"/>
+                    <h:outputText value="#{organizerController.selected.companyName}" title="#{bundle.ViewOrganizerTitle_companyName}"/>
+                    <h:outputText value="#{bundle.ViewOrganizerLabel_contactPersonName}"/>
+                    <h:outputText value="#{organizerController.selected.contactPersonName}" title="#{bundle.ViewOrganizerTitle_contactPersonName}"/>
+                    <h:outputText value="#{bundle.ViewOrganizerLabel_contactNumber}"/>
+                    <h:outputText value="#{organizerController.selected.contactNumber}" title="#{bundle.ViewOrganizerTitle_contactNumber}"/>
+                    <h:outputText value="#{bundle.ViewOrganizerLabel_email}"/>
+                    <h:outputText value="#{organizerController.selected.email}" title="#{bundle.ViewOrganizerTitle_email}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{organizerController.destroyAndView}" value="#{bundle.ViewOrganizerDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOrganizerEditLink}"/>
+                <br />
+                <h:commandLink action="#{organizerController.prepareCreate}" value="#{bundle.ViewOrganizerCreateLink}" />
+                <br />
+                <h:commandLink action="#{organizerController.prepareList}" value="#{bundle.ViewOrganizerShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOrganizerIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

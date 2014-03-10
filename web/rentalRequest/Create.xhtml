@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRentalRequestTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRentalRequestLabel_idrentalRequest}" for="idrentalRequest" />
+                    <h:inputText id="idrentalRequest" value="#{rentalRequestController.selected.idrentalRequest}" title="#{bundle.CreateRentalRequestTitle_idrentalRequest}" required="true" requiredMessage="#{bundle.CreateRentalRequestRequiredMessage_idrentalRequest}"/>
+                    <h:outputLabel value="#{bundle.CreateRentalRequestLabel_requestType}" for="requestType" />
+                    <h:inputText id="requestType" value="#{rentalRequestController.selected.requestType}" title="#{bundle.CreateRentalRequestTitle_requestType}" required="true" requiredMessage="#{bundle.CreateRentalRequestRequiredMessage_requestType}"/>
+                    <h:outputLabel value="#{bundle.CreateRentalRequestLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{rentalRequestController.selected.description}" title="#{bundle.CreateRentalRequestTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateRentalRequestLabel_qauntity}" for="qauntity" />
+                    <h:inputText id="qauntity" value="#{rentalRequestController.selected.qauntity}" title="#{bundle.CreateRentalRequestTitle_qauntity}" />
+                    <h:outputLabel value="#{bundle.CreateRentalRequestLabel_eventIdevent}" for="eventIdevent" />
+                    <h:selectOneMenu id="eventIdevent" value="#{rentalRequestController.selected.eventIdevent}" title="#{bundle.CreateRentalRequestTitle_eventIdevent}" required="true" requiredMessage="#{bundle.CreateRentalRequestRequiredMessage_eventIdevent}">
+                        <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{rentalRequestController.create}" value="#{bundle.CreateRentalRequestSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{rentalRequestController.prepareList}" value="#{bundle.CreateRentalRequestShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRentalRequestIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

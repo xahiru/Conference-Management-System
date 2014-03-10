@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateBookingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateBookingLabel_bookingRef}" for="bookingRef" />
+                    <h:inputText id="bookingRef" value="#{bookingController.selected.bookingRef}" title="#{bundle.CreateBookingTitle_bookingRef}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_bookingRef}"/>
+                    <h:outputLabel value="#{bundle.CreateBookingLabel_startTime}" for="startTime" />
+                    <h:inputText id="startTime" value="#{bookingController.selected.startTime}" title="#{bundle.CreateBookingTitle_startTime}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_startTime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateBookingLabel_endTime}" for="endTime" />
+                    <h:inputText id="endTime" value="#{bookingController.selected.endTime}" title="#{bundle.CreateBookingTitle_endTime}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_endTime}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateBookingLabel_usersIduser}" for="usersIduser" />
+                    <h:selectOneMenu id="usersIduser" value="#{bookingController.selected.usersIduser}" title="#{bundle.CreateBookingTitle_usersIduser}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_usersIduser}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{bookingController.create}" value="#{bundle.CreateBookingSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{bookingController.prepareList}" value="#{bundle.CreateBookingShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateBookingIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

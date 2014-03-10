@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewContentsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewContentsLabel_idcontents}"/>
+                    <h:outputText value="#{contentsController.selected.idcontents}" title="#{bundle.ViewContentsTitle_idcontents}"/>
+                    <h:outputText value="#{bundle.ViewContentsLabel_paticipantNotes}"/>
+                    <h:outputText value="#{contentsController.selected.paticipantNotes}" title="#{bundle.ViewContentsTitle_paticipantNotes}"/>
+                    <h:outputText value="#{bundle.ViewContentsLabel_eventIdevent}"/>
+                    <h:outputText value="#{contentsController.selected.eventIdevent}" title="#{bundle.ViewContentsTitle_eventIdevent}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{contentsController.destroyAndView}" value="#{bundle.ViewContentsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewContentsEditLink}"/>
+                <br />
+                <h:commandLink action="#{contentsController.prepareCreate}" value="#{bundle.ViewContentsCreateLink}" />
+                <br />
+                <h:commandLink action="#{contentsController.prepareList}" value="#{bundle.ViewContentsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewContentsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

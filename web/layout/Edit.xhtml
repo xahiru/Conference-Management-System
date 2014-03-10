@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditLayoutTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditLayoutLabel_idlayout}" for="idlayout" />
+                    <h:inputText id="idlayout" value="#{layoutController.selected.idlayout}" title="#{bundle.EditLayoutTitle_idlayout}" required="true" requiredMessage="#{bundle.EditLayoutRequiredMessage_idlayout}"/>
+                    <h:outputLabel value="#{bundle.EditLayoutLabel_photo}" for="photo" />
+                    <h:inputText id="photo" value="#{layoutController.selected.photo}" title="#{bundle.EditLayoutTitle_photo}" />
+                    <h:outputLabel value="#{bundle.EditLayoutLabel_roomIdroom}" for="roomIdroom" />
+                    <h:selectOneMenu id="roomIdroom" value="#{layoutController.selected.roomIdroom}" title="#{bundle.EditLayoutTitle_roomIdroom}" required="true" requiredMessage="#{bundle.EditLayoutRequiredMessage_roomIdroom}">
+                        <f:selectItems value="#{roomController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{layoutController.update}" value="#{bundle.EditLayoutSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditLayoutViewLink}"/>
+                <br />
+                <h:commandLink action="#{layoutController.prepareList}" value="#{bundle.EditLayoutShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditLayoutIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEventTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEventLabel_idevent}" for="idevent" />
+                    <h:inputText id="idevent" value="#{eventController.selected.idevent}" title="#{bundle.EditEventTitle_idevent}" required="true" requiredMessage="#{bundle.EditEventRequiredMessage_idevent}"/>
+                    <h:outputLabel value="#{bundle.EditEventLabel_title}" for="title" />
+                    <h:inputText id="title" value="#{eventController.selected.title}" title="#{bundle.EditEventTitle_title}" required="true" requiredMessage="#{bundle.EditEventRequiredMessage_title}"/>
+                    <h:outputLabel value="#{bundle.EditEventLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{eventController.selected.description}" title="#{bundle.EditEventTitle_description}" />
+                    <h:outputLabel value="#{bundle.EditEventLabel_numberOfParticipants}" for="numberOfParticipants" />
+                    <h:inputText id="numberOfParticipants" value="#{eventController.selected.numberOfParticipants}" title="#{bundle.EditEventTitle_numberOfParticipants}" />
+                    <h:outputLabel value="#{bundle.EditEventLabel_bookingBookingRef}" for="bookingBookingRef" />
+                    <h:selectOneMenu id="bookingBookingRef" value="#{eventController.selected.bookingBookingRef}" title="#{bundle.EditEventTitle_bookingBookingRef}" required="true" requiredMessage="#{bundle.EditEventRequiredMessage_bookingBookingRef}">
+                        <f:selectItems value="#{bookingController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditEventLabel_organizerIdorganizer}" for="organizerIdorganizer" />
+                    <h:selectOneMenu id="organizerIdorganizer" value="#{eventController.selected.organizerIdorganizer}" title="#{bundle.EditEventTitle_organizerIdorganizer}" required="true" requiredMessage="#{bundle.EditEventRequiredMessage_organizerIdorganizer}">
+                        <f:selectItems value="#{organizerController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditEventLabel_roomIdroom}" for="roomIdroom" />
+                    <h:selectOneMenu id="roomIdroom" value="#{eventController.selected.roomIdroom}" title="#{bundle.EditEventTitle_roomIdroom}" required="true" requiredMessage="#{bundle.EditEventRequiredMessage_roomIdroom}">
+                        <f:selectItems value="#{roomController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{eventController.update}" value="#{bundle.EditEventSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditEventViewLink}"/>
+                <br />
+                <h:commandLink action="#{eventController.prepareList}" value="#{bundle.EditEventShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditEventIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

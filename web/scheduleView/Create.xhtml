@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateScheduleViewTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateScheduleViewLabel_idtable1}" for="idtable1" />
+                    <h:inputText id="idtable1" value="#{scheduleViewController.selected.idtable1}" title="#{bundle.CreateScheduleViewTitle_idtable1}" required="true" requiredMessage="#{bundle.CreateScheduleViewRequiredMessage_idtable1}"/>
+                    <h:outputLabel value="#{bundle.CreateScheduleViewLabel_date}" for="date" />
+                    <h:inputText id="date" value="#{scheduleViewController.selected.date}" title="#{bundle.CreateScheduleViewTitle_date}" />
+                    <h:outputLabel value="#{bundle.CreateScheduleViewLabel_status}" for="status" />
+                    <h:inputText id="status" value="#{scheduleViewController.selected.status}" title="#{bundle.CreateScheduleViewTitle_status}" />
+                    <h:outputLabel value="#{bundle.CreateScheduleViewLabel_bookingBookingRef}" for="bookingBookingRef" />
+                    <h:selectOneMenu id="bookingBookingRef" value="#{scheduleViewController.selected.bookingBookingRef}" title="#{bundle.CreateScheduleViewTitle_bookingBookingRef}" required="true" requiredMessage="#{bundle.CreateScheduleViewRequiredMessage_bookingBookingRef}">
+                        <f:selectItems value="#{bookingController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{scheduleViewController.create}" value="#{bundle.CreateScheduleViewSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{scheduleViewController.prepareList}" value="#{bundle.CreateScheduleViewShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateScheduleViewIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

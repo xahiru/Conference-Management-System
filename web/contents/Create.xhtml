@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateContentsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateContentsLabel_idcontents}" for="idcontents" />
+                    <h:inputText id="idcontents" value="#{contentsController.selected.idcontents}" title="#{bundle.CreateContentsTitle_idcontents}" required="true" requiredMessage="#{bundle.CreateContentsRequiredMessage_idcontents}"/>
+                    <h:outputLabel value="#{bundle.CreateContentsLabel_paticipantNotes}" for="paticipantNotes" />
+                    <h:inputText id="paticipantNotes" value="#{contentsController.selected.paticipantNotes}" title="#{bundle.CreateContentsTitle_paticipantNotes}" />
+                    <h:outputLabel value="#{bundle.CreateContentsLabel_eventIdevent}" for="eventIdevent" />
+                    <h:selectOneMenu id="eventIdevent" value="#{contentsController.selected.eventIdevent}" title="#{bundle.CreateContentsTitle_eventIdevent}" required="true" requiredMessage="#{bundle.CreateContentsRequiredMessage_eventIdevent}">
+                        <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{contentsController.create}" value="#{bundle.CreateContentsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{contentsController.prepareList}" value="#{bundle.CreateContentsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateContentsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

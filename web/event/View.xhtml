@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewEventTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewEventLabel_idevent}"/>
+                    <h:outputText value="#{eventController.selected.idevent}" title="#{bundle.ViewEventTitle_idevent}"/>
+                    <h:outputText value="#{bundle.ViewEventLabel_title}"/>
+                    <h:outputText value="#{eventController.selected.title}" title="#{bundle.ViewEventTitle_title}"/>
+                    <h:outputText value="#{bundle.ViewEventLabel_description}"/>
+                    <h:outputText value="#{eventController.selected.description}" title="#{bundle.ViewEventTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewEventLabel_numberOfParticipants}"/>
+                    <h:outputText value="#{eventController.selected.numberOfParticipants}" title="#{bundle.ViewEventTitle_numberOfParticipants}"/>
+                    <h:outputText value="#{bundle.ViewEventLabel_bookingBookingRef}"/>
+                    <h:outputText value="#{eventController.selected.bookingBookingRef}" title="#{bundle.ViewEventTitle_bookingBookingRef}"/>
+                    <h:outputText value="#{bundle.ViewEventLabel_organizerIdorganizer}"/>
+                    <h:outputText value="#{eventController.selected.organizerIdorganizer}" title="#{bundle.ViewEventTitle_organizerIdorganizer}"/>
+                    <h:outputText value="#{bundle.ViewEventLabel_roomIdroom}"/>
+                    <h:outputText value="#{eventController.selected.roomIdroom}" title="#{bundle.ViewEventTitle_roomIdroom}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{eventController.destroyAndView}" value="#{bundle.ViewEventDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewEventEditLink}"/>
+                <br />
+                <h:commandLink action="#{eventController.prepareCreate}" value="#{bundle.ViewEventCreateLink}" />
+                <br />
+                <h:commandLink action="#{eventController.prepareList}" value="#{bundle.ViewEventShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewEventIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
