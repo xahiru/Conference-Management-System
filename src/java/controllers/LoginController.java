@@ -7,6 +7,7 @@
 package controllers;
 
 
+import entity.Users;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -24,7 +25,7 @@ public class LoginController implements Serializable {
 
     /**
      * Creates a new instance of LoginController
-     */
+     */  
     public LoginController() {
     }
     
@@ -34,5 +35,5 @@ public class LoginController implements Serializable {
           session.invalidate();
           return "index";
    }
-    
+   
 }

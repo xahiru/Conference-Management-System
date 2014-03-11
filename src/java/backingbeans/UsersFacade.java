@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package backingbeans;
 
 import entity.Users;
@@ -17,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UsersFacade extends AbstractFacade<Users> {
+
     @PersistenceContext(unitName = "Conference_Management_SystemPU")
     private EntityManager em;
 
@@ -28,5 +28,11 @@ public class UsersFacade extends AbstractFacade<Users> {
     public UsersFacade() {
         super(Users.class);
     }
-    
+
+    public Users findUsersbyName(String username) {
+
+        return (Users) em.createNamedQuery("Users.findByUsername").setParameter("username", username).getSingleResult();
+
+    }
+
 }
