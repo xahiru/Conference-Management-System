@@ -5,31 +5,34 @@
  */
 package controllers;
 
-import backingbeans.UsersFacade;
 import entity.Booking;
+import entity.Event;
 import entity.Organizer;
-import entity.Room;
+
 import entity.Users;
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.Date;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
+//import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
+//import org.primefaces.event.DateSelectEvent;
 
 /**
  *
  * @author xahiru
  */
 @Named("reservationController")
-@SessionScoped
+@RequestScoped
 public class ReservationController implements Serializable {
 
-  
     private String requestedPName;
 
     public String getRequestedPName() {
-        return requestedPName ;
+        return requestedPName;
     }
 
     public void setRequestedPName(String requestedPName) {
@@ -39,8 +42,9 @@ public class ReservationController implements Serializable {
     private Users user;
     private Booking booking;
     private Organizer organizer;
-    private Room room;
-    
+    private Event event;
+   
+
     @EJB
     private backingbeans.UsersFacade usersFacade;
     @EJB
@@ -48,28 +52,26 @@ public class ReservationController implements Serializable {
     @EJB
     private backingbeans.OrganizerFacade organizerFacade;
     @EJB
-    private backingbeans.RoomFacade roomFacade;
-   // private int selectedItemIndex;
+    private backingbeans.EventFacade eventFacade;
+    // private int selectedItemIndex;
 
     public ReservationController() {
         user = new Users();
         booking = new Booking();
         organizer = new Organizer();
-        room = new Room();
+        event = new Event();
+
         try {
             requestedPName = getLoggedinUsername();
-            
+
         } catch (NullPointerException e) {
             requestedPName = "Anon user";
         }
-        
-        
-    }
-    
 
+    }
 
     private String getLoggedinUsername() {
-      
+
         Principal userPrincipal;
         userPrincipal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
         return userPrincipal.getName();
@@ -83,20 +85,28 @@ public class ReservationController implements Serializable {
 //        } else {
 //
 //        }
-        
+        /*
+         Getting the loggedin user from DB
+         */
         user = usersFacade.findUsersbyName(requestedPName);
-        
-        booking.setUsersIduser(user);
-        
-        
+
         bookingFacade.create(booking);
-        
-        
+
+        booking.setUsersIduser(user);
+
+        event.setBookingBookingRef(booking);
+
+        organizerFacade.create(organizer);
+
+        event.setOrganizerIdorganizer(organizer);
+
+        eventFacade.create(event);
 
         return "index"; //the success page
 
     }
-
+    
+   
     public Users getUser() {
         return user;
     }
@@ -121,13 +131,13 @@ public class ReservationController implements Serializable {
         this.organizer = organizer;
     }
 
-    public Room getRoom() {
-        return room;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-   
+
 }

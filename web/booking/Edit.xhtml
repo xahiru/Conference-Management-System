@@ -15,8 +15,7 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditBookingLabel_bookingRef}" for="bookingRef" />
-                    <h:inputText id="bookingRef" value="#{bookingController.selected.bookingRef}" title="#{bundle.EditBookingTitle_bookingRef}" required="true" requiredMessage="#{bundle.EditBookingRequiredMessage_bookingRef}"/>
+                   
                     <h:outputLabel value="#{bundle.EditBookingLabel_startTime}" for="startTime" />
                     <h:inputText id="startTime" value="#{bookingController.selected.startTime}" title="#{bundle.EditBookingTitle_startTime}" required="true" requiredMessage="#{bundle.EditBookingRequiredMessage_startTime}">
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
@@ -26,9 +25,7 @@
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditBookingLabel_usersIduser}" for="usersIduser" />
-                    <h:selectOneMenu id="usersIduser" value="#{bookingController.selected.usersIduser}" title="#{bundle.EditBookingTitle_usersIduser}" required="true" requiredMessage="#{bundle.EditBookingRequiredMessage_usersIduser}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                
                 </h:panelGrid>
                 <h:commandLink action="#{bookingController.update}" value="#{bundle.EditBookingSaveLink}"/>
                 <br />

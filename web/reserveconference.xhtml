@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -13,42 +14,44 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateBookingLabel_bookingRef}" for="bookingRef" />
-                    <h:inputText id="bookingRef" value="#{bookingController.selected.bookingRef}" title="#{bundle.CreateBookingTitle_bookingRef}" required="false" requiredMessage="#{bundle.CreateBookingRequiredMessage_bookingRef}"/>
+                    <h:inputText id="bookingRef" value="#{bookingController.selected.bookingRef}" title="#{bundle.CreateBookingTitle_bookingRef}" disabled="true" required="false" requiredMessage="#{bundle.CreateBookingRequiredMessage_bookingRef}"/>
                     <h:outputLabel value="#{bundle.CreateBookingLabel_startTime}" for="startTime" />
                     <h:inputText id="startTime" value="#{reservationController.booking.startTime}" title="#{bundle.CreateBookingTitle_startTime}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_startTime}">
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateBookingLabel_endTime}" for="endTime" />
-                    <h:inputText id="endTime" value="#{reservationController.booking.endTime}" title="#{bundle.CreateBookingTitle_endTime}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_endTime}">
+                    <h:inputText  id="endTime" value="#{reservationController.booking.endTime}" title="#{bundle.CreateBookingTitle_endTime}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_endTime}">
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:inputText>
-                    <h:outputLabel value="#{reservationController.requestedPName}" for="usersIduser" />
-                    
-                </h:panelGrid>
-                
-             
-              
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateEventLabel_idevent}" for="idevent" />
-                    <h:inputText id="idevent" value="#{eventController.selected.idevent}" title="#{bundle.CreateEventTitle_idevent}" required="false" requiredMessage="#{bundle.CreateEventRequiredMessage_idevent}"/>
+                    <h:outputLabel value="Logged-in as:" for="usersIduser" />
+                    <h:inputText id="usersIduser" disabled="true" value="#{reservationController.requestedPName}" title="#{bundle.CreateBookingTitle_endTime}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_endTime}">
+
+                    </h:inputText>
+                   
                     <h:outputLabel value="#{bundle.CreateEventLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{eventController.selected.title}" title="#{bundle.CreateEventTitle_title}" required="false" requiredMessage="#{bundle.CreateEventRequiredMessage_title}"/>
+                    <h:inputText id="title" value="#{reservationController.event.title}" title="#{bundle.CreateEventTitle_title}" required="true" requiredMessage="#{bundle.CreateEventRequiredMessage_title}"/>
                     <h:outputLabel value="#{bundle.CreateEventLabel_description}" for="description" />
-                    <h:inputText id="description" value="#{eventController.selected.description}" title="#{bundle.CreateEventTitle_description}" />
+                    <h:inputText id="description" value="#{reservationController.event.description}" title="#{bundle.CreateEventTitle_description}" />
                     <h:outputLabel value="#{bundle.CreateEventLabel_numberOfParticipants}" for="numberOfParticipants" />
-                    <h:inputText id="numberOfParticipants" value="#{eventController.selected.numberOfParticipants}" title="#{bundle.CreateEventTitle_numberOfParticipants}" />
-                    <h:outputLabel value="#{bundle.CreateEventLabel_bookingBookingRef}" for="bookingBookingRef" />
-                    <h:selectOneMenu id="bookingBookingRef" value="#{eventController.selected.bookingBookingRef}" title="#{bundle.CreateEventTitle_bookingBookingRef}" required="false" requiredMessage="#{bundle.CreateEventRequiredMessage_bookingBookingRef}">
-                        <f:selectItems value="#{bookingController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateEventLabel_organizerIdorganizer}" for="organizerIdorganizer" />
-                    <h:selectOneMenu id="organizerIdorganizer" value="#{eventController.selected.organizerIdorganizer}" title="#{bundle.CreateEventTitle_organizerIdorganizer}" required="false" requiredMessage="#{bundle.CreateEventRequiredMessage_organizerIdorganizer}">
-                        <f:selectItems value="#{organizerController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <h:inputText id="numberOfParticipants" value="#{reservationController.event.numberOfParticipants}" title="#{bundle.CreateEventTitle_numberOfParticipants}" />
+                 
                     <h:outputLabel value="#{bundle.CreateEventLabel_roomIdroom}" for="roomIdroom" />
-                    <h:selectOneMenu id="roomIdroom" value="#{eventController.selected.roomIdroom}" title="#{bundle.CreateEventTitle_roomIdroom}" required="false" requiredMessage="#{bundle.CreateEventRequiredMessage_roomIdroom}">
+                    <h:selectOneMenu id="roomIdroom" value="#{reservationController.event.roomIdroom}" title="#{bundle.CreateEventTitle_roomIdroom}" required="true" requiredMessage="#{bundle.CreateEventRequiredMessage_roomIdroom}">
                         <f:selectItems value="#{roomController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+         
+                    
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_companyName}" for="companyName" />
+                    <h:inputText id="companyName" value="#{reservationController.organizer.companyName}" title="#{bundle.CreateOrganizerTitle_companyName}" required="true"/>
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_contactPersonName}" for="contactPersonName" />
+                    <h:inputText id="contactPersonName" value="#{reservationController.organizer.contactPersonName}" title="#{bundle.CreateOrganizerTitle_contactPersonName}" />
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_contactNumber}" for="contactNumber" />
+                    <h:inputText id="contactNumber" value="#{reservationController.organizer.contactNumber}" title="#{bundle.CreateOrganizerTitle_contactNumber}" />
+                    <h:outputLabel value="#{bundle.CreateOrganizerLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{reservationController.organizer.email}" title="#{bundle.CreateOrganizerTitle_email}" required="true"/>
+              
+                   
+                    
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{reservationController.reserveEvent()}" value="#{bundle.CreateEventSaveLink}" />

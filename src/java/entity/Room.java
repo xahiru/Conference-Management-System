@@ -213,7 +213,7 @@ public class Room implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Room[ idroom=" + idroom + " ]";
+        return "Room No:" + number + ", "+ name;
     }
     
 }
