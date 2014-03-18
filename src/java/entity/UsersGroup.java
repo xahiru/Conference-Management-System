@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UsersGroup.findAll", query = "SELECT u FROM UsersGroup u"),
+    @NamedQuery(name = "UsersGroup.findAllDistinctGroupNames", query = "SELECT DISTINCT u.groupname FROM UsersGroup u"),
     @NamedQuery(name = "UsersGroup.findByIdroles", query = "SELECT u FROM UsersGroup u WHERE u.idroles = :idroles"),
     @NamedQuery(name = "UsersGroup.findByGroupname", query = "SELECT u FROM UsersGroup u WHERE u.groupname = :groupname")})
 public class UsersGroup implements Serializable {
@@ -107,7 +108,7 @@ public class UsersGroup implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.UsersGroup[ idroles=" + idroles + " ]";
+        return groupname;
     }
     
 }

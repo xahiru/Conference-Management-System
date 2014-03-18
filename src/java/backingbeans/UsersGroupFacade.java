@@ -35,5 +35,10 @@ public class UsersGroupFacade extends AbstractFacade<UsersGroup> {
         return em.createNamedQuery("UsersGroup.findByGroupname").setParameter("groupname", groupName).getResultList();
 
     }
+      public List<UsersGroup> getAllDistinctGroupNames() {
+
+        return em.createNamedQuery("UsersGroup.findAllDistinctGroupNames").getResultList();
+
+    }
 
 }

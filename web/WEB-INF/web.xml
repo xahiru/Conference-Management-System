@@ -21,7 +21,7 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-     <login-config>
+    <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>jdbcRealm</realm-name>
         <form-login-config>
@@ -38,7 +38,6 @@
             <url-pattern>/faces/admin/*</url-pattern>
             <url-pattern>/faces/users/*</url-pattern>
             <url-pattern>/faces/usersGroup/*</url-pattern>
-            <url-pattern>/faces/reserveconference.xhtml</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
             <http-method>HEAD</http-method>
@@ -50,6 +49,29 @@
         <auth-constraint>
             <description/>
             <role-name>admin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Authorised userse Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Authusers Admin Area</web-resource-name>
+            <description>authenticated users</description>
+            <url-pattern>/faces/booking/*</url-pattern>
+            <url-pattern>/faces/reserveconference.xhtml</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>authusers</role-name>
         </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
@@ -73,4 +95,8 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/faces/403.xhtml</location>
+    </error-page>
 </web-app>

@@ -33,7 +33,7 @@ public class LoginController implements Serializable {
           FacesContext context = FacesContext.getCurrentInstance();
           HttpSession session = (HttpSession)context.getExternalContext().getSession(false);
           session.invalidate();
-          return "index";
+          return "/index";
    }
    
 }
