@@ -185,7 +185,7 @@ public class UsersGroupController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.getAllDistinctGroupNames(), true);
     }
 
     public UsersGroup getUsersGroup(java.lang.Integer id) {
