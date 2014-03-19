@@ -5,13 +5,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-     <ui:composition template="./../conferenceTemplate.xhtml">
+    <ui:composition template="./../conferenceTemplate.xhtml">
 
-            <ui:define name="options">
-                <h:commandLink action="#{loginController.logout()}" value="Logout"></h:commandLink>
-            </ui:define>
+        <ui:define name="options">
+            <h:commandLink action="#{loginController.logout()}" value="Logout"></h:commandLink>
+        </ui:define>
 
-            <ui:define name="content">
+        <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -33,7 +33,7 @@
                 <h:commandLink action="#{usersGroupController.prepareList}" value="#{bundle.CreateUsersGroupShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.CreateUsersGroupIndexLink}"/>
+                <h:link outcome="/admin/index" value="Admin Home"/>
             </h:form>
         </ui:define>
     </ui:composition>
