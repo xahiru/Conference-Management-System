@@ -59,7 +59,7 @@
         <web-resource-collection>
             <web-resource-name>Authusers Admin Area</web-resource-name>
             <description>authenticated users</description>
-            <url-pattern>/faces/booking/*</url-pattern>
+            <url-pattern>/faces/authusers/*</url-pattern>
             <url-pattern>/faces/reserveconference.xhtml</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>

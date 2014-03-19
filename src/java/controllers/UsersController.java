@@ -4,6 +4,7 @@ import entity.Users;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.UsersFacade;
+import entity.UsersGroup;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -26,10 +27,13 @@ public class UsersController implements Serializable {
     private HashUtil hashUtil;
     private Users current;
     private DataModel items = null;
+    private UsersGroup currentUserGroup;
     @EJB
     private backingbeans.UsersFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    @EJB
+    private backingbeans.UsersGroupFacade groupFacade;
 
     public UsersController() {
     }
@@ -37,6 +41,10 @@ public class UsersController implements Serializable {
     public Users getSelected() {
         if (current == null) {
             current = new Users();
+            currentUserGroup = new UsersGroup();
+            currentUserGroup.setGroupname("authusers");
+            //by default everyone is in authusers group
+            currentUserGroup.setUsername(current);
             selectedItemIndex = -1;
         }
         return current;
@@ -87,6 +95,7 @@ public class UsersController implements Serializable {
             hashUtil.setBase64(current.getPassword());
             current.setPassword(hashUtil.getBase64());
             getFacade().create(current);
+            groupFacade.create(currentUserGroup);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -94,6 +103,23 @@ public class UsersController implements Serializable {
             return null;
         }
     }
+    
+       public String signup() {
+        try {
+            hashUtil = new HashUtil();
+            hashUtil.setBase64(current.getPassword());
+            current.setPassword(hashUtil.getBase64());
+            getFacade().create(current);
+            groupFacade.create(currentUserGroup);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
+            return "/visitors/index";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+
+    
 
     public String prepareEdit() {
         current = (Users) getItems().getRowData();

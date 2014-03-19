@@ -2,53 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./conferenceTemplate.xhtml">
 
             <ui:define name="options">
-                
+
+                <h:link outcome="/visitors/Create" value="Signup" />
             </ui:define>
 
             <ui:define name="content">
                 <h:link outcome="/admin/index" value="To the admin section" />
-                    <br/>
-                    <h:link outcome="/visitors/index" value="To the user section" />
-                    <br/>
+                <br/>
+                <h:link outcome="/visitors/index" value="To the user section" />
+                <br/>
+                <br />
+                <h:link outcome="/rentalRequest/List" value="Reserve a hotel room"/>
+                <br />
+                <h:link outcome="/room/List" value="View Adds"/>
+                <br />
+                <h:link outcome="/authusers/CreateBooking" value="Make a booking"/>
+                <br />
+                <h:link outcome="/scheduleView/List" value="Show All ScheduleView Items"/>
+                <br />
 
-                    <br />
-                    <h:link outcome="/ads/List" value="Show All Ads Items"/>
-                    <br />
-                    <h:link outcome="/booking/List" value="Show All Booking Items"/>
-                    <br />
-                    <h:link outcome="/contents/List" value="Show All Contents Items"/>
-                    <br />
-                    <h:link outcome="/equipment/List" value="Show All Equipment Items"/>
-                    <br />
-                    <h:link outcome="/event/List" value="Show All Event Items"/>
-                    <br />
-                    <h:link outcome="/layout/List" value="Show All Layout Items"/>
-                    <br />
-                    <h:link outcome="/organizer/List" value="Show All Organizer Items"/>
-                    <br />
-                    <h:link outcome="/participant/List" value="Show All Participant Items"/>
-                    <br />
-                    <h:link outcome="/rentalRequest/List" value="Show All RentalRequest Items"/>
-                    <br />
-                    <h:link outcome="/room/List" value="Show All Room Items"/>
-                    <br />
-                    <h:link outcome="/roomcard/List" value="Show All Roomcard Items"/>
-                    <br />
-                    <h:link outcome="/scheduleView/List" value="Show All ScheduleView Items"/>
-                    <br />
-                    <h:link outcome="/users/List" value="Show All Users Items"/>
-                    <br />
-                    <h:link outcome="/usersGroup/List" value="Show All UsersGroup Items"/> 
-                       <br />
-                    <br />
-                    <h:link outcome="/reserveconference" value="Make a booking"/>
             </ui:define>
 
         </ui:composition>
