@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -14,7 +15,7 @@
 
             <ui:define name="content">
                 <p:panel header="Login Error" style="width: 300px;margin: 100px auto; position: relative">
-                    Sorry, you made an Error. Please try again: <a href="#{facesContext.externalContext.requestContextPath}/" >Login</a>
+                    Sorry, you made an Error. Please try again:<h:link outcome="/login" value="Login"/>
                 </p:panel>
             </ui:define>
 
