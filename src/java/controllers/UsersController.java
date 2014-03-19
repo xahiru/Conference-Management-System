@@ -28,6 +28,7 @@ public class UsersController implements Serializable {
     private Users current;
     private DataModel items = null;
     private UsersGroup currentUserGroup;
+    private String newPassword;
     @EJB
     private backingbeans.UsersFacade ejbFacade;
     private PaginationHelper pagination;
@@ -103,8 +104,8 @@ public class UsersController implements Serializable {
             return null;
         }
     }
-    
-       public String signup() {
+
+    public String signup() {
         try {
             hashUtil = new HashUtil();
             hashUtil.setBase64(current.getPassword());
@@ -119,7 +120,21 @@ public class UsersController implements Serializable {
         }
     }
 
-    
+    public String resetPassword() {
+        try {
+            hashUtil = new HashUtil();
+            current = new Users();
+            current = getFacade().findUsersbyName(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName());
+            hashUtil.setBase64(getNewPassword());
+            current.setPassword(hashUtil.getBase64());
+            getFacade().edit(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
+            return "View";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
 
     public String prepareEdit() {
         current = (Users) getItems().getRowData();
@@ -224,6 +239,14 @@ public class UsersController implements Serializable {
 
     public Users getUsers(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
     @FacesConverter(forClass = Users.class)
