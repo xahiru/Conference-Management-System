@@ -14,20 +14,21 @@
             </ui:define>
 
             <ui:define name="content">
-                <p:panel header="Login From">
+
+
+                <p:panel header="Login From" style="width: 300px;margin: 100px auto; position: relative" >
                     <form method="POST" action="j_security_check">
                         Username: <input type="text" name="j_username" />
-                        Password: <input type="password" name="j_password" />
 
+                        Password: <input type="password" name="j_password" />
 
                         <input type="submit" value="Login" />
                         <input type="reset" value="Reset" />
                     </form>
                 </p:panel>
-                <h:form>
 
-                    <h:commandLink action="#{loginController.logout()}" value="Go back"></h:commandLink>
-                </h:form>
+
+
             </ui:define>
 
         </ui:composition>
