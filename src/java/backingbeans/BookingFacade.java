@@ -33,4 +33,15 @@ public class BookingFacade extends AbstractFacade<Booking> {
     public List<Booking> getAllBookingsInRange(Date startTime, Date endTime) {
         return em.createNamedQuery("Booking.findAllBookingInRange").setParameter("startTime", startTime).setParameter("endTime", endTime).getResultList();
     }
+    
+     public List<Booking> getAllBookingbyStartTime(Date startTime) {
+        return em.createNamedQuery("Booking.findByStartTime").setParameter("startTime", startTime).getResultList();
+    }
+      public List<Booking> getAllBookingbyStartTimeTEST(Date startTime, Date endTime) {
+        return em.createNamedQuery("Booking.findAllBookingInRangeTest").setParameter("startTime", startTime).setParameter("endTime", endTime).getResultList();
+    }
+    
+     public List<Booking> getAllBookingbyEndTime(Date endTime) {
+        return em.createNamedQuery("Booking.findByEndTime").setParameter("endTime", endTime).getResultList();
+    }
 }
