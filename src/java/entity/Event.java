@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
 import java.io.Serializable;
@@ -37,9 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
     @NamedQuery(name = "Event.findByIdevent", query = "SELECT e FROM Event e WHERE e.idevent = :idevent"),
     @NamedQuery(name = "Event.findByTitle", query = "SELECT e FROM Event e WHERE e.title = :title"),
+    @NamedQuery(name = "Event.findByRoom", query = "SELECT e FROM Event e WHERE e.roomIdroom = :room"),
+    @NamedQuery(name = "Event.findMyEvents", query = "SELECT e FROM Event e WHERE e.bookingBookingRef.usersIduser = :user"),
+    @NamedQuery(name = "Event.findEventsByRoomInTimeRange", query = "SELECT e FROM Event e WHERE e.roomIdroom = :room AND e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime"),
     @NamedQuery(name = "Event.findByDescription", query = "SELECT e FROM Event e WHERE e.description = :description"),
     @NamedQuery(name = "Event.findByNumberOfParticipants", query = "SELECT e FROM Event e WHERE e.numberOfParticipants = :numberOfParticipants")})
 public class Event implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -191,5 +194,5 @@ public class Event implements Serializable {
     public String toString() {
         return "entity.Event[ idevent=" + idevent + " ]";
     }
-    
+
 }
