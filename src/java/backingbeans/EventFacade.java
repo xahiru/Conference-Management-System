@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package backingbeans;
 
 import entity.Event;
+import entity.Room;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +19,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class EventFacade extends AbstractFacade<Event> {
+
     @PersistenceContext(unitName = "Conference_Management_SystemPU")
     private EntityManager em;
 
@@ -27,6 +30,14 @@ public class EventFacade extends AbstractFacade<Event> {
 
     public EventFacade() {
         super(Event.class);
+    }
+
+    public List<Event> getEventByRoom(Room room) {
+        return em.createNamedQuery("Event.findByRoom").setParameter("room", room).getResultList();
+    }
+
+    public List<Event> getEventByRoomAndTime(Room room, Date startTtime, Date endTime) {
+        return em.createNamedQuery("Event.findEventsByRoomInTimeRange").setParameter("room", room).setParameter("startTime", startTtime).setParameter("endTime", endTime).getResultList();
     }
     
 }
