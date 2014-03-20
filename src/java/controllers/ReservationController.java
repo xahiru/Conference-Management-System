@@ -12,7 +12,6 @@ import entity.Room;
 
 import entity.Users;
 import java.io.Serializable;
-import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +19,6 @@ import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 //import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -80,22 +78,11 @@ public class ReservationController implements Serializable {
 
     public ReservationController() {
 
-        try {
-            requestedPName = getLoggedinUsername();
-
-        } catch (NullPointerException e) {
-            requestedPName = "Anon user";
-        }
+        requestedPName = controllers.util.JsfUtil.getLoggedinUsername();
 
     }
 
-    private String getLoggedinUsername() {
-
-        Principal userPrincipal;
-        userPrincipal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-        return userPrincipal.getName();
-
-    }
+   
 
     public String reserveEvent() {
 
@@ -106,14 +93,13 @@ public class ReservationController implements Serializable {
 //        }
         /*
          Getting the loggedin user from DB
-         */  user = usersFacade.findUsersbyName(requestedPName);
+         */ user = usersFacade.findUsersbyName(requestedPName);
 
         booking = new Booking();
         booking.setStartTime(startTime);
         booking.setEndTime(endTime);
         booking.setUsersIduser(user);
         bookingFacade.create(booking);
-        
 
         organizer = new Organizer();
         organizer.setCompanyName(companyName);
@@ -130,13 +116,12 @@ public class ReservationController implements Serializable {
         event.setNumberOfParticipants(numberOfParticipants);
         event.setOrganizerIdorganizer(organizer);
 
-
         eventFacade.create(event);
 
         return "/authusers/index"; //the success page
 
     }
-    
+
 //    public Booking createBooking(){
 //        
 //        user = usersFacade.findUsersbyName(requestedPName);
@@ -150,7 +135,6 @@ public class ReservationController implements Serializable {
 //        return booking;
 //               
 //    }
-
     public String checkRoomAvailability() {
 
         return "hell";
