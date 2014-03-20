@@ -42,10 +42,10 @@ public class UsersController implements Serializable {
     public Users getSelected() {
         if (current == null) {
             current = new Users();
-            currentUserGroup = new UsersGroup();
-            currentUserGroup.setGroupname("authusers");
+
+            
             //by default everyone is in authusers group
-            currentUserGroup.setUsername(current);
+//            currentUserGroup.setUsername(current);
             selectedItemIndex = -1;
         }
         return current;
@@ -92,11 +92,16 @@ public class UsersController implements Serializable {
 
     public String create() {
         try {
+           
             hashUtil = new HashUtil();
             hashUtil.setBase64(current.getPassword());
             current.setPassword(hashUtil.getBase64());
             getFacade().create(current);
+            currentUserGroup = new UsersGroup();
+            currentUserGroup.setGroupname("authusers");
+            currentUserGroup.setUsername(current);
             groupFacade.create(currentUserGroup);
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -111,6 +116,7 @@ public class UsersController implements Serializable {
             hashUtil.setBase64(current.getPassword());
             current.setPassword(hashUtil.getBase64());
             getFacade().create(current);
+            currentUserGroup.setUsername(current);
             groupFacade.create(currentUserGroup);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
             return "/visitors/index";
