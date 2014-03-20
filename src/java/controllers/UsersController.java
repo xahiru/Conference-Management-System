@@ -28,7 +28,7 @@ public class UsersController implements Serializable {
     private Users current;
     private DataModel items = null;
     private UsersGroup currentUserGroup;
-    private String newPassword;
+    private String newPassword;         
     @EJB
     private backingbeans.UsersFacade ejbFacade;
     private PaginationHelper pagination;

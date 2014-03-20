@@ -19,7 +19,7 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditUsersGroupLabel_groupname}" for="groupname" />
 
-                    <h:selectOneMenu id="groupname" value="#{usersGroupController.selected.username}" title="#{bundle.EditUsersGroupTitle_groupname}" required="true" requiredMessage="#{bundle.EditUsersGroupRequiredMessage_groupname}">
+                    <h:selectOneMenu id="groupname" value="#{usersGroupController.selected.groupname}" title="#{bundle.EditUsersGroupTitle_groupname}" required="true" requiredMessage="#{bundle.EditUsersGroupRequiredMessage_groupname}">
                         <f:selectItems value="#{usersGroupController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditUsersGroupLabel_username}" for="username" />

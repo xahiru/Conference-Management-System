@@ -18,7 +18,7 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateUsersGroupLabel_groupname}" for="groupname" />
-                    <h:selectOneMenu id="groupname" value="#{usersGroupController.selected.username}" title="#{bundle.CreateUsersGroupTitle_groupname}" required="true" requiredMessage="#{bundle.CreateUsersGroupRequiredMessage_groupname}">
+                    <h:selectOneMenu id="groupname" value="#{usersGroupController.selected.groupname}" title="#{bundle.CreateUsersGroupTitle_groupname}" required="true" requiredMessage="#{bundle.CreateUsersGroupRequiredMessage_groupname}">
                         <f:selectItems value="#{usersGroupController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateUsersGroupLabel_username}" for="username" />

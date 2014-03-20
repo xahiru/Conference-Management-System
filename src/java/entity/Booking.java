@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Booking.findAll", query = "SELECT b FROM Booking b"),
+    @NamedQuery(name = "Booking.findAllBookingInRange", query = "SELECT b FROM Booking b WHERE b.startTime >= :startTime OR b.endTime <= :endTime"),
     @NamedQuery(name = "Booking.findByBookingRef", query = "SELECT b FROM Booking b WHERE b.bookingRef = :bookingRef"),
     @NamedQuery(name = "Booking.findByStartTime", query = "SELECT b FROM Booking b WHERE b.startTime = :startTime"),
     @NamedQuery(name = "Booking.findByEndTime", query = "SELECT b FROM Booking b WHERE b.endTime = :endTime")})
