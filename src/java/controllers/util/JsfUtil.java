@@ -1,5 +1,6 @@
 package controllers.util;
 
+import java.security.Principal;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -55,6 +56,16 @@ public class JsfUtil {
     public static Object getObjectFromRequestParameter(String requestParameterName, Converter converter, UIComponent component) {
         String theId = JsfUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
+    }
+    
+     public static String getLoggedinUsername() {
+        try {
+            Principal userPrincipal;
+            userPrincipal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+            return userPrincipal.getName();
+        } catch (NullPointerException e) {
+            return  "Anon user";
+        }
     }
 
 }
