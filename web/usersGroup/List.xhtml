@@ -38,7 +38,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersGroupTitle_username}"/>
                             </f:facet>
-                            <h:outputText value="#{item.username}"/>
+                            <h:outputText value="#{usersGroupController.getUsersGroupsUsername(item.username)}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
