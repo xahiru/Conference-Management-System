@@ -4,6 +4,7 @@ import entity.UsersGroup;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.UsersGroupFacade;
+import entity.Users;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -28,6 +29,8 @@ public class UsersGroupController implements Serializable {
     private backingbeans.UsersGroupFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    @EJB
+    private backingbeans.UsersFacade uf;
 
     public UsersGroupController() {
     }
@@ -67,6 +70,13 @@ public class UsersGroupController implements Serializable {
         return "List";
     }
 
+    public String getUsersGroupsUsername(String id){
+        
+        Users u = (Users) uf.findUsersbyName(id);
+               
+        return u.getUsername();
+        
+    }
     public String prepareView() {
         current = (UsersGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
