@@ -1,15 +1,22 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers;
 
-import entity.Users;
+import backingbeans.EventFacade;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
-import backingbeans.UsersFacade;
-import entity.UsersGroup;
-
+import entity.Booking;
+import entity.Event;
+import entity.Organizer;
+import entity.Room;
+import entity.Users;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -18,39 +25,45 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import utilpack.HashUtil;
 
-@Named("usersController")
+import javax.inject.Named;
+
+/**
+ *
+ * @author xahiru
+ */
+@Named("eventlistController")
 @SessionScoped
-public class UsersController implements Serializable {
+public class EventlistController implements Serializable {
 
-    private HashUtil hashUtil;
-    private Users current;
+    private Event current;
     private DataModel items = null;
-    private UsersGroup currentUserGroup;
-    private String newPassword;         
     @EJB
-    private backingbeans.UsersFacade ejbFacade;
+    private backingbeans.EventFacade ejbFacade;
+    @EJB
+    private backingbeans.BookingFacade bookingFacade;
+    @EJB
+    private backingbeans.OrganizerFacade organizerFacade;
+    @EJB
+    private backingbeans.UsersFacade usersFacade;
+//    @EJB
+//    private backingbeans.RoomFacade roomFacade;
+
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    @EJB
-    private backingbeans.UsersGroupFacade groupFacade;
 
-    public UsersController() {
+    public EventlistController() {
     }
 
-    public Users getSelected() {
+    public Event getSelected() {
         if (current == null) {
-            current = new Users();
-
-            //by default everyone is in authusers group
-//            currentUserGroup.setUsername(current);
+            current = new Event();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private UsersFacade getFacade() {
+    private EventFacade getFacade() {
         return ejbFacade;
     }
 
@@ -65,7 +78,7 @@ public class UsersController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().getMyEvents(usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername())));
                 }
             };
         }
@@ -75,33 +88,58 @@ public class UsersController implements Serializable {
     public String prepareList() {
         recreateModel();
         return "List";
+        
+    }
+
+//    public String getRoomName(String id) {
+//       // Room r = (Room) roomFacade.find(Integer.valueOf(id));
+//      //  return r.getName();
+//        return id;
+//    }
+//
+    public String getOrganizerName(String id) {
+        Organizer r = (Organizer) organizerFacade.find(Integer.valueOf(id));
+        return r.getCompanyName();
+    }
+
+    public Date getStartTime(String id) {
+        Booking r = (Booking) bookingFacade.find(Integer.valueOf(id));
+        return r.getStartTime();
+    }
+
+    public Date getEndTime(String id) {
+        Booking r = (Booking) bookingFacade.find(Integer.valueOf(id));
+        return r.getEndTime();
+    }
+
+    public String getBookedBy(String id) {
+        Booking r = (Booking) bookingFacade.find(Integer.valueOf(id));
+//        Users r = (Users) usersFacade.find(Integer.valueOf(id));
+        return r.getUsersIduser().getUsername();
+//        return getStringValue(r.getUsersIduser().getUsername());
+    }
+
+    public String getStringValue(String id) {
+
+        return id;
     }
 
     public String prepareView() {
-        current = (Users) getItems().getRowData();
+        current = (Event) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Users();
+        current = new Event();
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-
-            hashUtil = new HashUtil();
-            hashUtil.setBase64(current.getPassword());
-            current.setPassword(hashUtil.getBase64());
             getFacade().create(current);
-            currentUserGroup = new UsersGroup();
-            currentUserGroup.setGroupname("authusers");
-            currentUserGroup.setUsername(current);
-            groupFacade.create(currentUserGroup);
-
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EventCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -109,53 +147,16 @@ public class UsersController implements Serializable {
         }
     }
 
-    public String signup() {
-        try {
-            hashUtil = new HashUtil();
-            hashUtil.setBase64(current.getPassword());
-            current.setPassword(hashUtil.getBase64());
-            getFacade().create(current);
-            currentUserGroup = new UsersGroup();
-            currentUserGroup.setGroupname("authusers");
-            currentUserGroup.setUsername(current);
-            groupFacade.create(currentUserGroup);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
-            return "/visitors/index";
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
-        }
-    }
-
-    public String resetPassword() {
-        try {
-            hashUtil = new HashUtil();
-            current = new Users();
-            current = getFacade().findUsersbyName(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName());
-            hashUtil.setBase64(getNewPassword());
-            current.setPassword(hashUtil.getBase64());
-            getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
-            return "Edit";
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
-        }
-    }
-
     public String prepareEdit() {
-        current = (Users) getItems().getRowData();
+        current = (Event) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            hashUtil = new HashUtil();
-            hashUtil.setBase64(current.getPassword());
-            current.setPassword(hashUtil.getBase64());
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EventUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -164,7 +165,7 @@ public class UsersController implements Serializable {
     }
 
     public String destroy() {
-        current = (Users) getItems().getRowData();
+        current = (Event) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -188,7 +189,7 @@ public class UsersController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EventDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -244,29 +245,21 @@ public class UsersController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Users getUsers(java.lang.Integer id) {
+    public Event getEvent(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
-    @FacesConverter(forClass = Users.class)
-    public static class UsersControllerConverter implements Converter {
+    @FacesConverter(forClass = Event.class)
+    public static class EventControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UsersController controller = (UsersController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "usersController");
-            return controller.getUsers(getKey(value));
+            EventController controller = (EventController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "eventController");
+            return controller.getEvent(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -286,11 +279,11 @@ public class UsersController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Users) {
-                Users o = (Users) object;
-                return getStringKey(o.getIduser());
+            if (object instanceof Event) {
+                Event o = (Event) object;
+                return getStringKey(o.getIdevent());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Users.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Event.class.getName());
             }
         }
 
