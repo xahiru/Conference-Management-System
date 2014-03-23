@@ -16,8 +16,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 //import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -82,44 +85,44 @@ public class ReservationController implements Serializable {
 
     }
 
-   
-
     public String reserveEvent() {
 
 //        if (!requestedPName.equals("Anonymous")) {
 //          //  user = usersFacade.findUsersbyName(requestedPName);
 //        } else {
 //
-//        }
-        /*
-         Getting the loggedin user from DB
-         */ user = usersFacade.findUsersbyName(requestedPName);
+//        }      
+        if (isRoomAvailable()) {
+            /*
+             Getting the loggedin user from DB
+             */ user = usersFacade.findUsersbyName(requestedPName);
 
-        booking = new Booking();
-        booking.setStartTime(startTime);
-        booking.setEndTime(endTime);
-        booking.setUsersIduser(user);
-        bookingFacade.create(booking);
+            booking = new Booking();
+            booking.setStartTime(startTime);
+            booking.setEndTime(endTime);
+            booking.setUsersIduser(user);
+            bookingFacade.create(booking);
 
-        organizer = new Organizer();
-        organizer.setCompanyName(companyName);
-        organizer.setContactPersonName(contactPersonName);
-        organizer.setContactNumber(contactNumber);
-        organizer.setEmail(email);
-        organizerFacade.create(organizer);
+            organizer = new Organizer();
+            organizer.setCompanyName(companyName);
+            organizer.setContactPersonName(contactPersonName);
+            organizer.setContactNumber(contactNumber);
+            organizer.setEmail(email);
+            organizerFacade.create(organizer);
 
-        event = new Event();
-        event.setBookingBookingRef(booking);
-        event.setTitle(title);
-        event.setRoomIdroom(room);
-        event.setDescription(description);
-        event.setNumberOfParticipants(numberOfParticipants);
-        event.setOrganizerIdorganizer(organizer);
+            event = new Event();
+            event.setBookingBookingRef(booking);
+            event.setTitle(title);
+            event.setRoomIdroom(room);
+            event.setDescription(description);
+            event.setNumberOfParticipants(numberOfParticipants);
+            event.setOrganizerIdorganizer(organizer);
 
-        eventFacade.create(event);
+            eventFacade.create(event);
 
-        return "/authusers/index"; //the success page
-
+            return "/authusers/EventList";
+        }//the success page
+        return "/authusers/CreateBooking";
     }
 
 //    public Booking createBooking(){
@@ -135,9 +138,16 @@ public class ReservationController implements Serializable {
 //        return booking;
 //               
 //    }
-    public String checkRoomAvailability() {
+    public boolean isRoomAvailable() {
+        List<Event> evntList = eventFacade.getEventByRoomAndTime(room, startTime, endTime);
+        if (evntList.isEmpty()) {
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("available"));
+            return true;
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Room is not available for the selected time, please select a different time"));
+            return false;
+        }
 
-        return "hell";
     }
 
     public Users getUser() {
