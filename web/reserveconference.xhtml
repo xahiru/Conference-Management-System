@@ -12,6 +12,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
+                <p:message/>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateBookingLabel_bookingRef}" for="bookingRef" />
                     <h:inputText id="bookingRef" value="#{bookingController.selected.bookingRef}" title="#{bundle.CreateBookingTitle_bookingRef}" disabled="true" required="false" requiredMessage="#{bundle.CreateBookingRequiredMessage_bookingRef}"/>
