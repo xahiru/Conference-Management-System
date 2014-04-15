@@ -5,8 +5,8 @@
         <Node id="rentalRequest/View.xhtml" x="650" y="900" zoom="true"/>
         <Node id="participant/List.xhtml" x="150" y="1050" zoom="true"/>
         <Node id="participant/Edit.xhtml" x="150" y="750" zoom="true"/>
-        <Node id="equipment/Edit.xhtml" x="900" y="450" zoom="true"/>
         <Node id="participant/View.xhtml" x="900" y="1050" zoom="true"/>
+        <Node id="equipment/Edit.xhtml" x="900" y="450" zoom="true"/>
         <Node id="rentalRequest/Create.xhtml" x="1150" y="150" zoom="true"/>
         <Node id="organizer/View.xhtml" x="400" y="1200" zoom="true"/>
         <Node id="layout/Edit.xhtml" x="650" y="1200" zoom="true"/>
@@ -14,8 +14,8 @@
         <Node id="equipment/View.xhtml" x="400" y="1350" zoom="true"/>
         <Node id="usersGroup/Create.xhtml" x="1150" y="600" zoom="true"/>
         <Node id="contents/Create.xhtml" x="150" y="300" zoom="true"/>
-        <Node id="event/Create.xhtml" x="1900" y="450" zoom="true"/>
         <Node id="room/View.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="event/Create.xhtml" x="1900" y="450" zoom="true"/>
         <Node id="event/Edit.xhtml" x="1150" y="300" zoom="true"/>
         <Node id="contents/List.xhtml" x="1650" y="600" zoom="true"/>
         <Node id="usersGroup/List.xhtml" x="2150" y="300" zoom="true"/>
@@ -26,16 +26,16 @@
         <Node id="scheduleView/Edit.xhtml" x="1400" y="600" zoom="true"/>
         <Node id="roomcard/List.xhtml" x="1900" y="600" zoom="true"/>
         <Node id="usersGroup/View.xhtml" x="150" y="900" zoom="true"/>
-        <Node id="rentalRequest/List.xhtml" x="900" y="150" zoom="true"/>
         <Node id="layout/List.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="rentalRequest/List.xhtml" x="900" y="150" zoom="true"/>
         <Node id="loginerror.xhtml" x="400" y="1050" zoom="true"/>
         <Node id="roomcard/Edit.xhtml" x="900" y="750" zoom="true"/>
         <Node id="roomcard/Create.xhtml" x="1400" y="900" zoom="true"/>
         <Node id="event/View.xhtml" x="650" y="300" zoom="true"/>
         <Node id="booking/Edit.xhtml" x="1900" y="300" zoom="true"/>
         <Node id="contents/Edit.xhtml" x="2650" y="150" zoom="true"/>
-        <Node id="layout/Create.xhtml" x="150" y="150" zoom="true"/>
         <Node id="template.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="layout/Create.xhtml" x="150" y="150" zoom="true"/>
         <Node id="booking/View.xhtml" x="1150" y="900" zoom="true"/>
         <Node id="organizer/List.xhtml" x="1400" y="450" zoom="true"/>
         <Node id="usersGroup/Edit.xhtml" x="1400" y="300" zoom="true"/>
@@ -49,16 +49,16 @@
         <Node id="room/Create.xhtml" x="400" y="600" zoom="true"/>
         <Node id="equipment/Create.xhtml" x="2150" y="450" zoom="true"/>
         <Node id="booking/List.xhtml" x="150" y="1200" zoom="true"/>
-        <Node id="equipment/List.xhtml" x="150" y="450" zoom="true"/>
         <Node id="organizer/Edit.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="equipment/List.xhtml" x="150" y="450" zoom="true"/>
         <Node id="roomcard/View.xhtml" x="650" y="450" zoom="true"/>
         <Node id="login.xhtml" x="2150" y="150" zoom="true"/>
         <Node id="ads/Edit.xhtml" x="1650" y="150" zoom="true"/>
         <Node id="scheduleView/List.xhtml" x="400" y="750" zoom="true"/>
         <Node id="booking/Create.xhtml" x="1650" y="450" zoom="true"/>
         <Node id="room/List.xhtml" x="150" y="600" zoom="true"/>
-        <Node id="scheduleView/View.xhtml" x="650" y="1050" zoom="true"/>
         <Node id="ads/List.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="scheduleView/View.xhtml" x="650" y="1050" zoom="true"/>
         <Node id="index.xhtml" x="900" y="300" zoom="true"/>
         <Node id="event/List.xhtml" x="400" y="300" zoom="true"/>
         <Node id="scheduleView/Create.xhtml" x="1150" y="450" zoom="true"/>

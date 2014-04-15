@@ -7,6 +7,24 @@
     margin: 0px 0px 10px 0px;
 }
 
+
+.main{
+    margin:0 auto;
+    width: 1000px;
+}
+
+
+#content{
+    margin:0 auto;
+    width: 1000px;
+}
+#widgetBar {
+    height: 50px;
+    width: 850px;
+    float: right;
+    background: #ccc;
+}
+
 #bottom {
     position: relative;
     background-color: #c2dfef;
@@ -29,9 +47,11 @@
 }
 
 .center_content {
-    position: relative;
+   
     background-color: #dddddd;
     padding: 5px;
+    margin:0 auto;
+    width: 1000px;
 }
 
 .left_content {

@@ -11,36 +11,47 @@
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>Conference Management System</title>
+        <style>
+      #headPanel {z-index:2 !important; }
+      #headPanel div{overflow:visible;}
+   </style>
     </h:head>
 
     <h:body>
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                <h:form> 
+            <p:layoutUnit id="headPanel" position="north" size="167" resizable="false" closable="false" collapsible="false"  >
+                <div class="main">
+                    
+                    <h:graphicImage url="/resources/image/header2.jpg" alt="banner" height="100" width="1000" /> 
+                                       
+                    <h:form> 
 
-                    <p:menubar>  
-                        
-                           
-                        <p:menuitem value="Home" outcome="/index" />  
-                             
-                          
-<!--                        <p:submenu label="Actions" icon="ui-icon-gear">  
-                            <p:submenu label="Ajax" icon="ui-icon-refresh">  
-                                <p:menuitem value="Save" actionListener="#{menuBean.save}" icon="ui-icon-disk" update="messages"/>  
-                                <p:menuitem value="Update" actionListener="#{menuBean.update}" icon="ui-icon-arrowrefresh-1-w" update="messages"/>  
-                            </p:submenu>  
-                            <p:submenu label="Non-Ajax" icon="ui-icon-newwin">  
-                                <p:menuitem value="Delete" actionListener="#{menuBean.delete}" icon="ui-icon-close" update="messages" ajax="false"/>  
-                            </p:submenu>  
-                        </p:submenu>  -->
+                        <p:menubar >  
 
-                       
-                        <f:facet name="options">  
+                            <div>
+                                <p:menuitem value="Home" outcome="/index" />  
+                                <ui:insert name="menubtns">buttons</ui:insert>
 
-                            <ui:insert name="options">Login Button,Signup,Language switch</ui:insert>
-                        </f:facet>  
-                    </p:menubar>
-                </h:form> 
+
+                                <!--                        <p:submenu label="Actions" icon="ui-icon-gear">  
+                                                            <p:submenu label="Ajax" icon="ui-icon-refresh">  
+                                                                <p:menuitem value="Save" actionListener="#{menuBean.save}" icon="ui-icon-disk" update="messages"/>  
+                                                                <p:menuitem value="Update" actionListener="#{menuBean.update}" icon="ui-icon-arrowrefresh-1-w" update="messages"/>  
+                                                            </p:submenu>  
+                                                            <p:submenu label="Non-Ajax" icon="ui-icon-newwin">  
+                                                                <p:menuitem value="Delete" actionListener="#{menuBean.delete}" icon="ui-icon-close" update="messages" ajax="false"/>  
+                                                            </p:submenu>  
+                                                        </p:submenu>  -->
+
+
+
+                            </div>
+                            
+                                <ui:insert name="options">Login Button,Signup,Language switch</ui:insert>
+                            
+                        </p:menubar>
+                    </h:form> 
+                </div>
             </p:layoutUnit>
 
             <p:layoutUnit position="center">

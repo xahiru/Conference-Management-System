@@ -1,24 +1,70 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h1>Hello Visitor</h1>
 
-       
-        <h:link outcome="/rentalRequest/List" value="Reserve a hotel room"/>
-        <br />
-        <h:link outcome="/room/List" value="View Adds"/>
-        <br />
-        <h:link outcome="/authusers/CreateBooking" value="Make a booking"/>
-        <br />
-        <h:link outcome="/scheduleView/List" value="Show All ScheduleView Items"/>
-        <br />
+    <body>
 
-        <h:link outcome="/index" value="Back to Homepage" />
-    </h:body>
+        <ui:composition template="./../conferenceTemplate.xhtml">
+
+            <ui:define name="menubtns">
+
+
+
+                <p:menuitem value="Schedule" outcome="/index" />  
+                <p:menuitem value="Register" outcome="/index" />  
+                <p:menuitem value="Rooms" outcome="/index" /> 
+                <p:menuitem value="Contact Us" outcome="/index" /> 
+
+            </ui:define>
+
+            <ui:define name="options" >
+                <div >
+                    <p:submenu label="Login"  style="float: right; " >
+                        <p:menuitem value="Admin" outcome="/index" />
+                        <p:menuitem value="User" outcome="/index"  /> 
+                    </p:submenu>
+
+                    <p:menuitem value="Sign Up" outcome="/index"  /> 
+                </div>
+
+
+            </ui:define>
+
+            <ui:define name="content"  >
+                <div class="main">
+                    <p:panel >
+                        <span>Date</span>
+                         <h:form>  
+                        <p:dataTable var="car" value="#{tableBean.carsSmall}">  
+                            <p:column headerText="Model">  
+                                <h:outputText value="#{car.model}" />  
+                            </p:column>  
+
+                            <p:column headerText="Year">  
+                                <h:outputText value="#{car.year}" />  
+                            </p:column>  
+
+                            <p:column headerText="Manufacturer">  
+                                <h:outputText value="#{car.manufacturer}" />  
+                            </p:column>  
+
+                            <p:column headerText="Color">  
+                                <h:outputText value="#{car.color}" />  
+                            </p:column>  
+                        </p:dataTable>  
+                    </h:form>  
+                    </p:panel>
+                   
+
+                </div>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
 </html>
-
