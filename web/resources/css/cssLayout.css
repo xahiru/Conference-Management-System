@@ -12,7 +12,9 @@
     margin:0 auto;
     width: 1000px;
 }
-
+.alignTop {
+vertical-align: top;
+}
 
 #content{
     margin:0 auto;

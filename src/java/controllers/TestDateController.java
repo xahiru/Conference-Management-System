@@ -67,6 +67,33 @@ public class TestDateController implements Serializable {
 
         return "/authusers/index";
     }
+    
+     public String printTodaysEvents() {
+        
+        System.out.println(startDate);
+        System.out.println(endDate);
+          System.out.println(room.toString());
+//        rangeBooking = bf.getAllBookingsInRange(startDate, endDate);
+        
+//        rangeBooking = bf.findAll();                                
+//        System.out.println("PRINTING DATES");
+//        for (Booking booking : rangeBooking) {
+//            System.out.println("Start" + booking.getStartTime() + " end " + booking.getEndTime());
+//        }
+        
+//        eventlList = ef.getEventByRoom(room);
+        eventlList = ef.getTodaysEvents( startDate, endDate);
+        
+        System.out.println("PRINTING Events");
+        if (eventlList.isEmpty()) {
+            System.out.println("Available");
+        }
+        for (Event event : eventlList) {
+            System.out.println("Title "+event.getTitle()+" IN "+event.getRoomIdroom().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
+        }
+
+        return "/authusers/index";
+    }
 
     public Date getStartDate() {
         return startDate;

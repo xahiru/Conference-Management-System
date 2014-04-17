@@ -8,6 +8,7 @@ package backingbeans;
 import entity.Event;
 import entity.Room;
 import entity.Users;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,9 +41,13 @@ public class EventFacade extends AbstractFacade<Event> {
     public List<Event> getEventByRoomAndTime(Room room, Date startTtime, Date endTime) {
         return em.createNamedQuery("Event.findEventsByRoomInTimeRange").setParameter("room", room).setParameter("startTime", startTtime).setParameter("endTime", endTime).getResultList();
     }
-    
-     public List<Event> getMyEvents(Users user) {
+
+    public List<Event> getMyEvents(Users user) {
         return em.createNamedQuery("Event.findMyEvents").setParameter("user", user).getResultList();
     }
-    
+
+    public List<Event> getTodaysEvents(Date startTtime, Date endTime) {
+          return em.createNamedQuery("Event.findTodaysEvent").setParameter("startTime", startTtime).setParameter("endTime", endTime).getResultList();
+        
+    }
 }

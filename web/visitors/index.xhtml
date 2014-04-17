@@ -23,8 +23,8 @@
             <ui:define name="options" >
                 <div >
                     <p:submenu label="Login"  style="float: right; " >
-                        <p:menuitem value="Admin" outcome="/index" />
-                        <p:menuitem value="User" outcome="/index"  /> 
+                        <p:menuitem value="Admin" outcome="/admin/index" />
+                        <p:menuitem value="User" outcome="/authusers/index"  /> 
                     </p:submenu>
 
                     <p:menuitem value="Sign Up" outcome="/index"  /> 
@@ -34,32 +34,36 @@
             </ui:define>
 
             <ui:define name="content"  >
-                <div class="main">
-                    <p:panel >
-                        <span>Date</span>
-                         <h:form>  
-                        <p:dataTable var="car" value="#{tableBean.carsSmall}">  
-                            <p:column headerText="Model">  
-                                <h:outputText value="#{car.model}" />  
-                            </p:column>  
+               
+                    <h:panelGrid columns="2" columnClasses="alignTop">
+                        <p:panel style="width:400px;height:485px;" >
+                            <span>Date</span>
+                            <h:form>  
+                                <p:dataTable var="event" value="#{visitorIndexController.eventList}">  
+                                    <p:column headerText="Room">  
+                                        <h:outputText value="#{visitorIndexController.getRoomname(event.roomIdroom)}" />  
+                                    </p:column>  
 
-                            <p:column headerText="Year">  
-                                <h:outputText value="#{car.year}" />  
-                            </p:column>  
+                                    <p:column headerText="Title">  
+                                        <h:outputText value="#{event.title}" />  
+                                    </p:column>  
 
-                            <p:column headerText="Manufacturer">  
-                                <h:outputText value="#{car.manufacturer}" />  
-                            </p:column>  
+                                    <p:column headerText="Time">  
+                                        <h:outputText value="#{visitorIndexController.getTime(event.bookingBookingRef)}" />  
+                                    </p:column>  
 
-                            <p:column headerText="Color">  
-                                <h:outputText value="#{car.color}" />  
-                            </p:column>  
-                        </p:dataTable>  
-                    </h:form>  
-                    </p:panel>
-                   
+                                    <p:column headerText="Organization">  
+                                        <h:outputText value="#{visitorIndexController.getOrganizerName(event.organizerIdorganizer)}" />  
+                                    </p:column>  
+                                </p:dataTable>  
+                            </h:form>  
+                        </p:panel>
+                        <p:panel style="width:575px;height:485px;">
 
-                </div>
+                        </p:panel>
+
+                    </h:panelGrid>
+               
 
 
             </ui:define>

@@ -38,8 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Event.findByTitle", query = "SELECT e FROM Event e WHERE e.title = :title"),
     @NamedQuery(name = "Event.findByRoom", query = "SELECT e FROM Event e WHERE e.roomIdroom = :room"),
     @NamedQuery(name = "Event.findMyEvents", query = "SELECT e FROM Event e WHERE e.bookingBookingRef.usersIduser = :user"),
-    @NamedQuery(name = "Event.findEventsByRoomInTimeRange", query = "SELECT e FROM Event e WHERE e.roomIdroom = :room AND e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime"),
+    @NamedQuery(name = "Event.findEventsByRoomInTimeRange", query = "SELECT e FROM Event e WHERE e.roomIdroom = :room AND ((e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime) OR (e.bookingBookingRef.startTime >= :startTime  AND e.bookingBookingRef.endTime <= :endTime)) "),
     @NamedQuery(name = "Event.findByDescription", query = "SELECT e FROM Event e WHERE e.description = :description"),
+    @NamedQuery(name = "Event.findTodaysEvent", query = "SELECT e FROM Event e WHERE  (e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime) OR (e.bookingBookingRef.startTime >= :startTime  AND e.bookingBookingRef.endTime <= :endTime) "),
     @NamedQuery(name = "Event.findByNumberOfParticipants", query = "SELECT e FROM Event e WHERE e.numberOfParticipants = :numberOfParticipants")})
 public class Event implements Serializable {
 

@@ -12,24 +12,27 @@
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>Conference Management System</title>
         <style>
-      #headPanel {z-index:2 !important; }
-      #headPanel div{overflow:visible;}
-   </style>
+            #headPanel {z-index:2 !important; }
+            #headPanel div{overflow:visible;}
+            .ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
+             border: none;
+        }
+        </style>
     </h:head>
 
     <h:body>
         <p:layout fullPage="true">
             <p:layoutUnit id="headPanel" position="north" size="167" resizable="false" closable="false" collapsible="false"  >
                 <div class="main">
-                    
+
                     <h:graphicImage url="/resources/image/header2.jpg" alt="banner" height="100" width="1000" /> 
-                                       
+
                     <h:form> 
 
                         <p:menubar >  
 
                             <div>
-                                <p:menuitem value="Home" outcome="/index" />  
+                                <p:menuitem value="Home" outcome="/visitors/index" />  
                                 <ui:insert name="menubtns">buttons</ui:insert>
 
 
@@ -46,20 +49,32 @@
 
 
                             </div>
-                            
-                                <ui:insert name="options">Login Button,Signup,Language switch</ui:insert>
-                            
+
+                            <ui:insert name="options">Login Button,Signup,Language switch</ui:insert>
+
                         </p:menubar>
                     </h:form> 
                 </div>
             </p:layoutUnit>
 
             <p:layoutUnit position="center">
+                 <div class="main">
                 <ui:insert name="content">Content</ui:insert>
+                 </div>
             </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                Footer
+            <p:layoutUnit  position="south" size="50" closable="true" collapsible="true">
+                <div class="main">
+                    <p:panel>
+                        <span >
+                            版权所有©北京邮电大学 地址:北京市西土
+                            城路10号 邮编:100876 京ICP备 05064445号 京公网安备110402430070
+                        </span>
+                    </p:panel>
+
+                </div>
+
+
             </p:layoutUnit>
         </p:layout>
     </h:body>
