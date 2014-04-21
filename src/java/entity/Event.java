@@ -193,7 +193,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Event[ idevent=" + idevent + " ]";
+        return title;
     }
 
 }

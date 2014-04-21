@@ -5,12 +5,15 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListRoomTitle}"></h:outputText>
+    <ui:composition template="./../conferenceTemplate.xhtml">
+        <ui:define name="options">
+
         </ui:define>
-        <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+
+        <ui:define name="content">
+        
+       
+            <h:form >
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
