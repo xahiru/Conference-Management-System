@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/maincss.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="./resources/house.png"/>
+        <title>:: Senior Housing System ::</title> 
+    </h:head>
+
+    <h:body>        
+        <div id="main_wrapper">
+            <div id="header">
+                <img src="./resources/logo1.png"/>
+                <h:form>
+                    <p:menubar id="menubar">  
+                        <p:menuitem value="Home" icon="ui-icon-star" url="./faces/newIndex.xhtml" ></p:menuitem>
+                        <p:menuitem value="Building" icon="ui-icon-home" url="./faces/newBuilding.xhtml" ></p:menuitem>
+                        <p:menuitem value="Apartment" icon="ui-icon-bookmark" url="./faces/newApartment.xhtml" ></p:menuitem>
+                        <p:menuitem value="Resident" icon="ui-icon-person" url="./faces/newResident.xhtml" ></p:menuitem>
+                        <p:menuitem value="Employee" icon="ui-icon-wrench" url="./faces/newEmployee.xhtml" ></p:menuitem>   
+                        <p:menuitem value="Dashboards" icon="ui-icon-wrench" url="./faces/newDashboard.xhtml" ></p:menuitem>
+                        <p:submenu label="Orders" icon="ui-icon-tag">
+                            <p:menuitem value="Products" icon="ui-icon-calculator" url="./faces/newProducts.xhtml"/>
+                            <p:menuitem value="Ship Orders" icon="ui-icon-cart" url="./faces/newDelivery.xhtml"/>
+                        </p:submenu>>
+                        <p:menuitem value="Search" icon="ui-icon-search" onclick="searchResidentDialog.show();"></p:menuitem>
+                    </p:menubar> 
+                </h:form>
+                <h:form id="frmSearch">
+                    <p:growl id="growlSearchResident" showDetail="true" sticky="true"/>
+                    <p:dialog id="searchResidentDialog" header="Search Resident" widgetVar="searchResidentDialog" resizable="false" draggable="false"  
+                              showEffect="fade" hideEffect="fade" modal="true"> 
+                        <table>
+                            <tr>
+                                <td class="outputLabel">
+                                    Search by:
+                                </td>
+                                <td>
+                                    <p:selectOneMenu id="searchResident" value="#{residentManagedBean.typeSearch}">  
+                                        <f:selectItem itemLabel="Select..." itemValue="" />  
+                                        <f:selectItem itemLabel="Name" itemValue="1" />
+                                        <f:selectItem itemLabel="Mobile Number" itemValue="2" />                                           
+                                    </p:selectOneMenu>                                    
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="outputLabel">
+                                    Enter Key Words:
+                                </td>
+                                <td>
+                                    <p:column styleClass="outputText"> 
+                                        <p:inputText id="keyWords" value="#{residentManagedBean.keyWord}" size="15" required="true" 
+                                                     requiredMessage="you need to enter key words">
+                                            <p:ajax update="residentDataTable" event="keyup" listener="#{residentManagedBean.handleFindResident}"/>
+                                        </p:inputText>
+                                    </p:column>
+                                </td>
+                                <td>
+                                    <p:commandButton value="Search" update="residentDataTable,growlSearchResident" actionListener="#{residentManagedBean.findResident}" 
+                                                     icon="ui-icon-search" />
+                                </td>
+                            </tr>
+                        </table>             
+                        <br/>
+
+                        <p:dataTable id="residentDataTable" var="residentt" value="#{residentManagedBean.residents}" paginator="true" rows="5"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                     rowsPerPageTemplate="5,10,15" lazy="true" paginatorPosition="bottom"
+                                     emptyMessage="No Residents found with the given criteria">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id Card"/>
+                                </f:facet>
+                                <h:outputText value="#{residentt.idCardNumber}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="First Name"/>
+                                </f:facet>
+                                <h:outputText value="#{residentt.firstName}"/>
+                            </p:column>                    
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Last Name"/>
+                                </f:facet>
+                                <h:outputText value="#{residentt.lastName}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="gender"/>
+                                </f:facet>                               
+                                <h:outputText value="#{residentt.gender == 1 ? 'Female':'Male'}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Mobile Number"/>
+                                </f:facet>
+                                <h:outputText value="#{residentt.mobileNumber}"/>
+                            </p:column>                     
+                        </p:dataTable>
+                    </p:dialog>
+                </h:form>
+            </div><!-- Header End -->
+
+            <div id="bodycontainer">                   
+                <div id="content"> <!-- for Right Content --> 
+                    <ui:insert name="content">Content</ui:insert>                        
+                </div>
+            </div><!-- Body End -->   
+            <div id="footercontainer">
+                <div id="ftrcontainer">
+                    <div id="ftrlogo"><a href="#"><img src="./resources/logoCompany1.png" alt="Seniour Housing System - Logo" width="120" height="120" border="0" /></a></div>
+                    <div id="ftrlinks">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="aboutus.html">About us</a></li>
+                            <li><a href="ourwork.html">Our Work</a></li>
+                            <li><a href="contact.php">Contact</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="clients.html">Clients</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                        </ul>
+                    </div>
+                    <div id="ftraddresses">
+                        <ul>
+                            <li><span class="ftradd">BUPT, Beijing, China</span></li>
+                            <li><span class="ftrph">+86 158 109 4822</span></li>
+                            <li><span class="ftremail"><a href="#" target="_blank">info@buptsse.cn</a></span></li>                        
+                        </ul>
+                    </div>
+                </div>
+            </div><!--Footer End -->
+        </div><!-- Main Wrapper End -->
+    </h:body>
+</html>

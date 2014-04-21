@@ -1,0 +1,112 @@
+/**
+ *********************************************
+ * Prototype of styles for horizontal CSS-leftmenu
+ * Left Menu Navigation
+ */
+
+#leftmenu, #leftmenu * {
+    list-style:none;
+    border:0;
+    padding:0;
+    margin:0;
+    margin:65px 0 0 40px;
+}
+#leftmenu {
+    width:173px;
+    position:relative;
+    z-index:999;
+    background:url(../images/base.png) -173px 0;
+    padding-top:20px;
+}
+#leftmenu ul {
+    background:url(../images/base.png) 0 bottom;
+    padding-bottom:11px;
+}
+* html #leftmenu, * html #leftmenu ul { background-image:url(../images/base.gif); }
+#leftmenu div {
+    width:180px;
+    position:relative;
+    background:url(../images/sub.png) -180px 0;
+    padding-top:9px;
+}
+#leftmenu div ul {
+    background:url(../images/sub.png) 0 bottom;
+    padding-bottom:5px;
+}
+* html #leftmenu div, * html #leftmenu div ul { background-image:url(../images/sub.gif); }
+*+html #leftmenu li { border-bottom:1px solid transparent; }
+#leftmenu li div {
+    visibility:hidden;
+    position:absolute;
+    margin:-44px 0 0 -2px;
+    left:100%;
+}
+* html #leftmenu li div, *+html #leftmenu li div { margin-top:-42px; }
+#leftmenu li:hover>div { visibility:visible; }
+* html #leftmenu li { height:34px; }
+#leftmenu li a {
+    display:block;
+    font-size:11px;
+    font-family:'Trebuchet MS', Arial, Verdana;
+    font-weight:bold;
+    text-decoration:none;
+    color:#fff;
+    padding-top:11px;
+    cursor:pointer;
+    position:relative;
+    z-index:9;
+}
+*+html #leftmenu li a { padding-top:12px; }
+* html #leftmenu li a { padding-top:10px; }
+#leftmenu li.current a,
+#leftmenu li a:hover { background:url(../images/base-select.gif) no-repeat -163px 0; }
+#leftmenu li span {
+    line-height:14px;
+    padding:0 19px 11px 17px;
+    display:block;
+}
+*+html #leftmenu li span { padding-bottom:10px; }
+* html #leftmenu li span {
+    height:24px;
+    padding-bottom:2px;
+}
+#leftmenu li.current a span,
+#leftmenu li a:hover span { background:url(../images/base-select.gif) no-repeat 5px bottom; }
+#leftmenu li a:hover span { color:#515151; }
+#leftmenu li a.parent:hover span { background:url(../images/base-select.gif) no-repeat -331px bottom; }
+#leftmenu.js-active li.current a,
+#leftmenu.js-active li.current a span,
+#leftmenu.js-active li a:hover,
+#leftmenu.js-active li a:hover span { background-image:url(../images/pix.gif); }
+#leftmenu li a.parent span, #leftmenu.js-active li a.parent span { background:url(../images/base-select.gif) no-repeat -499px bottom; }
+#leftmenu li.current li a,
+#leftmenu li.current li a span { background-image:url(../images/pix.gif); }
+#leftmenu li li { border:0; }
+#leftmenu li li a span { color:#515151; }
+#leftmenu li li a.parent span, #leftmenu.js-active li li a.parent span { background:url(../images/sub-select.gif) no-repeat -520px bottom; }
+#leftmenu li li a:hover, #leftmenu.js-active li li a:hover { background:url(../images/sub-select.gif) no-repeat -170px 0; }
+#leftmenu li li a:hover span,
+#leftmenu.js-active li li a:hover span {
+    background:url(../images/sub-select.gif) no-repeat 5px bottom;
+    color:#fff;
+}
+#leftmenu li li a.parent:hover span, #leftmenu.js-active li li a.parent:hover span { background:url(../images/sub-select.gif) no-repeat -345px bottom; }
+#leftmenu li.back {
+    width:170px;
+    z-index:8;
+    position:absolute;
+    background:url(../images/lavalamp.gif) no-repeat 5px bottom;
+}
+#leftmenu li.back .left {
+    width:170px;
+    float:none;
+    position:relative;
+    top:0;
+    left:0;
+    height:7px;
+    overflow:hidden;
+    padding:0;
+    margin:0;
+    visibility:visible;
+    background:url(../images/lavalamp.gif) no-repeat -163px 0;
+} 

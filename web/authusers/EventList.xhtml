@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -14,65 +15,71 @@
             </ui:define>
 
             <ui:define name="content">
-                <h:dataTable value="#{eventlistController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEventTitle_bookingBookingRef}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.bookingBookingRef}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEventTitle_title}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.title}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEventTitle_description}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.description}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEventTitle_numberOfParticipants}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.numberOfParticipants}"/>
-                    </h:column>
+                <p:panel>
+
+                    <p:dataTable  value="#{eventlistController.items}" var="item" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                  rowsPerPageTemplate="5,10,15"  
+                                  emptyMessage="No Events reserved yet">
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Event Title"/>
+                            </f:facet>
+                            <h:outputText value="#{item.title}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Participants"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numberOfParticipants}"/>
+                        </p:column>
 
 
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Booked by"/>
-                        </f:facet>
-                        <h:outputText value="#{eventlistController.getBookedBy(item.bookingBookingRef.bookingRef)}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Organizer"/>
-                        </f:facet>
-                        <h:outputText value="#{eventlistController.getOrganizerName(item.organizerIdorganizer.idorganizer)}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Start time"/>
-                        </f:facet>
-                        <h:outputText value="#{eventlistController.getStartTime(item.bookingBookingRef.bookingRef)}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="End time"/>
-                        </f:facet>
-                        <h:outputText value="#{eventlistController.getEndTime(item.bookingBookingRef.bookingRef)}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Room"/>
-                        </f:facet>
-                        <h:outputText value="#{eventlistController.getStringValue(item.roomIdroom)}"/>
-                    </h:column>
 
-                </h:dataTable>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Organizer"/>
+                            </f:facet>
+                            <h:outputText value="#{eventlistController.getOrganizerName(item.organizerIdorganizer.idorganizer)}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Time"/>
+                            </f:facet>
+                            <h:outputText value="#{eventlistController.getTime(item.bookingBookingRef.bookingRef)}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Room"/>
+                            </f:facet>
+                            <h:outputText value="#{eventlistController.getRoomName(item.roomIdroom.idroom)}"/>
+                        </p:column>
+
+                        <p:column>  
+                            <p:commandButton value="View"  
+                                             actionListener="#{residentManagedBean.prepareSelectResident(residentt.residentId)}"
+                                             icon="ui-icon-search" >  
+                            </p:commandButton>  
+                        </p:column> 
+                        <p:column>  
+                            <p:commandButton value="Update"  
+                                             actionListener="#{residentManagedBean.prepareSelectResident(residentt.residentId)}"
+                                             icon="ui-icon-pencil" />                         
+                        </p:column> 
+                        <p:column>  
+                            <p:commandButton value="Delete" 
+                                             actionListener="#{residentManagedBean.prepareSelectResident(residentt.residentId)}"
+                                             icon="ui-icon-trash" >                                
+                            </p:commandButton>
+                        </p:column>   
+
+                    </p:dataTable>
+
+                </p:panel>
+
+
             </ui:define>
 
         </ui:composition>

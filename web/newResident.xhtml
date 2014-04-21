@@ -1,0 +1,493 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templateFinal.xhtml">
+
+            <ui:define name="content">
+                <p:tabView id="tabView" dynamic="true" cache="true">  
+                    <p:tab id="tba1" title="New Resident"> 
+                        <h:form id="frmResident">
+                            <p:growl id="growlAddResident" showDetail="true" sticky="true"/>
+                            <h:outputText styleClass="outputLabel1" value="Resident Personal Information" />
+                            <p:separator id="separtor01"/>
+
+                            <h:panelGrid columns="3" columnClasses="label, value"> 
+
+                                <h:outputText styleClass="outputLabel" value="IdCard Number" />
+                                <p:inputText id="idCardNumber" value="#{residentManagedBean.resident.idCardNumber}" size="30" required="true" requiredMessage="Id Card must be filled" />
+                                <p:message for="idCardNumber"/>   
+
+                                <h:outputText styleClass="outputLabel" value="First Name" />
+                                <p:inputText id="firstName" value="#{residentManagedBean.resident.firstName}" size="35" required="true" requiredMessage="First name must be filled" />
+                                <p:message for="firstName"/>  
+
+                                <h:outputText styleClass="outputLabel" value="Last Name" />
+                                <p:inputText id="lastName" value="#{residentManagedBean.resident.lastName}" size="35" required="true" requiredMessage="Last name must be filled" />
+                                <p:message for="lastName"/>
+
+                                <h:outputText styleClass="outputLabel" value="Gender" />
+                                <p:selectOneRadio id="gender" value="#{residentManagedBean.resident.gender}" requiredMessage="Gender must be filled">  
+                                    <f:selectItem itemLabel="Female" itemValue="1" />  
+                                    <f:selectItem itemLabel="Male" itemValue="2" />  
+                                </p:selectOneRadio>  
+                                <p:message for="gender"/>
+
+                                <h:outputText styleClass="outputLabel" value="Date of Birth" />
+                                <p:calendar id="dob" value="#{residentManagedBean.resident.dob}" pattern="dd/MM/yyyy" showOn="button" size="10" requiredMessage="DOB must be filled" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                <p:message for="dob"/>
+
+                                <h:outputText styleClass="outputLabel" value="Marital Status" />
+                                <p:selectOneMenu id="maritalStatus" value="#{residentManagedBean.resident.maritalStatus}" style="width: 80%;" requiredMessage="Marital status must be filled">  
+                                    <f:selectItem itemLabel="Select One..." itemValue="" />  
+                                    <f:selectItem itemLabel="Married" itemValue="1" />
+                                    <f:selectItem itemLabel="Single" itemValue="2" />
+                                    <f:selectItem itemLabel="Divorced" itemValue="3" />
+                                    <f:selectItem itemLabel="Widowed" itemValue="4" />
+                                </p:selectOneMenu>   
+                                <p:message for="maritalStatus"/>
+
+                                <h:outputText styleClass="outputLabel" value="Email" />
+                                <p:inputText id="email" value="#{residentManagedBean.resident.email}" size="25" required="true" requiredMessage="Email must be filled" />
+                                <p:message for="email"/> 
+
+                                <h:outputText styleClass="outputLabel" value="Address" />
+                                <p:inputText id="Address" value="#{residentManagedBean.resident.address}" size="15" required="true" requiredMessage="Address must be filled" />
+                                <p:message for="Address"/>       
+
+                                <h:outputText styleClass="outputLabel" value="City" />
+                                <p:inputText id="City" value="#{residentManagedBean.resident.city}" size="15" required="true" requiredMessage="City must be filled" />
+                                <p:message for="City"/>  
+
+                                <h:outputText styleClass="outputLabel" value="Mobile Number" />
+                                <p:inputText id="mobileNumber" value="#{residentManagedBean.resident.mobileNumber}" size="15" required="true" requiredMessage="phone number must be filled" />
+                                <p:message for="mobileNumber"/>                          
+                                <p:spacer height="10" />
+                            </h:panelGrid>
+
+                            <h:outputText styleClass="outputLabel1" value="Emergency Contact" />
+                            <p:separator id="separtor02"/>
+                            <h:panelGrid columns="3" columnClasses="label, value">
+                                <h:outputText styleClass="outputLabel" value="Emergency Contact Person" />
+                                <p:inputText id="emergencyContactPerson" value="#{residentManagedBean.resident.emergencyContactPerson}" size="15" required="true" requiredMessage="Emergency contact person must be filled" />
+                                <p:message for="emergencyContactPerson"/> 
+
+                                <h:outputText styleClass="outputLabel" value="Relationship" />
+                                <p:selectOneMenu id="relationship" value="#{residentManagedBean.resident.relationship}" style="width: 80%;" requiredMessage="Relationship must be filled">  
+                                    <f:selectItem itemLabel="Select One..." itemValue="" />  
+                                    <f:selectItem itemLabel="Father" itemValue="1" />
+                                    <f:selectItem itemLabel="Mother" itemValue="2" />
+                                    <f:selectItem itemLabel="Brother" itemValue="3" />
+                                    <f:selectItem itemLabel="Sister" itemValue="4" />
+                                    <f:selectItem itemLabel="Son" itemValue="5" />
+                                    <f:selectItem itemLabel="Daugther" itemValue="6" />
+                                    <f:selectItem itemLabel="Other" itemValue="7" />                            
+                                </p:selectOneMenu>   
+                                <p:message for="relationship"/> 
+
+                                <h:outputText styleClass="outputLabel" value="Emergency Contact Number" />
+                                <p:inputText id="emergencyContactNumber" value="#{residentManagedBean.resident.emergencyContactNumber}" size="15" required="true" requiredMessage="Emergency contact number must be filled" />
+                                <p:message for="emergencyContactNumber"/>     
+                                <p:spacer height="10" />
+                            </h:panelGrid>                              
+
+                            <h:outputText styleClass="outputLabel1" value="Assigning Apartment" />
+                            <p:separator id="separator3"/>
+                            <h:panelGrid columns="3" columnClasses="label, value">
+                                <h:outputText styleClass="outputLabel" value="Building" />
+                                <p:selectOneMenu id="buildingNameAssigning" value="#{residentManagedBean.building.buildingId}">                              
+                                    <f:selectItem itemLabel="Select One..." itemValue="" /> 
+                                    <f:selectItems value="#{residentManagedBean.buildings}" var="b" itemValue="#{b.buildingId}" itemLabel="#{b.buildingName}" /> 
+                                    <p:ajax listener="#{residentManagedBean.handleBuildingNameChange}" update="apartmentNumberAssigning"  />
+                                </p:selectOneMenu>                      
+                                <p:message for="buildingNameAssigning"/> 
+
+                                <h:outputText styleClass="outputLabel" value="Apartment" />
+                                <p:selectOneMenu id="apartmentNumberAssigning" value="#{residentManagedBean.apartment.apartmentId}">                             
+                                    <f:selectItem itemLabel="Select One..." itemValue="" />   
+                                    <f:selectItems value="#{residentManagedBean.apartaments}" var="a" itemValue="#{a.apartmentId}" itemLabel="#{a.apartmentNumber}" /> 
+
+                                </p:selectOneMenu>    
+                                <p:message for="apartmentNumberAssigning"/>    
+                            </h:panelGrid>
+                            <p:separator id="separator4"/>
+                            <p:commandButton value="Add" icon="ui-icon-disk" update=":tabView:frmResidents:residentDataTable,growlAddResident"
+                                             actionListener="#{residentManagedBean.addResident}" /> 
+                            <p:spacer width="10"/>
+                            <p:commandButton value="Cancel"  icon="ui-icon-circle-close" />
+                        </h:form>
+                    </p:tab>  
+                    <p:tab id="tab2" title="Residents">  
+                        <h:form id="frmResidents">
+                            <p:growl id="growlSearchResident" showDetail="true" sticky="true"/>
+                            <p:panel header="Search Resident" >   
+                                <table>
+                                    <tr>
+                                        <td class="outputLabel">
+                                            Search by:
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu id="searchResident" value="#{residentManagedBean.typeSearch}">  
+                                                <f:selectItem itemLabel="Select..." itemValue="" />  
+                                                <f:selectItem itemLabel="Name" itemValue="1" />
+                                                <f:selectItem itemLabel="Mobile Number" itemValue="2" />                                           
+                                            </p:selectOneMenu>                                    
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="outputLabel">
+                                            Enter Key Words:
+                                        </td>
+                                        <td>
+                                            <p:column styleClass="outputText"> 
+                                                <p:inputText id="keyWords" value="#{residentManagedBean.keyWord}" size="15" required="true" 
+                                                             requiredMessage="you need to enter key words">
+                                                    <p:ajax update="residentDataTable" event="keyup" listener="#{residentManagedBean.handleFindResident}"/>
+                                                </p:inputText>
+                                            </p:column>
+                                        </td>
+                                        <td>
+                                            <p:commandButton value="Search" update="residentDataTable,growlSearchResident" actionListener="#{residentManagedBean.findResident}" 
+                                                             icon="ui-icon-search" />
+                                        </td>
+                                    </tr>
+                                </table>             
+                            </p:panel>   
+                            <p:dataTable id="residentDataTable" var="residentt" value="#{residentManagedBean.residents}" paginator="true" rows="5"  
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                         rowsPerPageTemplate="5,10,15"  
+                                         emptyMessage="No Residents found with the given criteria">
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Resident Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{residentt.residentId}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id Card"/>
+                                    </f:facet>
+                                    <h:outputText value="#{residentt.idCardNumber}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="First Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{residentt.firstName}"/>
+                                </p:column>                    
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Last Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{residentt.lastName}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="gender"/>
+                                    </f:facet>
+                                    <h:outputText value="#{residentt.gender == 1 ? 'Female':'Male'}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mobile Number"/>
+                                    </f:facet>
+                                    <h:outputText value="#{residentt.mobileNumber}"/>
+                                </p:column>                         
+                                <p:column>  
+                                    <p:commandButton value="View" update=":frmSelectResident" oncomplete="residentSelectDialog.show()"
+                                                     actionListener="#{residentManagedBean.prepareSelectResident(residentt.residentId)}"
+                                                     icon="ui-icon-search" >  
+                                    </p:commandButton>  
+                                </p:column> 
+                                <p:column>  
+                                    <p:commandButton value="Update" update=":frmUpdateResident" oncomplete="residentUpdateDialog.show()"
+                                                     actionListener="#{residentManagedBean.prepareSelectResident(residentt.residentId)}"
+                                                     icon="ui-icon-pencil" />                         
+                                </p:column> 
+                                <p:column>  
+                                    <p:commandButton value="Delete" update=":frmDeleteResident" oncomplete="residentDeleteDialog.show()"
+                                                     actionListener="#{residentManagedBean.prepareSelectResident(residentt.residentId)}"
+                                                     icon="ui-icon-trash" >                                
+                                    </p:commandButton>
+                                </p:column>                        
+                            </p:dataTable>
+                        </h:form>
+                    </p:tab>                 
+                </p:tabView>        
+                <!--view resident details-->
+                <h:form id="frmSelectResident">
+                    <p:dialog header="Resident Detail #{residentManagedBean.selectedResident.residentId}" widgetVar="residentSelectDialog" resizable="false" draggable="false"  
+                              showEffect="fade" hideEffect="fade" modal="true">  
+                        <p:panelGrid id="display" style="border: none;">
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Id Card Number:</p:column>  
+                                <p:column styleClass="outputText"><h:outputText value="#{residentManagedBean.selectedResident.idCardNumber}" /></p:column>                 
+                                <p:column rowspan="10" style="width: 30%;height: 40%;" ><p:graphicImage value="/resources/employees/#{residentManagedBean.selectedResident.mobileNumber}.jpg" /></p:column> 
+                            </p:row>  
+                            <p:row>  
+                                <p:column styleClass="outputLabel">First Name:</p:column>  
+                                <p:column styleClass="outputText"><h:outputText value="#{residentManagedBean.selectedResident.firstName}" /></p:column>                
+                            </p:row>  
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Last Name:</p:column>  
+                                <p:column styleClass="outputText"> <h:outputText value="#{residentManagedBean.selectedResident.lastName}" /></p:column> 
+                            </p:row>
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Gender:</p:column>  
+                                <p:column styleClass="outputText">
+                                    <p:selectOneMenu value="#{residentManagedBean.selectedResident.gender}" style="width: 80%;" disabled="true" >  
+                                        <f:selectItem itemLabel="Select One..." itemValue="" />  
+                                        <f:selectItem itemLabel="Female" itemValue="1" />
+                                        <f:selectItem itemLabel="Male" itemValue="2" />                                                            
+                                    </p:selectOneMenu>
+                                </p:column> 
+                            </p:row>
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Date of Birth:</p:column>  
+                                <p:column styleClass="outputText">
+                                    <p:calendar styleClass="outputText" value="#{residentManagedBean.selectedResident.dob}" disabled="true" 
+                                                pattern="dd/MM/yyyy" showOn="button" size="10" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:calendar>
+                                </p:column> 
+                            </p:row>
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Marital Status:</p:column>  
+                                <p:column styleClass="outputText"> 
+                                    <p:selectOneMenu value="#{residentManagedBean.selectedResident.maritalStatus}" style="width: 80%;" disabled="true">  
+                                        <f:selectItem itemLabel="Select One..." itemValue="" />  
+                                        <f:selectItem itemLabel="Married" itemValue="1" />
+                                        <f:selectItem itemLabel="Single" itemValue="2" />
+                                        <f:selectItem itemLabel="Divorced" itemValue="3" />
+                                        <f:selectItem itemLabel="Widowed" itemValue="4" />
+                                    </p:selectOneMenu>  
+                                </p:column> 
+                            </p:row>
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Email:</p:column>  
+                                <p:column styleClass="outputText"> <h:outputText value="#{residentManagedBean.selectedResident.email}" /></p:column> 
+                            </p:row>
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Address:</p:column>  
+                                <p:column styleClass="outputText"> <h:outputText value="#{residentManagedBean.selectedResident.address}" /></p:column> 
+                            </p:row>
+                            <p:row>  
+                                <p:column styleClass="outputLabel">City:</p:column>  
+                                <p:column styleClass="outputText"> <h:outputText value="#{residentManagedBean.selectedResident.city}" /></p:column> 
+                            </p:row>    
+                            <p:row>  
+                                <p:column styleClass="outputLabel">Mobile Number:</p:column>  
+                                <p:column styleClass="outputText"> <h:outputText value="#{residentManagedBean.selectedResident.mobileNumber}" /></p:column> 
+                            </p:row> 
+                            <p:row>  
+                                <p:column colspan="3" styleClass="ui-widget-header">  
+                                    <p:spacer height="0"/>  
+                                </p:column>  
+                            </p:row>                   
+                            <p:row>  
+                                <p:column colspan="2" styleClass="outputLabel">Emergency Contact Number:</p:column>  
+                                <p:column styleClass="outputText"><h:outputText value="#{residentManagedBean.selectedResident.emergencyContactNumber}" /></p:column>  
+                            </p:row> 
+                            <p:row>  
+                                <p:column colspan="2" styleClass="outputLabel">Relationship:</p:column>  
+                                <p:column styleClass="outputText"><h:outputText value="#{residentManagedBean.selectedResident.relationship}" /></p:column>  
+                            </p:row> 
+                            <p:row>  
+                                <p:column colspan="2" styleClass="outputLabel">Emergency Contact Person:</p:column>  
+                                <p:column styleClass="outputText"><h:outputText value="#{residentManagedBean.selectedResident.emergencyContactPerson}" /></p:column>  
+                            </p:row> 
+                            <p:row>  
+                                <p:column colspan="3" styleClass="ui-widget-header">  
+                                    <p:spacer height="0"/>  
+                                </p:column>  
+                            </p:row> 
+                            <p:row>  
+                                <p:column colspan="2" styleClass="outputLabel">Building Name:</p:column>  
+                                <p:column styleClass="outputText"><h:outputText value="#{residentManagedBean.selectedBuilding.buildingName}" /></p:column>  
+                            </p:row> 
+                            <p:row>  
+                                <p:column colspan="2" styleClass="outputLabel">Apartment Number:</p:column>  
+                                <p:column styleClass="outputText"><h:outputText value="#{residentManagedBean.selectedApartment.apartmentNumber}" /></p:column>  
+                            </p:row> 
+                        </p:panelGrid>  
+                    </p:dialog>        
+                </h:form>
+                <!--update resident -->
+                <h:form id="frmUpdateResident">
+                    <p:dialog header="Update Resident Information #{residentManagedBean.selectedResident.residentId}" widgetVar="residentUpdateDialog" resizable="false" draggable="false"  
+                              showEffect="fade" hideEffect="fade" modal="true" style="font-size: 13px;">  
+                        <p:tabView >
+                            <p:tab title="Personal" id="personalInfoUpdate">  
+                                <p:growl id="growlUpdateResident" showDetail="true" sticky="true" />                       
+                                <h:outputText styleClass="outputLabel1" value="Resident Personal Information" />
+                                <p:separator id="separtor01"/>
+                                <h:panelGrid columns="3" columnClasses="label, value"> 
+
+                                    <h:outputText styleClass="outputLabel" value="IdCard Number" />
+                                    <p:inputText id="idCardNumber" value="#{residentManagedBean.selectedResident.idCardNumber}" size="30" required="true" requiredMessage="Id Card must be filled" />
+                                    <p:message for="idCardNumber"/>   
+
+                                    <h:outputText styleClass="outputLabel" value="First Name" />
+                                    <p:inputText id="firstName" value="#{residentManagedBean.selectedResident.firstName}" size="35" required="true" requiredMessage="First name must be filled" />
+                                    <p:message for="firstName"/>  
+
+                                    <h:outputText styleClass="outputLabel" value="Last Name" />
+                                    <p:inputText id="lastName" value="#{residentManagedBean.selectedResident.lastName}" size="35" required="true" requiredMessage="Last name must be filled" />
+                                    <p:message for="lastName"/>
+
+                                    <h:outputText styleClass="outputLabel" value="Gender" />
+                                    <p:selectOneRadio id="gender" value="#{residentManagedBean.selectedResident.gender}" requiredMessage="Gender must be filled">  
+                                        <f:selectItem itemLabel="Female" itemValue="1" />  
+                                        <f:selectItem itemLabel="Male" itemValue="2" />  
+                                    </p:selectOneRadio>  
+                                    <p:message for="gender"/>
+
+                                    <h:outputText styleClass="outputLabel" value="Date of Birth" />
+                                    <p:calendar id="dob" value="#{residentManagedBean.selectedResident.dob}" pattern="dd/MM/yyyy" showOn="button" size="10" requiredMessage="DOB must be filled" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:calendar>
+                                    <p:message for="dob"/>
+
+                                    <h:outputText styleClass="outputLabel" value="Marital Status" />
+                                    <p:selectOneMenu id="maritalStatus" value="#{residentManagedBean.selectedResident.maritalStatus}" style="width: 80%;" requiredMessage="Marital status must be filled">  
+                                        <f:selectItem itemLabel="Select One..." itemValue="" />  
+                                        <f:selectItem itemLabel="Married" itemValue="1" />
+                                        <f:selectItem itemLabel="Single" itemValue="2" />
+                                        <f:selectItem itemLabel="Divorced" itemValue="3" />
+                                        <f:selectItem itemLabel="Widowed" itemValue="4" />
+                                    </p:selectOneMenu>   
+                                    <p:message for="maritalStatus"/>
+
+                                    <h:outputText styleClass="outputLabel" value="Email" />
+                                    <p:inputText id="email" value="#{residentManagedBean.selectedResident.email}" size="25" required="true" requiredMessage="Email must be filled" />
+                                    <p:message for="email"/> 
+
+                                    <h:outputText styleClass="outputLabel" value="Address" />
+                                    <p:inputText id="Address" value="#{residentManagedBean.selectedResident.address}" size="15" required="true" requiredMessage="Address must be filled" />
+                                    <p:message for="Address"/>       
+
+                                    <h:outputText styleClass="outputLabel" value="City" />
+                                    <p:inputText id="City" value="#{residentManagedBean.selectedResident.city}" size="15" required="true" requiredMessage="City must be filled" />
+                                    <p:message for="City"/>  
+
+                                    <h:outputText styleClass="outputLabel" value="Mobile Number" />
+                                    <p:inputText id="mobileNumber" value="#{residentManagedBean.selectedResident.mobileNumber}" size="15" required="true" requiredMessage="phone number must be filled" />
+                                    <p:message for="mobileNumber"/>                          
+                                    <p:spacer height="10" />
+                                </h:panelGrid>
+
+                                <h:outputText styleClass="outputLabel1" value="Emergency Contact" />
+                                <p:separator id="separtor02"/>
+                                <h:panelGrid columns="3" columnClasses="label, value">
+                                    <h:outputText styleClass="outputLabel" value="Emergency Contact Person" />
+                                    <p:inputText id="emergencyContactPerson" value="#{residentManagedBean.selectedResident.emergencyContactPerson}" size="15" required="true" requiredMessage="Emergency contact person must be filled" />
+                                    <p:message for="emergencyContactPerson"/> 
+
+                                    <h:outputText styleClass="outputLabel" value="Relationship" />
+                                    <p:selectOneMenu id="relationship" value="#{residentManagedBean.selectedResident.relationship}" style="width: 80%;" requiredMessage="Relationship must be filled">  
+                                        <f:selectItem itemLabel="Select One..." itemValue="" />  
+                                        <f:selectItem itemLabel="Father" itemValue="1" />
+                                        <f:selectItem itemLabel="Mother" itemValue="2" />
+                                        <f:selectItem itemLabel="Brother" itemValue="3" />
+                                        <f:selectItem itemLabel="Sister" itemValue="4" />
+                                        <f:selectItem itemLabel="Son" itemValue="5" />
+                                        <f:selectItem itemLabel="Daugther" itemValue="6" />
+                                        <f:selectItem itemLabel="Other" itemValue="7" />                            
+                                    </p:selectOneMenu>   
+                                    <p:message for="relationship"/> 
+
+                                    <h:outputText styleClass="outputLabel" value="Emergency Contact Number" />
+                                    <p:inputText id="emergencyContactNumber" value="#{residentManagedBean.selectedResident.emergencyContactNumber}" size="15" required="true" requiredMessage="Emergency contact number must be filled" />
+                                    <p:message for="emergencyContactNumber"/>     
+                                    <p:spacer height="10" />
+                                </h:panelGrid>   
+                                <p:separator/>
+                                <p:commandButton value="Update" icon="ui-icon-disk" update=":tabView:frmResidents:residentDataTable,growlUpdateResident"
+                                                 actionListener="#{residentManagedBean.updateResident}" oncomplete="residentUpdateDialog.hide();"/> 
+                                <p:spacer width="10"/>
+                                <p:commandButton value="Cancel" oncomplete="residentUpdateDialog.hide();" 
+                                                 icon="ui-icon-circle-close" />   
+
+                            </p:tab>
+                            <p:tab title="Update Apartment" id="residentInformationUpdate">                         
+                                <h:outputText styleClass="outputText" value="Currently Building and Apartment" />
+                                <p:separator/>
+                                <h:panelGrid columns="3" columnClasses="label, value">
+
+                                    <h:outputText styleClass="outputLabel" value="Building Name:" />
+                                    <h:outputText id="buildingNamee" styleClass="outputText" value="#{residentManagedBean.selectedBuilding.buildingName}" />
+                                    <p:message for="buildingNamee"/> 
+
+                                    <h:outputText styleClass="outputLabel" value="Apartment Number:" />
+                                    <h:outputText id="apartmentNumberr" styleClass="outputText" value="#{residentManagedBean.selectedApartment.apartmentNumber}" />
+                                    <p:message for="apartmentNumberr"/>                            
+
+                                </h:panelGrid>
+                                <br/>
+                                <h:outputText styleClass="outputText" value="Change Building and Apartment" />
+                                <p:separator id="separtor07"/>
+                                <h:panelGrid columns="3" columnClasses="label, value">
+
+                                    <h:outputText styleClass="outputLabel" value="Building" />
+                                    <p:selectOneMenu id="buildingNameAssigning" value="#{residentManagedBean.selectedBuilding.buildingId}">                              
+                                        <f:selectItem itemLabel="Select One..." itemValue="" /> 
+                                        <f:selectItems value="#{residentManagedBean.buildings}" var="b" itemValue="#{b.buildingId}" itemLabel="#{b.buildingName}" /> 
+                                        <p:ajax listener="#{residentManagedBean.handleBuildingNameChange}" update="apartmentNumberAssigning"  />
+                                    </p:selectOneMenu>                      
+                                    <p:message for="buildingNameAssigning"/> 
+
+                                    <h:outputText styleClass="outputLabel" value="Apartment" />
+                                    <p:selectOneMenu id="apartmentNumberAssigning" value="#{residentManagedBean.selectedApartment.apartmentId}">                             
+                                        <f:selectItem itemLabel="Select One..." itemValue="" />   
+                                        <f:selectItems value="#{residentManagedBean.apartaments}" var="a" itemValue="#{a.apartmentId}" itemLabel="#{a.apartmentNumber}" /> 
+                                    </p:selectOneMenu>    
+                                    <p:message for="apartmentNumberAssigning"/>  
+                                </h:panelGrid>  
+                                <br />
+                                <p:separator/>                        
+                                <p:commandButton value="Update" update=":tabView:frmResidents:residentDataTable,growlUpdateResident"                                          
+                                                 actionListener="#{residentManagedBean.updateResidentApartment}" 
+                                                 oncomplete="residentUpdateDialog.hide();"
+                                                 icon="ui-icon-disk"/> 
+                                <p:spacer width="10"/>
+                                <p:commandButton value="Cancel"  oncomplete="residentUpdateDialog.hide();"
+                                                 icon="ui-icon-circle-close" /> 
+                            </p:tab>
+                        </p:tabView>
+                    </p:dialog>  
+                </h:form>
+                <!--delete resident -->
+                <h:form id="frmDeleteResident" style="margin-left: auto;margin-right: auto;">
+                    <p:growl id="growlDeleteResident" showDetail="true" sticky="true"/>
+                    <p:confirmDialog id="residentDeleteDialog"   
+                                     header="Remove Resident" severity="alert" widgetVar="residentDeleteDialog" 
+                                     style="font-size: 13px;font-weight: bold;">  
+                        <f:facet name="message">
+                            <h:outputText id="messageTextDelete" value="Are you sure about remove this resident?" style="color: #D20005;" />
+                        </f:facet>
+                        <p:commandButton value="Yes" update=":tabView:frmResidents:residentDataTable,growlDeleteResident" 
+                                         actionListener="#{residentManagedBean.deleteResident}" 
+                                         oncomplete="residentDeleteDialog.hide();" icon="ui-icon-circle-check"/>  
+                        <p:spacer width="10"/>
+                        <p:commandButton value="Not" oncomplete="residentDeleteDialog.hide();" 
+                                         icon="ui-icon-circle-close" /> 
+                    </p:confirmDialog>
+                </h:form>                    
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

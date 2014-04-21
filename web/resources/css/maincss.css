@@ -1,0 +1,510 @@
+/* 
+    Document   : maincss
+    Created on : Jan 16, 2013, 11:55:27 AM
+    Author     : george01
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+h1{
+    color:#43bfff;
+}
+.outputLabel{
+    color: #036fab;
+    font-weight: bold;
+}
+.outputText{
+    font-weight: bold;
+}
+.outputLabel1{
+    color:#000;
+    font-weight: bold;
+}
+#logoutCSS{
+    float: right;
+}
+
+/* Global properties ======================================================== */
+html {width:100%;}
+body{
+    border-top:#000 solid 3px;
+    margin:0;
+    padding:0;	
+    background-repeat:no-repeat;
+    background-position:top center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    color:#808080;    
+    background:rgb(74,81,85);
+}
+
+#main_wrapper {	
+    width:1000px;
+    height:auto;
+    margin:0 auto;
+}
+
+/*********************************header*************************************/
+#header{
+    width:1000px;
+    height:100px;
+    float:left;
+    margin-bottom:40px;
+}
+
+#logo{
+    width:500px;
+    float:left;
+    margin-top:60px;
+}
+
+#headerlinks{
+    width:490px;
+    float:right;
+    padding-top:40px;
+}
+
+#emailndno{
+    width:490px;
+    float:right;
+    height:auto;
+}
+
+#emailndno ul{
+    list-style:none;
+    float:right;
+}
+
+#emailndno ul li{
+    float:left;
+    margin-left:20px;
+    height:35px;
+}
+
+#emailndno ul li p{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#999;
+    letter-spacing:0.3px;
+    padding:0;
+    margin:0;
+}
+
+#emailndno ul li a{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#999;
+    letter-spacing:0.3px;
+    float:right;
+    text-decoration:none;
+}
+
+#emailndno ul li a:hover{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#999;
+    letter-spacing:0.3px;
+    text-decoration:underline;
+}
+
+
+/************************************************* Content *****************************************************/
+#bodycontainer {
+    width:100%;	
+    position:relative;    
+}
+
+#leftcolumn{
+    float:left;        
+    width: 25%; /*Width of left column*/
+    clear:both;
+}
+
+#bodytextcontainer{
+    width:1030px;
+    height:auto;
+    float:left;
+}
+
+#content {
+    width:100%;	
+    position:relative;
+    float:right;   	
+}
+
+#contentcolumn{
+    margin-left: 200px; /*Set left margin to LeftColumnWidth*/
+}
+
+
+
+.innertube{
+    margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
+    margin-top: 0;
+}
+
+h3 {
+    font-size:32px; 
+    line-height:2em; 
+    color:#1c1b18;
+    font-weight:normal;
+    letter-spacing:-1px;
+    margin-bottom:-5px
+}
+h4 {
+    font-size:21px; 
+    line-height:24px; 
+    color:#1c1b18;
+    font-weight:normal;
+    margin-bottom:18px;
+}
+h6 {color:#1c1b18;}
+
+.border-bot {
+    width:100%; 
+    padding-bottom:11px; 
+    background:url(../images/pic-1.gif) 0 bottom repeat-x;
+}
+
+.circle {
+    width:58px;
+    height:58px;
+    font-size:32px;
+    line-height:58px;
+    color:#fff;
+    background:url(../images/circle.png) 0 0 no-repeat;
+    text-align:center;
+    float:left;
+    margin-right:15px;
+    margin-top:8px;
+}
+
+.box {
+    width:100%; 
+    background:url(../images/box-tail.gif) 0 0 repeat-x;
+}
+
+.button {
+    display:inline-block; 
+    padding:9px 20px;
+    font-size:21px;
+    line-height:1.2em;
+    color:#fff; 
+    background:#1c1b18;
+    cursor:pointer;
+}
+.button:hover {color:#fff;}
+
+.list-1 li {
+    line-height:20px; 
+    padding:7px 0 8px 20px; 
+    background:url(../images/marker-1.gif) 0 12px no-repeat;
+}
+.list-1 li a {display:inline-block; color:#808080;}
+.list-1 li a:hover {color:#43bfff; text-decoration:underline;}
+
+.list-2 li {
+    line-height:20px; 
+    padding:7px 0 8px 20px; 
+    background:url(../images/marker-1.gif) 0 12px no-repeat;
+}
+.list-2 li a {display:inline-block;}
+
+.link:hover {text-decoration:underline;} 
+
+.link-1 {color:#1c1b18;}
+.link-1:hover {text-decoration:none;} 
+
+dl span {float:left; width:88px; font-weight:bold; color:#1c1b18;}
+
+
+
+/*************************** -------------- Left Navigation -----------------------********************/
+
+/* Starter CSS for Flyout Menu */
+/* Starter CSS for Flyout Menu */
+#cssmenu {
+    padding: 0;
+    margin: 0;
+    border: 0; }
+
+#cssmenu ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+
+#cssmenu ul {
+    position: relative;
+    z-index: 200;
+    float: left; }
+
+#cssmenu ul li {
+    float: left;
+    min-height: 1px;
+    line-height: 1em;
+    vertical-align: middle; }
+
+#cssmenu ul li.hover,
+#cssmenu ul li:hover {
+    position: relative;
+    z-index: 200;
+    cursor: default; }
+
+#cssmenu ul ul {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 200;
+    width: 100%; }
+
+#cssmenu ul ul li {
+    float: none; }
+
+#cssmenu ul li:hover > ul {
+    visibility: visible; }
+
+#cssmenu ul ul {
+    top: 0;
+    left: 100%; }
+
+#cssmenu ul li {
+    float: none; }
+
+/* Custom Stuff */
+#cssmenu span, #cssmenu a {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-decoration: none; }
+
+#cssmenu {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -moz-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+    width: 200px; }
+#cssmenu:after, #cssmenu ul:after {
+    content: '';
+    display: block;
+    clear: both; }
+#cssmenu > ul > li:first-child {
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; }
+#cssmenu > ul > li:last-child {
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; }
+#cssmenu > ul > li ul ul li:first-child {
+    -moz-border-radius: 0 5px 0 0;
+    -webkit-border-radius: 0 5px 0 0;
+    border-radius: 0 5px 0 0;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; }
+#cssmenu > ul > li ul ul li:last-child {
+    -moz-border-radius: 0 0 5px 0;
+    -webkit-border-radius: 0 0 5px 0;
+    border-radius: 0 0 5px 0;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; }
+#cssmenu ul, #cssmenu li {
+    width: 100%; }
+#cssmenu li {
+    background: #c0bebf url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA0CAMAAAB8fKKlAAAAmVBMVEXy7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7erx7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7ery7eoO3g4TAAAAMnRSTlP8+fbz7+vn497Z1M/KxL+5s66oopuVj4mDfHZwamRdV1FMRkA7NTArJiEcGBQQDAkGA02z+X0AAABLSURBVHheDcGDEQMBAACwvFnbtrv/cO3F949AKBJLpDK5QqlSa2hqaevo6ukbGBoZm5iamVtYWlnb2NrZOzg6Obu4url7eHp5+/wAxikFLnlTZcYAAAAASUVORK5CYII=) repeat-x;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f2edea), color-stop(1, #c0bebf));
+    background-image: -webkit-linear-gradient(top, #f2edea, #c0bebf);
+    background-image: -moz-linear-gradient(top, #f2edea, #c0bebf);
+    background-image: -ms-linear-gradient(top, #f2edea, #c0bebf);
+    background-image: -o-linear-gradient(top, #f2edea, #c0bebf);
+    background-image: linear-gradient(#f2edea, #c0bebf); }
+#cssmenu li:hover, #cssmenu li.active {
+    background: #606a76 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA0CAMAAAB8fKKlAAAAmVBMVEVKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmJKVmL///9KVmL3Z0MtAAAAMnRSTlP8+fby7+vm4t3Y087Iw723sauln5mTjIaAeXNsZmBaVE5IQjw3MSwnIh0ZFBANCQYDAAm6nKYAAABLSURBVHheDcGDEQMBAACwvFnbtrv/cO3F949AKBJLpDK5QqlSa2hqaevo6ukbGBoZm5iamVtYWlnb2NrZOzg6Obu4url7eHp5+/wAxikFLnlTZcYAAAAASUVORK5CYII=) repeat-x;
+    -moz-box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4a5662), color-stop(1, #606a76));
+    background-image: -webkit-linear-gradient(top, #4a5662, #606a76);
+    background-image: -moz-linear-gradient(top, #4a5662, #606a76);
+    background-image: -ms-linear-gradient(top, #4a5662, #606a76);
+    background-image: -o-linear-gradient(top, #4a5662, #606a76);
+    background-image: linear-gradient(#4a5662, #606a76); }
+#cssmenu li:hover > a, #cssmenu li.active > a {
+    color: #FFF; }
+#cssmenu a {
+    color: #666666;
+    line-height: 160%;
+    padding: 16px 8px 16px 28px;
+    width: 164px; }
+#cssmenu ul ul {
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); }
+#cssmenu ul ul li {
+    background: #606a76;
+    border-bottom: 1px solid #59636F;
+    -moz-box-shadow: inset 0 1px 0 #66707c;
+    -webkit-box-shadow: inset 0 1px 0 #66707c;
+    box-shadow: inset 0 1px 0 #66707c; }
+#cssmenu ul ul li:hover {
+    background: #4a5662; }
+#cssmenu ul ul li a {
+    color: #FFF; }
+
+
+/************************************************* Footer *****************************************************/
+/* ----  Footer container  ---- */
+
+#footercontainer{
+    width:100%;
+    height:auto;
+    float:left;
+    border-top:4px solid #ddd;
+    padding-top:30px;
+    padding-bottom:50px;
+    margin-top:40px;
+}
+
+#ftrcontainer{
+    width:1000px;
+    height:auto;
+    margin:0 auto;
+}
+
+#ftrlogo{
+    float:left;
+    margin-right:100px;
+}
+
+#ftrlinks {
+    width:320px;
+    float:left;
+    margin-right:40px;
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+
+#ftrlinks ul{
+    float:left;
+    list-style:none;
+    display:block;
+    margin:0;
+    padding:0;
+}
+
+#ftrlinks ul li{
+    border-bottom: 1px solid #555;
+    margin-right: 30px;
+    width: 120px;
+}
+
+#ftrlinks ul li a{
+    color: #999999;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    line-height: 26px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#ftrlinks ul li a:hover{
+    color:#ED1E24;
+}
+
+#ftraddresses{
+    width:360px;	
+    float:right;
+}
+
+#ftraddresses ul{
+    width:360px;	
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+#ftraddresses ul li{
+    width:360px;
+    float:left;	
+    line-height:26px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    color:#999;	
+}
+
+#ftraddresses ul li a{
+    color:#999;
+    text-decoration:none;
+}
+
+#ftraddresses ul li a:hover{
+    color:#ED1E24;
+    text-decoration:underline;
+}
+
+
+#ftraddresses ul li .ftradd{
+    background:url(../images/icon-add.png) no-repeat left;
+    padding-left:35px;
+    float:left;
+}
+
+#ftraddresses ul li .ftrph{
+    background:url(../images/icon-ph.png) no-repeat left;
+    padding-left:35px;
+    float:left;
+}
+
+#ftraddresses ul li .ftremail{
+    background:url(../images/icon-email.png) no-repeat left;
+    padding-left:35px;
+    float:left;
+}
+
+#ftraddresses ul li .ftrfb{
+    background:url(../images/icon-fb.png) no-repeat left;
+    padding-left:35px;
+    float:left;
+}
+
+#ftraddresses ul li .ftrtw{
+    background:url(../images/icon-tw.png) no-repeat left;
+    padding-left:35px;
+    float:left;
+}
+
+/*/************************************************* Extra *****************************************************/
+.block {height:114px;}
+.extra {
+    min-height:100%; 
+    height:auto !important; 
+    height:100%; 
+    margin: 0 auto -114px; 
+    position:relative;
+    overflow:hidden;
+} 
+html, body {height:100%;}
+
+
+/*/***by george*******************/
+/* modify the menu
+ul{
+    float: right;
+}
+*/

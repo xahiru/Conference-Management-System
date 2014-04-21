@@ -77,6 +77,28 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+     <security-constraint>
+        <display-name>Receptionist</display-name>
+        <web-resource-collection>
+            <web-resource-name>Staff Area</web-resource-name>
+            <description>company users</description>
+            <url-pattern>/faces/room/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>coordinator</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     <security-constraint>
         <display-name>All Access</display-name>
         <web-resource-collection>

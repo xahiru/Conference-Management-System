@@ -14,6 +14,7 @@ import entity.Organizer;
 import entity.Room;
 import entity.Users;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -46,8 +47,8 @@ public class EventlistController implements Serializable {
     private backingbeans.OrganizerFacade organizerFacade;
     @EJB
     private backingbeans.UsersFacade usersFacade;
-//    @EJB
-//    private backingbeans.RoomFacade roomFacade;
+    @EJB
+    private backingbeans.RoomFacade roomFacade;
 
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -88,15 +89,38 @@ public class EventlistController implements Serializable {
     public String prepareList() {
         recreateModel();
         return "List";
-        
+
     }
 
-//    public String getRoomName(String id) {
-//       // Room r = (Room) roomFacade.find(Integer.valueOf(id));
-//      //  return r.getName();
+    public String getRoomName(String id) {
+        Room r = (Room) roomFacade.find(Integer.valueOf(id));
+        return r.getName();
 //        return id;
-//    }
-//
+    }
+
+    public String getTime(String id) {
+        Booking b = (Booking) bookingFacade.find(Integer.valueOf(id));
+        Date d = b.getStartTime();
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        int s = c.get(Calendar.HOUR);
+        int sm = c.get(Calendar.MINUTE);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        d = b.getEndTime();
+        c.setTime(d);
+        int f = c.get(Calendar.HOUR);
+        int fm = c.get(Calendar.MINUTE);
+         int dayf = c.get(Calendar.DAY_OF_MONTH);
+        int monthf = c.get(Calendar.MONTH);
+        int yearf = c.get(Calendar.YEAR);
+        String sTime = String.format("%02d-%02d-%04d %02d:%02d",month,day,year, s, sm);
+        String fTime = String.format("%02d-%02d-%04d %02d:%02d",monthf,dayf,yearf, f, fm);
+
+        return sTime + "-" + fTime;
+    }
+
     public String getOrganizerName(String id) {
         Organizer r = (Organizer) organizerFacade.find(Integer.valueOf(id));
         return r.getCompanyName();
