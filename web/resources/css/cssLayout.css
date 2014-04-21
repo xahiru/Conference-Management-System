@@ -7,13 +7,19 @@
     margin: 0px 0px 10px 0px;
 }
 
+.formpanels  {
+    margin:0 auto; 
+    width: 600px;
+    
+    }
+    
 
 .main{
     margin:0 auto;
     width: 1000px;
 }
 .alignTop {
-vertical-align: top;
+    vertical-align: top;
 }
 
 #content{
@@ -49,7 +55,7 @@ vertical-align: top;
 }
 
 .center_content {
-   
+
     background-color: #dddddd;
     padding: 5px;
     margin:0 auto;
@@ -69,15 +75,15 @@ vertical-align: top;
 }
 
 #top a:link, #top a:visited {
-  color: white;
-  font-weight : bold;
-  text-decoration: none;
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
 }
 
 #top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
-  text-decoration : underline;
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
 }
 
 

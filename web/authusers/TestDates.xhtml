@@ -15,8 +15,7 @@
             </ui:define>
 
             <ui:define name="content">
-                <h:form>
-
+               
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{bundle.CreateBookingLabel_startTime}" for="startTime" />
                         <p:calendar id="startTime" value="#{testDateController.startDate}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_startTime}"/>
@@ -32,7 +31,39 @@
                     <br />
                     <h:commandLink action="#{testDateController.printTodaysEvents()}" value="TodysEvent" />
 
-                </h:form>
+                <br />
+                 <h:link outcome="/ads/List" value="Show All Ads Items"/>
+                <br />
+                <h:link outcome="/booking/List" value="Show All Booking Items"/>
+                <br />
+                <h:link outcome="/contents/List" value="Show All Contents Items"/>
+                <br />
+                <h:link outcome="/equipment/List" value="Show All Equipment Items"/>
+                <br />
+                <h:link outcome="/event/List" value="Show All Event Items"/>
+                <br />
+                <h:link outcome="/layout/List" value="Show All Layout Items"/>
+                <br />
+                <h:link outcome="/organizer/List" value="Show All Organizer Items"/>
+                <br />
+                <h:link outcome="/participant/List" value="Show All Participant Items"/>
+                <br />
+                <h:link outcome="/rentalRequest/List" value="Show All RentalRequest Items"/>
+                <br />
+                <h:link outcome="/room/List" value="Show All Room Items"/>
+                <br />
+                <h:link outcome="/roomcard/List" value="Show All Roomcard Items"/>
+                <br />
+                <h:link outcome="/scheduleView/List" value="Show All ScheduleView Items"/>
+                <br />
+                <h:link outcome="/users/List" value="Show All Users Items"/>
+                <br />
+                <h:link outcome="/usersGroup/List" value="Show All UsersGroup Items"/> 
+                <br />
+                <br />
+                <h:link outcome="/reserveconference" value="Make a booking"/>
+                <br />
+                <h:link outcome="/index" value="Homepage" />
             </ui:define>
 
         </ui:composition>

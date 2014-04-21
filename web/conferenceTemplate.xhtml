@@ -15,8 +15,8 @@
             #headPanel {z-index:2 !important; }
             #headPanel div{overflow:visible;}
             .ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
-             border: none;
-        }
+                border: none;                
+            }
         </style>
     </h:head>
 
@@ -35,19 +35,6 @@
                                 <p:menuitem value="Home" outcome="/visitors/index" />  
                                 <ui:insert name="menubtns">buttons</ui:insert>
 
-
-                                <!--                        <p:submenu label="Actions" icon="ui-icon-gear">  
-                                                            <p:submenu label="Ajax" icon="ui-icon-refresh">  
-                                                                <p:menuitem value="Save" actionListener="#{menuBean.save}" icon="ui-icon-disk" update="messages"/>  
-                                                                <p:menuitem value="Update" actionListener="#{menuBean.update}" icon="ui-icon-arrowrefresh-1-w" update="messages"/>  
-                                                            </p:submenu>  
-                                                            <p:submenu label="Non-Ajax" icon="ui-icon-newwin">  
-                                                                <p:menuitem value="Delete" actionListener="#{menuBean.delete}" icon="ui-icon-close" update="messages" ajax="false"/>  
-                                                            </p:submenu>  
-                                                        </p:submenu>  -->
-
-
-
                             </div>
 
                             <ui:insert name="options">Login Button,Signup,Language switch</ui:insert>
@@ -58,9 +45,9 @@
             </p:layoutUnit>
 
             <p:layoutUnit position="center">
-                 <div class="main">
-                <ui:insert name="content">Content</ui:insert>
-                 </div>
+                <div class="main">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
             </p:layoutUnit>
 
             <p:layoutUnit  position="south" size="50" closable="true" collapsible="true">

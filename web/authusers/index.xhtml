@@ -2,29 +2,198 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../conferenceTemplate.xhtml">
 
             <ui:define name="options">
-                <h:commandLink action="#{loginController.logout()}" value="Logout"></h:commandLink>
+                <div styleClass="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" >
+                    <p:menuitem outcome="/authusers/CreateBooking" value="Book"/>
+                    <p:menuitem outcome="/authusers/EventList" value="Events"/>
+                    <p:menuitem outcome="/room/List" value="Venue"/>
+                    <p:menuitem outcome="/participant/List" value="Participants"/>
+                    <p:menuitem outcome="/contents/List" value="Handout"/>
+                    <p:menuitem outcome="/authusers/ResetPass" value="Reset password"/>
+                    <p:menuitem  value="Logout"  action="#{loginController.logout()}" style="float: right"/>
+                </div>
+
             </ui:define>
 
             <ui:define name="content">
-                <h:link outcome="/booking/List" value="Bookings"/>
-                <br />
-                <h:link outcome="/authusers/CreateBooking" value="Book an event"/>
-                <br />
-                <h:link outcome="/authusers/TestDates" value="Test Dates"/>
-                <br />
-                <h:link outcome="/organizer/List" value="Organizers"/>
-                <br />
-                <h:link outcome="/authusers/EventList" value="Events"/>
-                <br />
-                <h:link outcome="/authusers/Edit" value="Reset Password"/>
-                
+                <h:form>
+
+                    
+                    <p:panel>
+                        <p:messages closable="true" />  
+
+                        <p:panelGrid styleClass="formpanels">
+
+                            <p:row>
+                                <p:column colspan="10" >
+                                    <p:spacer height="0"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column style="font-weight: bold;"> <p:outputLabel value="#{bundle.CreateBookingLabel_startTime}"  /></p:column>
+                                <p:column> <p:calendar id="startTime" value="#{reservationController.startTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_startTime}" mindate="#{reservationController.currentDate}" />
+                                </p:column>
+
+                                <p:column  style="font-weight: bold;"></p:column>
+
+
+                                <p:column  style="font-weight: bold;"> <p:outputLabel value="#{bundle.CreateEventLabel_roomIdroom}" />
+                                </p:column>
+                                <p:column  style="font-weight: bold;"><p:selectOneMenu id="roomIdroom" value="#{reservationController.room}" required="true" requiredMessage="#{bundle.CreateEventRequiredMessage_roomIdroom}">
+                                        <f:selectItems value="#{roomController.itemsAvailableSelectOne}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                                
+
+                            </p:row>
+                            <p:row>
+                                <p:column style="font-weight: bold;"><p:outputLabel value="#{bundle.CreateBookingLabel_endTime}" for="endTime" />
+                                </p:column>
+                                <p:column ><p:calendar id="endTime" value="#{reservationController.endTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{bundle.CreateBookingTitle_endTime}" mindate="#{reservationController.currentDate}" />
+                                </p:column>
+                                
+                                <p:column colspan="3" style="font-weight: bold;"></p:column>
+
+
+                               
+                            </p:row>
+
+                            <p:row>
+                                <p:column colspan="10" >
+                                    <p:spacer height="0"/>
+                                </p:column>
+                            </p:row>
+
+
+
+
+                            <p:row >
+                                <p:column style="font-weight: bold;"> <p:outputLabel  value="#{bundle.CreateEventLabel_title}" for="title" />
+                                </p:column>
+                                <p:column colspan='10'>  <p:inputText id="title"  value="#{reservationController.title}" title="#{bundle.CreateEventTitle_title}" required="true" requiredMessage="#{bundle.CreateEventRequiredMessage_title}" />
+                                </p:column>
+
+                            </p:row>
+
+                            <p:row >
+                                <p:column style="font-weight: bold;">  <p:outputLabel  value="#{bundle.CreateEventLabel_description}" for="description" />
+                                </p:column>
+                                <p:column colspan='10'> <p:inputText  id="description" value="#{reservationController.description}" title="#{bundle.CreateEventTitle_description}" />
+                                </p:column>
+
+                            </p:row>
+
+                            <p:row >
+                                <p:column style="font-weight: bold;">   <p:outputLabel  value="#{bundle.CreateEventLabel_numberOfParticipants}" for="numberOfParticipants" />
+                                </p:column>
+                                <p:column > <p:inputText id="numberOfParticipants" value="#{reservationController.numberOfParticipants}" title="#{bundle.CreateEventTitle_numberOfParticipants}" />
+                                </p:column>
+
+                                <p:column  style="font-weight: bold;"></p:column>
+                                <p:column ><p:outputLabel  value="#{bundle.CreateEventLabel_numberOfParticipants}" for="numberOfParticipants" />
+                                </p:column>
+                                <p:column>
+                                    <input type="checkbox" name="registration" value="Open registration?" checked="checked" />
+                                </p:column>
+
+                            </p:row>
+
+
+                            <p:row>
+                                <p:column colspan="10" >
+                                    <p:spacer height="0"/>
+                                </p:column>
+                            </p:row>
+
+
+                            <p:row >
+                                <p:column style="font-weight: bold;">   <p:outputLabel value="#{bundle.CreateOrganizerLabel_companyName}" for="companyName" />
+                                </p:column>
+                                <p:column colspan='10'> <p:inputText id="companyName" value="#{reservationController.companyName}" title="#{bundle.CreateOrganizerTitle_companyName}" required="true"/>
+                                </p:column>
+
+                            </p:row>
+                            <p:row>
+                                <p:column style="font-weight: bold;" ><p:outputLabel value="#{bundle.CreateOrganizerLabel_contactPersonName}" for="contactPersonName" />
+                                </p:column>
+                                <p:column colspan='10'>
+                                    <p:inputText id="contactPersonName" value="#{reservationController.contactPersonName}" title="#{bundle.CreateOrganizerTitle_contactPersonName}" />
+                                </p:column>
+
+                            </p:row>
+
+                            <p:row>
+                                <p:column style="font-weight: bold;" ><p:outputLabel value="#{bundle.CreateOrganizerLabel_contactNumber}" for="contactNumber" />
+                                </p:column>
+                                <p:column colspan='10'>
+                                    <p:inputText id="contactNumber" value="#{reservationController.contactNumber}" title="#{bundle.CreateOrganizerTitle_contactNumber}" />
+                                </p:column>
+
+                            </p:row>
+
+                            <p:row>
+                                <p:column style="font-weight: bold;" ><p:outputLabel value="#{bundle.CreateOrganizerLabel_email}" for="email" />
+                                </p:column>
+                                <p:column colspan='10'>
+                                    <p:inputText id="email" value="#{reservationController.email}" title="#{bundle.CreateOrganizerTitle_email}" required="true"/>
+                                </p:column>
+
+                            </p:row>
+
+
+                            <p:row>
+                                <p:column colspan="10" >
+                                    <p:spacer height="0"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row >
+                                <p:column colspan="4" >
+                                    <p:spacer height="0"/>
+                                </p:column>
+
+                                <p:column   style=" text-align:center">
+                                    <h:commandButton action="#{reservationController.reserveEvent()}" value="Save" />
+
+                                </p:column>
+
+                            </p:row>
+
+                        </p:panelGrid>
+
+
+                        <p:panel styleClass="formpanels" visible="false">
+
+                            <h:panelGrid  columns="4" >
+
+
+
+
+
+                                <p:outputLabel value="Logged-in as:" for="usersIduser" />                               
+
+                                <p:inputText  id="usersIduser" disabled="true" value="#{reservationController.requestedPName}" title="#{bundle.CreateBookingTitle_endTime}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_endTime}"/>
+
+
+
+
+
+
+                            </h:panelGrid>
+                        </p:panel>
+
+
+                    </p:panel>
+                    
+                </h:form>
             </ui:define>
 
         </ui:composition>

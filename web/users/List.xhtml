@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="./../conferenceTemplate.xhtml">
 
@@ -53,7 +54,7 @@
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{usersController.prepareCreate}" value="#{bundle.ListUsersCreateLink}"/>
+                <p:commandButton  action="#{usersController.prepareCreate}" value ="New User" />
                 <br />
                 <br />
                 <h:link outcome="/admin/index" value="Admin Home"/>

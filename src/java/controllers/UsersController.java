@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -28,7 +29,7 @@ public class UsersController implements Serializable {
     private Users current;
     private DataModel items = null;
     private UsersGroup currentUserGroup;
-    private String newPassword;         
+    private String newPassword;
     @EJB
     private backingbeans.UsersFacade ejbFacade;
     private PaginationHelper pagination;
@@ -119,10 +120,12 @@ public class UsersController implements Serializable {
             currentUserGroup.setGroupname("authusers");
             currentUserGroup.setUsername(current);
             groupFacade.create(currentUserGroup);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Welcome! Please sign in"));
             return "/visitors/index";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+//            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Invalid username"));
+
             return null;
         }
     }

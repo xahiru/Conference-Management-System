@@ -16,8 +16,7 @@
                 <p:menuitem value="Schedule" outcome="/index" />  
                 <p:menuitem value="Register" outcome="/index" />  
                 <p:menuitem value="Rooms" outcome="/index" /> 
-                <p:menuitem value="Contact Us" outcome="/index" /> 
-
+           
             </ui:define>
 
             <ui:define name="options" >
@@ -27,7 +26,7 @@
                         <p:menuitem value="User" outcome="/authusers/index"  /> 
                     </p:submenu>
 
-                    <p:menuitem value="Sign Up" outcome="/index"  /> 
+                    <p:menuitem value="Sign Up" outcome="/visitors/SignUp"  /> 
                 </div>
 
 
@@ -37,7 +36,7 @@
                
                     <h:panelGrid columns="2" columnClasses="alignTop">
                         <p:panel style="width:400px;height:485px;" >
-                            <span>Date</span>
+                            <h3>Todays' Schedule</h3>
                             <h:form>  
                                 <p:dataTable var="event" value="#{visitorIndexController.eventList}">  
                                     <p:column headerText="Room">  
