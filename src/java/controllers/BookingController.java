@@ -224,7 +224,7 @@ public class BookingController implements Serializable {
             }
             if (object instanceof Booking) {
                 Booking o = (Booking) object;
-                return getStringKey(o.getBookingRef());
+                return getStringKey(o.getBookingId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Booking.class.getName());
             }

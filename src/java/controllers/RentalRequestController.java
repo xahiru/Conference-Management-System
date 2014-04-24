@@ -224,7 +224,7 @@ public class RentalRequestController implements Serializable {
             }
             if (object instanceof RentalRequest) {
                 RentalRequest o = (RentalRequest) object;
-                return getStringKey(o.getIdrentalRequest());
+                return getStringKey(o.getRentalrequestId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + RentalRequest.class.getName());
             }

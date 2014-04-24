@@ -224,7 +224,7 @@ public class RoomcardController implements Serializable {
             }
             if (object instanceof Roomcard) {
                 Roomcard o = (Roomcard) object;
-                return getStringKey(o.getIdtable1());
+                return getStringKey(o.getRoomcardId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Roomcard.class.getName());
             }

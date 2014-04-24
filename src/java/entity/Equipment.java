@@ -11,9 +11,9 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,48 +28,45 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author xahiru
  */
 @Entity
-@Table(name = "equipment")
+@Table(name = "tblEquipment")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Equipment.findAll", query = "SELECT e FROM Equipment e"),
-    @NamedQuery(name = "Equipment.findByIdequipment", query = "SELECT e FROM Equipment e WHERE e.idequipment = :idequipment"),
+    @NamedQuery(name = "Equipment.findByEquipmentId", query = "SELECT e FROM Equipment e WHERE e.equipmentId = :equipmentId"),
     @NamedQuery(name = "Equipment.findByName", query = "SELECT e FROM Equipment e WHERE e.name = :name")})
 public class Equipment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idequipment")
-    private Integer idequipment;
+    @Column(name = "equipmentId")
+    private Integer equipmentId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @JoinTable(name = "equipment_has_rental_request", joinColumns = {
-        @JoinColumn(name = "equipment_idequipment", referencedColumnName = "idequipment")}, inverseJoinColumns = {
-        @JoinColumn(name = "rental_request_idrental_request", referencedColumnName = "idrental_request")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "equipmentCollection")
     private Collection<RentalRequest> rentalRequestCollection;
 
     public Equipment() {
     }
 
-    public Equipment(Integer idequipment) {
-        this.idequipment = idequipment;
+    public Equipment(Integer equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
-    public Equipment(Integer idequipment, String name) {
-        this.idequipment = idequipment;
+    public Equipment(Integer equipmentId, String name) {
+        this.equipmentId = equipmentId;
         this.name = name;
     }
 
-    public Integer getIdequipment() {
-        return idequipment;
+    public Integer getEquipmentId() {
+        return equipmentId;
     }
 
-    public void setIdequipment(Integer idequipment) {
-        this.idequipment = idequipment;
+    public void setEquipmentId(Integer equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public String getName() {
@@ -92,7 +89,7 @@ public class Equipment implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idequipment != null ? idequipment.hashCode() : 0);
+        hash += (equipmentId != null ? equipmentId.hashCode() : 0);
         return hash;
     }
 
@@ -103,7 +100,7 @@ public class Equipment implements Serializable {
             return false;
         }
         Equipment other = (Equipment) object;
-        if ((this.idequipment == null && other.idequipment != null) || (this.idequipment != null && !this.idequipment.equals(other.idequipment))) {
+        if ((this.equipmentId == null && other.equipmentId != null) || (this.equipmentId != null && !this.equipmentId.equals(other.equipmentId))) {
             return false;
         }
         return true;
@@ -111,7 +108,7 @@ public class Equipment implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Equipment[ idequipment=" + idequipment + " ]";
+        return name;
     }
     
 }

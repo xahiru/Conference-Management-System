@@ -234,7 +234,7 @@ public class UsersGroupController implements Serializable {
             }
             if (object instanceof UsersGroup) {
                 UsersGroup o = (UsersGroup) object;
-                return getStringKey(o.getIdroles());
+                return getStringKey(o.getGroupId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UsersGroup.class.getName());
             }

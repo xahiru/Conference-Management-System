@@ -100,7 +100,7 @@ public class ReservationController implements Serializable {
             booking = new Booking();
             booking.setStartTime(startTime);
             booking.setEndTime(endTime);
-            booking.setUsersIduser(user);
+            booking.setTblUseruserId(user);
             bookingFacade.create(booking);
 
             organizer = new Organizer();
@@ -113,10 +113,10 @@ public class ReservationController implements Serializable {
             event = new Event();
             event.setBookingBookingRef(booking);
             event.setTitle(title);
-            event.setRoomIdroom(room);
+            event.setTblRoomroomId(room);
             event.setDescription(description);
             event.setNumberOfParticipants(numberOfParticipants);
-            event.setOrganizerIdorganizer(organizer);
+            event.setTblOrganizerorganizerId(organizer);
 
             eventFacade.create(event);
 

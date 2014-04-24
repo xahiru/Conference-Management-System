@@ -13,9 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -26,38 +24,35 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author xahiru
  */
 @Entity
-@Table(name = "tblLayout")
+@Table(name = "tblAdvertisement")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Layout.findAll", query = "SELECT l FROM Layout l"),
-    @NamedQuery(name = "Layout.findByLayoutId", query = "SELECT l FROM Layout l WHERE l.layoutId = :layoutId")})
-public class Layout implements Serializable {
+    @NamedQuery(name = "Advertisement.findAll", query = "SELECT a FROM Advertisement a"),
+    @NamedQuery(name = "Advertisement.findByAdId", query = "SELECT a FROM Advertisement a WHERE a.adId = :adId")})
+public class Advertisement implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "layoutId")
-    private Integer layoutId;
+    @Column(name = "adId")
+    private Integer adId;
     @Lob
     @Column(name = "photo")
     private byte[] photo;
-    @JoinColumn(name = "room_roomId", referencedColumnName = "roomId")
-    @ManyToOne(optional = false)
-    private Room roomroomId;
 
-    public Layout() {
+    public Advertisement() {
     }
 
-    public Layout(Integer layoutId) {
-        this.layoutId = layoutId;
+    public Advertisement(Integer adId) {
+        this.adId = adId;
     }
 
-    public Integer getLayoutId() {
-        return layoutId;
+    public Integer getAdId() {
+        return adId;
     }
 
-    public void setLayoutId(Integer layoutId) {
-        this.layoutId = layoutId;
+    public void setAdId(Integer adId) {
+        this.adId = adId;
     }
 
     public byte[] getPhoto() {
@@ -68,29 +63,21 @@ public class Layout implements Serializable {
         this.photo = photo;
     }
 
-    public Room getRoomroomId() {
-        return roomroomId;
-    }
-
-    public void setRoomroomId(Room roomroomId) {
-        this.roomroomId = roomroomId;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (layoutId != null ? layoutId.hashCode() : 0);
+        hash += (adId != null ? adId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Layout)) {
+        if (!(object instanceof Advertisement)) {
             return false;
         }
-        Layout other = (Layout) object;
-        if ((this.layoutId == null && other.layoutId != null) || (this.layoutId != null && !this.layoutId.equals(other.layoutId))) {
+        Advertisement other = (Advertisement) object;
+        if ((this.adId == null && other.adId != null) || (this.adId != null && !this.adId.equals(other.adId))) {
             return false;
         }
         return true;
@@ -98,7 +85,7 @@ public class Layout implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Layout[ layoutId=" + layoutId + " ]";
+        return "entity.Advertisement[ adId=" + adId + " ]";
     }
     
 }

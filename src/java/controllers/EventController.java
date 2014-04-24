@@ -224,7 +224,7 @@ public class EventController implements Serializable {
             }
             if (object instanceof Event) {
                 Event o = (Event) object;
-                return getStringKey(o.getIdevent());
+                return getStringKey(o.getEventId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Event.class.getName());
             }

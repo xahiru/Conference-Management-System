@@ -224,7 +224,7 @@ public class EquipmentController implements Serializable {
             }
             if (object instanceof Equipment) {
                 Equipment o = (Equipment) object;
-                return getStringKey(o.getIdequipment());
+                return getStringKey(o.getEquipmentId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Equipment.class.getName());
             }

@@ -1,6 +1,6 @@
 package controllers;
 
-import entity.Ads;
+import entity.Advertisement;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.AdsFacade;
@@ -22,7 +22,7 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class AdsController implements Serializable {
 
-    private Ads current;
+    private Advertisement current;
     private DataModel items = null;
     @EJB
     private backingbeans.AdsFacade ejbFacade;
@@ -32,9 +32,9 @@ public class AdsController implements Serializable {
     public AdsController() {
     }
 
-    public Ads getSelected() {
+    public Advertisement getSelected() {
         if (current == null) {
-            current = new Ads();
+            current = new Advertisement();
             selectedItemIndex = -1;
         }
         return current;
@@ -68,13 +68,13 @@ public class AdsController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Ads) getItems().getRowData();
+        current = (Advertisement) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Ads();
+        current = new Advertisement();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -91,7 +91,7 @@ public class AdsController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Ads) getItems().getRowData();
+        current = (Advertisement) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -108,7 +108,7 @@ public class AdsController implements Serializable {
     }
 
     public String destroy() {
-        current = (Ads) getItems().getRowData();
+        current = (Advertisement) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -188,11 +188,11 @@ public class AdsController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Ads getAds(java.lang.Integer id) {
+    public Advertisement getAds(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Ads.class)
+    @FacesConverter(forClass = Advertisement.class)
     public static class AdsControllerConverter implements Converter {
 
         @Override
@@ -222,11 +222,11 @@ public class AdsController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Ads) {
-                Ads o = (Ads) object;
-                return getStringKey(o.getIdads());
+            if (object instanceof Advertisement) {
+                Advertisement o = (Advertisement) object;
+                return getStringKey(o.getAdId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Ads.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Advertisement.class.getName());
             }
         }
 

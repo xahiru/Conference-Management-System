@@ -28,11 +28,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author xahiru
  */
 @Entity
-@Table(name = "organizer")
+@Table(name = "tblOrganizer")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Organizer.findAll", query = "SELECT o FROM Organizer o"),
-    @NamedQuery(name = "Organizer.findByIdorganizer", query = "SELECT o FROM Organizer o WHERE o.idorganizer = :idorganizer"),
+    @NamedQuery(name = "Organizer.findByOrganizerId", query = "SELECT o FROM Organizer o WHERE o.organizerId = :organizerId"),
     @NamedQuery(name = "Organizer.findByCompanyName", query = "SELECT o FROM Organizer o WHERE o.companyName = :companyName"),
     @NamedQuery(name = "Organizer.findByContactPersonName", query = "SELECT o FROM Organizer o WHERE o.contactPersonName = :contactPersonName"),
     @NamedQuery(name = "Organizer.findByContactNumber", query = "SELECT o FROM Organizer o WHERE o.contactNumber = :contactNumber"),
@@ -42,8 +42,8 @@ public class Organizer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idorganizer")
-    private Integer idorganizer;
+    @Column(name = "organizerId")
+    private Integer organizerId;
     @Size(max = 45)
     @Column(name = "company_name")
     private String companyName;
@@ -57,22 +57,22 @@ public class Organizer implements Serializable {
     @Size(max = 45)
     @Column(name = "email")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizerIdorganizer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblOrganizerorganizerId")
     private Collection<Event> eventCollection;
 
     public Organizer() {
     }
 
-    public Organizer(Integer idorganizer) {
-        this.idorganizer = idorganizer;
+    public Organizer(Integer organizerId) {
+        this.organizerId = organizerId;
     }
 
-    public Integer getIdorganizer() {
-        return idorganizer;
+    public Integer getOrganizerId() {
+        return organizerId;
     }
 
-    public void setIdorganizer(Integer idorganizer) {
-        this.idorganizer = idorganizer;
+    public void setOrganizerId(Integer organizerId) {
+        this.organizerId = organizerId;
     }
 
     public String getCompanyName() {
@@ -119,7 +119,7 @@ public class Organizer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idorganizer != null ? idorganizer.hashCode() : 0);
+        hash += (organizerId != null ? organizerId.hashCode() : 0);
         return hash;
     }
 
@@ -130,7 +130,7 @@ public class Organizer implements Serializable {
             return false;
         }
         Organizer other = (Organizer) object;
-        if ((this.idorganizer == null && other.idorganizer != null) || (this.idorganizer != null && !this.idorganizer.equals(other.idorganizer))) {
+        if ((this.organizerId == null && other.organizerId != null) || (this.organizerId != null && !this.organizerId.equals(other.organizerId))) {
             return false;
         }
         return true;
@@ -138,7 +138,7 @@ public class Organizer implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Organizer[ idorganizer=" + idorganizer + " ]";
+        return "entity.Organizer[ organizerId=" + organizerId + " ]";
     }
     
 }

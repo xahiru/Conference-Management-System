@@ -7,33 +7,30 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author xahiru
  */
 @Entity
-@Table(name = "room")
+@Table(name = "tblRoom")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r"),
-    @NamedQuery(name = "Room.findByIdroom", query = "SELECT r FROM Room r WHERE r.idroom = :idroom"),
+    @NamedQuery(name = "Room.findByRoomId", query = "SELECT r FROM Room r WHERE r.roomId = :roomId"),
     @NamedQuery(name = "Room.findByNumber", query = "SELECT r FROM Room r WHERE r.number = :number"),
     @NamedQuery(name = "Room.findByName", query = "SELECT r FROM Room r WHERE r.name = :name"),
     @NamedQuery(name = "Room.findByArea", query = "SELECT r FROM Room r WHERE r.area = :area"),
@@ -41,15 +38,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Room.findByType", query = "SELECT r FROM Room r WHERE r.type = :type"),
     @NamedQuery(name = "Room.findByFurnitureMobility", query = "SELECT r FROM Room r WHERE r.furnitureMobility = :furnitureMobility"),
     @NamedQuery(name = "Room.findByFurnitureType", query = "SELECT r FROM Room r WHERE r.furnitureType = :furnitureType"),
-    @NamedQuery(name = "Room.findByOrientation", query = "SELECT r FROM Room r WHERE r.orientation = :orientation"),
-    @NamedQuery(name = "Room.findByFloorPlan", query = "SELECT r FROM Room r WHERE r.floorPlan = :floorPlan")})
+    @NamedQuery(name = "Room.findByOrientation", query = "SELECT r FROM Room r WHERE r.orientation = :orientation")})
 public class Room implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idroom")
-    private Integer idroom;
+    @Column(name = "roomId")
+    private Integer roomId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "number")
@@ -73,32 +69,28 @@ public class Room implements Serializable {
     @Size(max = 45)
     @Column(name = "orientation")
     private String orientation;
-    @Size(max = 255)
+    @Lob
     @Column(name = "floor_plan")
-    private String floorPlan;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roomIdroom")
-    private Collection<Event> eventCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roomIdroom")
-    private Collection<Layout> layoutCollection;
+    private byte[] floorPlan;
 
     public Room() {
     }
 
-    public Room(Integer idroom) {
-        this.idroom = idroom;
+    public Room(Integer roomId) {
+        this.roomId = roomId;
     }
 
-    public Room(Integer idroom, int number) {
-        this.idroom = idroom;
+    public Room(Integer roomId, int number) {
+        this.roomId = roomId;
         this.number = number;
     }
 
-    public Integer getIdroom() {
-        return idroom;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setIdroom(Integer idroom) {
-        this.idroom = idroom;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
     public int getNumber() {
@@ -165,36 +157,18 @@ public class Room implements Serializable {
         this.orientation = orientation;
     }
 
-    public String getFloorPlan() {
+    public byte[] getFloorPlan() {
         return floorPlan;
     }
 
-    public void setFloorPlan(String floorPlan) {
+    public void setFloorPlan(byte[] floorPlan) {
         this.floorPlan = floorPlan;
-    }
-
-    @XmlTransient
-    public Collection<Event> getEventCollection() {
-        return eventCollection;
-    }
-
-    public void setEventCollection(Collection<Event> eventCollection) {
-        this.eventCollection = eventCollection;
-    }
-
-    @XmlTransient
-    public Collection<Layout> getLayoutCollection() {
-        return layoutCollection;
-    }
-
-    public void setLayoutCollection(Collection<Layout> layoutCollection) {
-        this.layoutCollection = layoutCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idroom != null ? idroom.hashCode() : 0);
+        hash += (roomId != null ? roomId.hashCode() : 0);
         return hash;
     }
 
@@ -205,7 +179,7 @@ public class Room implements Serializable {
             return false;
         }
         Room other = (Room) object;
-        if ((this.idroom == null && other.idroom != null) || (this.idroom != null && !this.idroom.equals(other.idroom))) {
+        if ((this.roomId == null && other.roomId != null) || (this.roomId != null && !this.roomId.equals(other.roomId))) {
             return false;
         }
         return true;
@@ -213,7 +187,7 @@ public class Room implements Serializable {
 
     @Override
     public String toString() {
-        return "Room No:" + number + ", "+ name;
+        return getName();
     }
     
 }

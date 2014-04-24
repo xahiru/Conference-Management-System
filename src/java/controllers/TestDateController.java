@@ -62,7 +62,7 @@ public class TestDateController implements Serializable {
             System.out.println("Available");
         }
         for (Event event : eventlList) {
-            System.out.println("Title "+event.getTitle()+" IN "+event.getRoomIdroom().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
+            System.out.println("Title "+event.getTitle()+" IN "+event.getTblRoomroomId().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
         }
 
         return "/authusers/index";
@@ -89,7 +89,7 @@ public class TestDateController implements Serializable {
             System.out.println("Available");
         }
         for (Event event : eventlList) {
-            System.out.println("Title "+event.getTitle()+" IN "+event.getRoomIdroom().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
+            System.out.println("Title "+event.getTitle()+" IN "+event.getTblRoomroomId().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
         }
 
         return "/authusers/index";

@@ -10,13 +10,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,53 +27,50 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author xahiru
  */
 @Entity
-@Table(name = "participant")
+@Table(name = "tblParticipant")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Participant.findAll", query = "SELECT p FROM Participant p"),
-    @NamedQuery(name = "Participant.findByIdparticipant", query = "SELECT p FROM Participant p WHERE p.idparticipant = :idparticipant"),
     @NamedQuery(name = "Participant.findByName", query = "SELECT p FROM Participant p WHERE p.name = :name"),
-    @NamedQuery(name = "Participant.findByPhoto", query = "SELECT p FROM Participant p WHERE p.photo = :photo")})
+    @NamedQuery(name = "Participant.findByRegistrationstatus", query = "SELECT p FROM Participant p WHERE p.registrationstatus = :registrationstatus"),
+    @NamedQuery(name = "Participant.findByParticipantId", query = "SELECT p FROM Participant p WHERE p.participantId = :participantId")})
 public class Participant implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idparticipant")
-    private Integer idparticipant;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @Size(max = 255)
+    @Lob
     @Column(name = "photo")
-    private String photo;
-    @JoinColumn(name = "roomcard_idtable1", referencedColumnName = "idtable1")
+    private byte[] photo;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "registrationstatus")
+    private boolean registrationstatus;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "participantId")
+    private Integer participantId;
+    @JoinColumn(name = "participantId", referencedColumnName = "roomcardId", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private Roomcard roomcard;
+    @JoinColumn(name = "tblEvent_eventId", referencedColumnName = "eventId")
     @ManyToOne(optional = false)
-    private Roomcard roomcardIdtable1;
-    @JoinColumn(name = "event_idevent", referencedColumnName = "idevent")
-    @ManyToOne(optional = false)
-    private Event eventIdevent;
+    private Event tblEventeventId;
 
     public Participant() {
     }
 
-    public Participant(Integer idparticipant) {
-        this.idparticipant = idparticipant;
+    public Participant(Integer participantId) {
+        this.participantId = participantId;
     }
 
-    public Participant(Integer idparticipant, String name) {
-        this.idparticipant = idparticipant;
+    public Participant(Integer participantId, String name, boolean registrationstatus) {
+        this.participantId = participantId;
         this.name = name;
-    }
-
-    public Integer getIdparticipant() {
-        return idparticipant;
-    }
-
-    public void setIdparticipant(Integer idparticipant) {
-        this.idparticipant = idparticipant;
+        this.registrationstatus = registrationstatus;
     }
 
     public String getName() {
@@ -84,34 +81,50 @@ public class Participant implements Serializable {
         this.name = name;
     }
 
-    public String getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
-    public Roomcard getRoomcardIdtable1() {
-        return roomcardIdtable1;
+    public boolean getRegistrationstatus() {
+        return registrationstatus;
     }
 
-    public void setRoomcardIdtable1(Roomcard roomcardIdtable1) {
-        this.roomcardIdtable1 = roomcardIdtable1;
+    public void setRegistrationstatus(boolean registrationstatus) {
+        this.registrationstatus = registrationstatus;
     }
 
-    public Event getEventIdevent() {
-        return eventIdevent;
+    public Integer getParticipantId() {
+        return participantId;
     }
 
-    public void setEventIdevent(Event eventIdevent) {
-        this.eventIdevent = eventIdevent;
+    public void setParticipantId(Integer participantId) {
+        this.participantId = participantId;
+    }
+
+    public Roomcard getRoomcard() {
+        return roomcard;
+    }
+
+    public void setRoomcard(Roomcard roomcard) {
+        this.roomcard = roomcard;
+    }
+
+    public Event getTblEventeventId() {
+        return tblEventeventId;
+    }
+
+    public void setTblEventeventId(Event tblEventeventId) {
+        this.tblEventeventId = tblEventeventId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idparticipant != null ? idparticipant.hashCode() : 0);
+        hash += (participantId != null ? participantId.hashCode() : 0);
         return hash;
     }
 
@@ -122,7 +135,7 @@ public class Participant implements Serializable {
             return false;
         }
         Participant other = (Participant) object;
-        if ((this.idparticipant == null && other.idparticipant != null) || (this.idparticipant != null && !this.idparticipant.equals(other.idparticipant))) {
+        if ((this.participantId == null && other.participantId != null) || (this.participantId != null && !this.participantId.equals(other.participantId))) {
             return false;
         }
         return true;
@@ -130,7 +143,7 @@ public class Participant implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Participant[ idparticipant=" + idparticipant + " ]";
+        return "entity.Participant[ participantId=" + participantId + " ]";
     }
     
 }

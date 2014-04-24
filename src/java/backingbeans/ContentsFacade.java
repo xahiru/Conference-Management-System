@@ -6,7 +6,7 @@
 
 package backingbeans;
 
-import entity.Contents;
+import entity.Content;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author xahiru
  */
 @Stateless
-public class ContentsFacade extends AbstractFacade<Contents> {
+public class ContentsFacade extends AbstractFacade<Content> {
     @PersistenceContext(unitName = "Conference_Management_SystemPU")
     private EntityManager em;
 
@@ -26,7 +26,7 @@ public class ContentsFacade extends AbstractFacade<Contents> {
     }
 
     public ContentsFacade() {
-        super(Contents.class);
+        super(Content.class);
     }
     
 }

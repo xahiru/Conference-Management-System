@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package entity;
 
 import java.io.Serializable;
@@ -30,26 +31,25 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author xahiru
  */
 @Entity
-@Table(name = "event")
+@Table(name = "tblEvent")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
-    @NamedQuery(name = "Event.findByIdevent", query = "SELECT e FROM Event e WHERE e.idevent = :idevent"),
+    @NamedQuery(name = "Event.findByEventId", query = "SELECT e FROM Event e WHERE e.eventId = :eventId"),
     @NamedQuery(name = "Event.findByTitle", query = "SELECT e FROM Event e WHERE e.title = :title"),
-    @NamedQuery(name = "Event.findByRoom", query = "SELECT e FROM Event e WHERE e.roomIdroom = :room"),
-    @NamedQuery(name = "Event.findMyEvents", query = "SELECT e FROM Event e WHERE e.bookingBookingRef.usersIduser = :user"),
-    @NamedQuery(name = "Event.findEventsByRoomInTimeRange", query = "SELECT e FROM Event e WHERE e.roomIdroom = :room AND ((e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime) OR (e.bookingBookingRef.startTime >= :startTime  AND e.bookingBookingRef.endTime <= :endTime)) "),
     @NamedQuery(name = "Event.findByDescription", query = "SELECT e FROM Event e WHERE e.description = :description"),
     @NamedQuery(name = "Event.findTodaysEvent", query = "SELECT e FROM Event e WHERE  (e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime) OR (e.bookingBookingRef.startTime >= :startTime  AND e.bookingBookingRef.endTime <= :endTime) "),
+    @NamedQuery(name = "Event.findByRoom", query = "SELECT e FROM Event e WHERE e.tblRoomroomId = :room"),
+    @NamedQuery(name = "Event.findMyEvents", query = "SELECT e FROM Event e WHERE e.bookingBookingRef.tblUseruserId = :user"),
+    @NamedQuery(name = "Event.findEventsByRoomInTimeRange", query = "SELECT e FROM Event e WHERE e.tblRoomroomId = :room AND ((e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime) OR (e.bookingBookingRef.startTime >= :startTime  AND e.bookingBookingRef.endTime <= :endTime)) "),
     @NamedQuery(name = "Event.findByNumberOfParticipants", query = "SELECT e FROM Event e WHERE e.numberOfParticipants = :numberOfParticipants")})
 public class Event implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idevent")
-    private Integer idevent;
+    @Column(name = "eventId")
+    private Integer eventId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -60,40 +60,40 @@ public class Event implements Serializable {
     private String description;
     @Column(name = "number_of_participants")
     private Integer numberOfParticipants;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventIdevent")
-    private Collection<RentalRequest> rentalRequestCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventIdevent")
-    private Collection<Contents> contentsCollection;
-    @JoinColumn(name = "booking_booking_ref", referencedColumnName = "booking_ref")
+    @JoinColumn(name = "tblRoom_roomId", referencedColumnName = "roomId")
+    @ManyToOne(optional = false)
+    private Room tblRoomroomId;
+    @JoinColumn(name = "tblOrganizer_organizerId", referencedColumnName = "organizerId")
+    @ManyToOne(optional = false)
+    private Organizer tblOrganizerorganizerId;
+    @JoinColumn(name = "booking_booking_ref", referencedColumnName = "bookingId")
     @ManyToOne(optional = false)
     private Booking bookingBookingRef;
-    @JoinColumn(name = "organizer_idorganizer", referencedColumnName = "idorganizer")
-    @ManyToOne(optional = false)
-    private Organizer organizerIdorganizer;
-    @JoinColumn(name = "room_idroom", referencedColumnName = "idroom")
-    @ManyToOne(optional = false)
-    private Room roomIdroom;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventIdevent")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblEventeventId")
+    private Collection<Content> contentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblEventeventId")
     private Collection<Participant> participantCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblEventeventId")
+    private Collection<RentalRequest> rentalRequestCollection;
 
     public Event() {
     }
 
-    public Event(Integer idevent) {
-        this.idevent = idevent;
+    public Event(Integer eventId) {
+        this.eventId = eventId;
     }
 
-    public Event(Integer idevent, String title) {
-        this.idevent = idevent;
+    public Event(Integer eventId, String title) {
+        this.eventId = eventId;
         this.title = title;
     }
 
-    public Integer getIdevent() {
-        return idevent;
+    public Integer getEventId() {
+        return eventId;
     }
 
-    public void setIdevent(Integer idevent) {
-        this.idevent = idevent;
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
     }
 
     public String getTitle() {
@@ -120,22 +120,20 @@ public class Event implements Serializable {
         this.numberOfParticipants = numberOfParticipants;
     }
 
-    @XmlTransient
-    public Collection<RentalRequest> getRentalRequestCollection() {
-        return rentalRequestCollection;
+    public Room getTblRoomroomId() {
+        return tblRoomroomId;
     }
 
-    public void setRentalRequestCollection(Collection<RentalRequest> rentalRequestCollection) {
-        this.rentalRequestCollection = rentalRequestCollection;
+    public void setTblRoomroomId(Room tblRoomroomId) {
+        this.tblRoomroomId = tblRoomroomId;
     }
 
-    @XmlTransient
-    public Collection<Contents> getContentsCollection() {
-        return contentsCollection;
+    public Organizer getTblOrganizerorganizerId() {
+        return tblOrganizerorganizerId;
     }
 
-    public void setContentsCollection(Collection<Contents> contentsCollection) {
-        this.contentsCollection = contentsCollection;
+    public void setTblOrganizerorganizerId(Organizer tblOrganizerorganizerId) {
+        this.tblOrganizerorganizerId = tblOrganizerorganizerId;
     }
 
     public Booking getBookingBookingRef() {
@@ -146,20 +144,13 @@ public class Event implements Serializable {
         this.bookingBookingRef = bookingBookingRef;
     }
 
-    public Organizer getOrganizerIdorganizer() {
-        return organizerIdorganizer;
+    @XmlTransient
+    public Collection<Content> getContentCollection() {
+        return contentCollection;
     }
 
-    public void setOrganizerIdorganizer(Organizer organizerIdorganizer) {
-        this.organizerIdorganizer = organizerIdorganizer;
-    }
-
-    public Room getRoomIdroom() {
-        return roomIdroom;
-    }
-
-    public void setRoomIdroom(Room roomIdroom) {
-        this.roomIdroom = roomIdroom;
+    public void setContentCollection(Collection<Content> contentCollection) {
+        this.contentCollection = contentCollection;
     }
 
     @XmlTransient
@@ -171,10 +162,19 @@ public class Event implements Serializable {
         this.participantCollection = participantCollection;
     }
 
+    @XmlTransient
+    public Collection<RentalRequest> getRentalRequestCollection() {
+        return rentalRequestCollection;
+    }
+
+    public void setRentalRequestCollection(Collection<RentalRequest> rentalRequestCollection) {
+        this.rentalRequestCollection = rentalRequestCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idevent != null ? idevent.hashCode() : 0);
+        hash += (eventId != null ? eventId.hashCode() : 0);
         return hash;
     }
 
@@ -185,7 +185,7 @@ public class Event implements Serializable {
             return false;
         }
         Event other = (Event) object;
-        if ((this.idevent == null && other.idevent != null) || (this.idevent != null && !this.idevent.equals(other.idevent))) {
+        if ((this.eventId == null && other.eventId != null) || (this.eventId != null && !this.eventId.equals(other.eventId))) {
             return false;
         }
         return true;
@@ -193,7 +193,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return title;
+        return "entity.Event[ eventId=" + eventId + " ]";
     }
-
+    
 }

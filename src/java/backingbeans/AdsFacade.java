@@ -6,7 +6,7 @@
 
 package backingbeans;
 
-import entity.Ads;
+import entity.Advertisement;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author xahiru
  */
 @Stateless
-public class AdsFacade extends AbstractFacade<Ads> {
+public class AdsFacade extends AbstractFacade<Advertisement> {
     @PersistenceContext(unitName = "Conference_Management_SystemPU")
     private EntityManager em;
 
@@ -26,7 +26,7 @@ public class AdsFacade extends AbstractFacade<Ads> {
     }
 
     public AdsFacade() {
-        super(Ads.class);
+        super(Advertisement.class);
     }
     
 }

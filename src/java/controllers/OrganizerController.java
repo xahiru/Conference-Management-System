@@ -224,7 +224,7 @@ public class OrganizerController implements Serializable {
             }
             if (object instanceof Organizer) {
                 Organizer o = (Organizer) object;
-                return getStringKey(o.getIdorganizer());
+                return getStringKey(o.getOrganizerId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Organizer.class.getName());
             }

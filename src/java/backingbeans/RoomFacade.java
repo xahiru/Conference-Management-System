@@ -29,4 +29,8 @@ public class RoomFacade extends AbstractFacade<Room> {
         super(Room.class);
     }
     
+//    public Integer getRoomImageSize(Room room) {
+//          return em.createNamedQuery("Room.findRoomImageSize").setParameter("roomId",room.getRoomId()).getFirstResult();
+//        
+//    }
 }

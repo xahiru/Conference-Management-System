@@ -29,11 +29,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author xahiru
  */
 @Entity
-@Table(name = "users")
+@Table(name = "tblUser")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findByIduser", query = "SELECT u FROM Users u WHERE u.iduser = :iduser"),
+    @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId"),
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")})
 public class Users implements Serializable {
@@ -41,8 +41,8 @@ public class Users implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "iduser")
-    private Integer iduser;
+    @Column(name = "userId")
+    private Integer userId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -53,30 +53,30 @@ public class Users implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersIduser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblUseruserId")
     private Collection<Booking> bookingCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Collection<UsersGroup> usersGroupCollection;
+    private Collection<UsersGroup> tblGroupCollection;
 
     public Users() {
     }
 
-    public Users(Integer iduser) {
-        this.iduser = iduser;
+    public Users(Integer userId) {
+        this.userId = userId;
     }
 
-    public Users(Integer iduser, String username, String password) {
-        this.iduser = iduser;
+    public Users(Integer userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
     }
 
-    public Integer getIduser() {
-        return iduser;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setIduser(Integer iduser) {
-        this.iduser = iduser;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -105,18 +105,18 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<UsersGroup> getUsersGroupCollection() {
-        return usersGroupCollection;
+    public Collection<UsersGroup> getTblGroupCollection() {
+        return tblGroupCollection;
     }
 
-    public void setUsersGroupCollection(Collection<UsersGroup> usersGroupCollection) {
-        this.usersGroupCollection = usersGroupCollection;
+    public void setTblGroupCollection(Collection<UsersGroup> tblGroupCollection) {
+        this.tblGroupCollection = tblGroupCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iduser != null ? iduser.hashCode() : 0);
+        hash += (userId != null ? userId.hashCode() : 0);
         return hash;
     }
 
@@ -127,7 +127,7 @@ public class Users implements Serializable {
             return false;
         }
         Users other = (Users) object;
-        if ((this.iduser == null && other.iduser != null) || (this.iduser != null && !this.iduser.equals(other.iduser))) {
+        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
             return false;
         }
         return true;

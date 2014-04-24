@@ -224,7 +224,7 @@ public class ParticipantController implements Serializable {
             }
             if (object instanceof Participant) {
                 Participant o = (Participant) object;
-                return getStringKey(o.getIdparticipant());
+                return getStringKey(o.getParticipantId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Participant.class.getName());
             }

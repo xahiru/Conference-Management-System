@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
 import java.io.Serializable;
@@ -27,20 +26,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author xahiru
  */
 @Entity
-@Table(name = "users_group")
+@Table(name = "tblGroup")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UsersGroup.findAll", query = "SELECT u FROM UsersGroup u"),
+    @NamedQuery(name = "TblGroup.findAll", query = "SELECT t FROM UsersGroup t"),
     @NamedQuery(name = "UsersGroup.findAllDistinctGroupNames", query = "SELECT DISTINCT u.groupname FROM UsersGroup u"),
-    @NamedQuery(name = "UsersGroup.findByIdroles", query = "SELECT u FROM UsersGroup u WHERE u.idroles = :idroles"),
-    @NamedQuery(name = "UsersGroup.findByGroupname", query = "SELECT u FROM UsersGroup u WHERE u.groupname = :groupname")})
+    @NamedQuery(name = "TblGroup.findByGroupId", query = "SELECT t FROM UsersGroup t WHERE t = :groupId"),
+    @NamedQuery(name = "TblGroup.findByGroupname", query = "SELECT t FROM UsersGroup t WHERE t.groupname = :groupname")})
 public class UsersGroup implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idroles")
-    private Integer idroles;
+    @Column(name = "groupId")
+    private Integer groupId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -53,21 +53,21 @@ public class UsersGroup implements Serializable {
     public UsersGroup() {
     }
 
-    public UsersGroup(Integer idroles) {
-        this.idroles = idroles;
+    public UsersGroup(Integer groupId) {
+        this.groupId = groupId;
     }
 
-    public UsersGroup(Integer idroles, String groupname) {
-        this.idroles = idroles;
+    public UsersGroup(Integer groupId, String groupname) {
+        this.groupId = groupId;
         this.groupname = groupname;
     }
 
-    public Integer getIdroles() {
-        return idroles;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setIdroles(Integer idroles) {
-        this.idroles = idroles;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
     public String getGroupname() {
@@ -89,7 +89,7 @@ public class UsersGroup implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idroles != null ? idroles.hashCode() : 0);
+        hash += (groupId != null ? groupId.hashCode() : 0);
         return hash;
     }
 
@@ -100,7 +100,7 @@ public class UsersGroup implements Serializable {
             return false;
         }
         UsersGroup other = (UsersGroup) object;
-        if ((this.idroles == null && other.idroles != null) || (this.idroles != null && !this.idroles.equals(other.idroles))) {
+        if ((this.groupId == null && other.groupId != null) || (this.groupId != null && !this.groupId.equals(other.groupId))) {
             return false;
         }
         return true;
@@ -110,5 +110,5 @@ public class UsersGroup implements Serializable {
     public String toString() {
         return groupname;
     }
-    
+
 }

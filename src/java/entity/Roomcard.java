@@ -7,40 +7,40 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author xahiru
  */
 @Entity
-@Table(name = "roomcard")
+@Table(name = "tblRoomcard")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Roomcard.findAll", query = "SELECT r FROM Roomcard r"),
-    @NamedQuery(name = "Roomcard.findByIdtable1", query = "SELECT r FROM Roomcard r WHERE r.idtable1 = :idtable1"),
+    @NamedQuery(name = "Roomcard.findByRoomcardId", query = "SELECT r FROM Roomcard r WHERE r.roomcardId = :roomcardId"),
     @NamedQuery(name = "Roomcard.findByRoomNumber", query = "SELECT r FROM Roomcard r WHERE r.roomNumber = :roomNumber"),
     @NamedQuery(name = "Roomcard.findByCardNumber", query = "SELECT r FROM Roomcard r WHERE r.cardNumber = :cardNumber")})
 public class Roomcard implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "idtable1")
-    private Integer idtable1;
+    @Column(name = "roomcardId")
+    private Integer roomcardId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -51,28 +51,28 @@ public class Roomcard implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "card_number")
     private String cardNumber;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roomcardIdtable1")
-    private Collection<Participant> participantCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "roomcard")
+    private Participant participant;
 
     public Roomcard() {
     }
 
-    public Roomcard(Integer idtable1) {
-        this.idtable1 = idtable1;
+    public Roomcard(Integer roomcardId) {
+        this.roomcardId = roomcardId;
     }
 
-    public Roomcard(Integer idtable1, String roomNumber, String cardNumber) {
-        this.idtable1 = idtable1;
+    public Roomcard(Integer roomcardId, String roomNumber, String cardNumber) {
+        this.roomcardId = roomcardId;
         this.roomNumber = roomNumber;
         this.cardNumber = cardNumber;
     }
 
-    public Integer getIdtable1() {
-        return idtable1;
+    public Integer getRoomcardId() {
+        return roomcardId;
     }
 
-    public void setIdtable1(Integer idtable1) {
-        this.idtable1 = idtable1;
+    public void setRoomcardId(Integer roomcardId) {
+        this.roomcardId = roomcardId;
     }
 
     public String getRoomNumber() {
@@ -91,19 +91,18 @@ public class Roomcard implements Serializable {
         this.cardNumber = cardNumber;
     }
 
-    @XmlTransient
-    public Collection<Participant> getParticipantCollection() {
-        return participantCollection;
+    public Participant getParticipant() {
+        return participant;
     }
 
-    public void setParticipantCollection(Collection<Participant> participantCollection) {
-        this.participantCollection = participantCollection;
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idtable1 != null ? idtable1.hashCode() : 0);
+        hash += (roomcardId != null ? roomcardId.hashCode() : 0);
         return hash;
     }
 
@@ -114,7 +113,7 @@ public class Roomcard implements Serializable {
             return false;
         }
         Roomcard other = (Roomcard) object;
-        if ((this.idtable1 == null && other.idtable1 != null) || (this.idtable1 != null && !this.idtable1.equals(other.idtable1))) {
+        if ((this.roomcardId == null && other.roomcardId != null) || (this.roomcardId != null && !this.roomcardId.equals(other.roomcardId))) {
             return false;
         }
         return true;
@@ -122,7 +121,7 @@ public class Roomcard implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Roomcard[ idtable1=" + idtable1 + " ]";
+        return "entity.Roomcard[ roomcardId=" + roomcardId + " ]";
     }
     
 }

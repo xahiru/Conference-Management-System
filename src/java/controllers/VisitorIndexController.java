@@ -78,7 +78,7 @@ public class VisitorIndexController implements Serializable {
         System.out.println(startTime);
         System.err.println(endDate);
         for (Event event : eventList) {
-            System.out.println("Title "+event.getTitle()+" IN "+event.getRoomIdroom().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
+            System.out.println("Title "+event.getTitle()+" IN "+event.getTblRoomroomId().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
         }
     }
 

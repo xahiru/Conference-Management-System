@@ -12,7 +12,6 @@ import entity.Booking;
 import entity.Event;
 import entity.Organizer;
 import entity.Room;
-import entity.Users;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -139,7 +138,7 @@ public class EventlistController implements Serializable {
     public String getBookedBy(String id) {
         Booking r = (Booking) bookingFacade.find(Integer.valueOf(id));
 //        Users r = (Users) usersFacade.find(Integer.valueOf(id));
-        return r.getUsersIduser().getUsername();
+        return r.getTblUseruserId().getUsername();
 //        return getStringValue(r.getUsersIduser().getUsername());
     }
 
@@ -305,7 +304,7 @@ public class EventlistController implements Serializable {
             }
             if (object instanceof Event) {
                 Event o = (Event) object;
-                return getStringKey(o.getIdevent());
+                return getStringKey(o.getEventId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Event.class.getName());
             }

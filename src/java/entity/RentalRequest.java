@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -30,11 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author xahiru
  */
 @Entity
-@Table(name = "rental_request")
+@Table(name = "tblRentalRequest")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RentalRequest.findAll", query = "SELECT r FROM RentalRequest r"),
-    @NamedQuery(name = "RentalRequest.findByIdrentalRequest", query = "SELECT r FROM RentalRequest r WHERE r.idrentalRequest = :idrentalRequest"),
+    @NamedQuery(name = "RentalRequest.findByRentalrequestId", query = "SELECT r FROM RentalRequest r WHERE r.rentalrequestId = :rentalrequestId"),
     @NamedQuery(name = "RentalRequest.findByRequestType", query = "SELECT r FROM RentalRequest r WHERE r.requestType = :requestType"),
     @NamedQuery(name = "RentalRequest.findByDescription", query = "SELECT r FROM RentalRequest r WHERE r.description = :description"),
     @NamedQuery(name = "RentalRequest.findByQauntity", query = "SELECT r FROM RentalRequest r WHERE r.qauntity = :qauntity")})
@@ -43,8 +44,8 @@ public class RentalRequest implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idrental_request")
-    private Integer idrentalRequest;
+    @Column(name = "rentalrequestId")
+    private Integer rentalrequestId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -55,30 +56,33 @@ public class RentalRequest implements Serializable {
     private String description;
     @Column(name = "qauntity")
     private Integer qauntity;
-    @ManyToMany(mappedBy = "rentalRequestCollection")
+    @JoinTable(name = "tblRentalRequest_has_tblEquipment", joinColumns = {
+        @JoinColumn(name = "tblRentalRequest_rentalrequestId", referencedColumnName = "rentalrequestId")}, inverseJoinColumns = {
+        @JoinColumn(name = "tblEquipment_equipmentId", referencedColumnName = "equipmentId")})
+    @ManyToMany
     private Collection<Equipment> equipmentCollection;
-    @JoinColumn(name = "event_idevent", referencedColumnName = "idevent")
+    @JoinColumn(name = "tblEvent_eventId", referencedColumnName = "eventId")
     @ManyToOne(optional = false)
-    private Event eventIdevent;
+    private Event tblEventeventId;
 
     public RentalRequest() {
     }
 
-    public RentalRequest(Integer idrentalRequest) {
-        this.idrentalRequest = idrentalRequest;
+    public RentalRequest(Integer rentalrequestId) {
+        this.rentalrequestId = rentalrequestId;
     }
 
-    public RentalRequest(Integer idrentalRequest, String requestType) {
-        this.idrentalRequest = idrentalRequest;
+    public RentalRequest(Integer rentalrequestId, String requestType) {
+        this.rentalrequestId = rentalrequestId;
         this.requestType = requestType;
     }
 
-    public Integer getIdrentalRequest() {
-        return idrentalRequest;
+    public Integer getRentalrequestId() {
+        return rentalrequestId;
     }
 
-    public void setIdrentalRequest(Integer idrentalRequest) {
-        this.idrentalRequest = idrentalRequest;
+    public void setRentalrequestId(Integer rentalrequestId) {
+        this.rentalrequestId = rentalrequestId;
     }
 
     public String getRequestType() {
@@ -114,18 +118,18 @@ public class RentalRequest implements Serializable {
         this.equipmentCollection = equipmentCollection;
     }
 
-    public Event getEventIdevent() {
-        return eventIdevent;
+    public Event getTblEventeventId() {
+        return tblEventeventId;
     }
 
-    public void setEventIdevent(Event eventIdevent) {
-        this.eventIdevent = eventIdevent;
+    public void setTblEventeventId(Event tblEventeventId) {
+        this.tblEventeventId = tblEventeventId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idrentalRequest != null ? idrentalRequest.hashCode() : 0);
+        hash += (rentalrequestId != null ? rentalrequestId.hashCode() : 0);
         return hash;
     }
 
@@ -136,7 +140,7 @@ public class RentalRequest implements Serializable {
             return false;
         }
         RentalRequest other = (RentalRequest) object;
-        if ((this.idrentalRequest == null && other.idrentalRequest != null) || (this.idrentalRequest != null && !this.idrentalRequest.equals(other.idrentalRequest))) {
+        if ((this.rentalrequestId == null && other.rentalrequestId != null) || (this.rentalrequestId != null && !this.rentalrequestId.equals(other.rentalrequestId))) {
             return false;
         }
         return true;
@@ -144,7 +148,7 @@ public class RentalRequest implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.RentalRequest[ idrentalRequest=" + idrentalRequest + " ]";
+        return "entity.RentalRequest[ rentalrequestId=" + rentalrequestId + " ]";
     }
     
 }

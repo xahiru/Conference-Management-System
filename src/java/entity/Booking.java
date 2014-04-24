@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package entity;
 
 import java.io.Serializable;
@@ -32,12 +33,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author xahiru
  */
 @Entity
-@Table(name = "booking")
+@Table(name = "tblBooking")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Booking.findAll", query = "SELECT b FROM Booking b"),
-    @NamedQuery(name = "Booking.findAllBookingInRange", query = "SELECT b FROM Booking b WHERE b.startTime >= :startTime  AND b.endTime <= :endTime"),
-    @NamedQuery(name = "Booking.findByBookingRef", query = "SELECT b FROM Booking b WHERE b.bookingRef = :bookingRef"),
+    @NamedQuery(name = "Booking.findByBookingId", query = "SELECT b FROM Booking b WHERE b.bookingId = :bookingId"),
     @NamedQuery(name = "Booking.findByStartTime", query = "SELECT b FROM Booking b WHERE b.startTime = :startTime"),
     @NamedQuery(name = "Booking.findByEndTime", query = "SELECT b FROM Booking b WHERE b.endTime = :endTime")})
 public class Booking implements Serializable {
@@ -45,8 +45,8 @@ public class Booking implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "booking_ref")
-    private Integer bookingRef;
+    @Column(name = "bookingId")
+    private Integer bookingId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_time")
@@ -57,33 +57,31 @@ public class Booking implements Serializable {
     @Column(name = "end_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
-    @JoinColumn(name = "users_iduser", referencedColumnName = "iduser")
+    @JoinColumn(name = "tblUser_userId", referencedColumnName = "userId")
     @ManyToOne(optional = false)
-    private Users usersIduser;
+    private Users tblUseruserId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingBookingRef")
     private Collection<Event> eventCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingBookingRef")
-    private Collection<ScheduleView> scheduleViewCollection;
 
     public Booking() {
     }
 
-    public Booking(Integer bookingRef) {
-        this.bookingRef = bookingRef;
+    public Booking(Integer bookingId) {
+        this.bookingId = bookingId;
     }
 
-    public Booking(Integer bookingRef, Date startTime, Date endTime) {
-        this.bookingRef = bookingRef;
+    public Booking(Integer bookingId, Date startTime, Date endTime) {
+        this.bookingId = bookingId;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Integer getBookingRef() {
-        return bookingRef;
+    public Integer getBookingId() {
+        return bookingId;
     }
 
-    public void setBookingRef(Integer bookingRef) {
-        this.bookingRef = bookingRef;
+    public void setBookingId(Integer bookingId) {
+        this.bookingId = bookingId;
     }
 
     public Date getStartTime() {
@@ -102,12 +100,12 @@ public class Booking implements Serializable {
         this.endTime = endTime;
     }
 
-    public Users getUsersIduser() {
-        return usersIduser;
+    public Users getTblUseruserId() {
+        return tblUseruserId;
     }
 
-    public void setUsersIduser(Users usersIduser) {
-        this.usersIduser = usersIduser;
+    public void setTblUseruserId(Users tblUseruserId) {
+        this.tblUseruserId = tblUseruserId;
     }
 
     @XmlTransient
@@ -119,19 +117,10 @@ public class Booking implements Serializable {
         this.eventCollection = eventCollection;
     }
 
-    @XmlTransient
-    public Collection<ScheduleView> getScheduleViewCollection() {
-        return scheduleViewCollection;
-    }
-
-    public void setScheduleViewCollection(Collection<ScheduleView> scheduleViewCollection) {
-        this.scheduleViewCollection = scheduleViewCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (bookingRef != null ? bookingRef.hashCode() : 0);
+        hash += (bookingId != null ? bookingId.hashCode() : 0);
         return hash;
     }
 
@@ -142,7 +131,7 @@ public class Booking implements Serializable {
             return false;
         }
         Booking other = (Booking) object;
-        if ((this.bookingRef == null && other.bookingRef != null) || (this.bookingRef != null && !this.bookingRef.equals(other.bookingRef))) {
+        if ((this.bookingId == null && other.bookingId != null) || (this.bookingId != null && !this.bookingId.equals(other.bookingId))) {
             return false;
         }
         return true;
@@ -150,7 +139,7 @@ public class Booking implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Booking[ bookingRef=" + bookingRef + " ]";
+        return "entity.Booking[ bookingId=" + bookingId + " ]";
     }
-
+    
 }

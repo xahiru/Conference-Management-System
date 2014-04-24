@@ -1,6 +1,6 @@
 package controllers;
 
-import entity.Contents;
+import entity.Content;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.ContentsFacade;
@@ -22,7 +22,7 @@ import javax.faces.model.SelectItem;
 @SessionScoped
 public class ContentsController implements Serializable {
 
-    private Contents current;
+    private Content current;
     private DataModel items = null;
     @EJB
     private backingbeans.ContentsFacade ejbFacade;
@@ -32,9 +32,9 @@ public class ContentsController implements Serializable {
     public ContentsController() {
     }
 
-    public Contents getSelected() {
+    public Content getSelected() {
         if (current == null) {
-            current = new Contents();
+            current = new Content();
             selectedItemIndex = -1;
         }
         return current;
@@ -68,13 +68,13 @@ public class ContentsController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Contents) getItems().getRowData();
+        current = (Content) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Contents();
+        current = new Content();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -91,7 +91,7 @@ public class ContentsController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Contents) getItems().getRowData();
+        current = (Content) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -108,7 +108,7 @@ public class ContentsController implements Serializable {
     }
 
     public String destroy() {
-        current = (Contents) getItems().getRowData();
+        current = (Content) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -188,11 +188,11 @@ public class ContentsController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Contents getContents(java.lang.Integer id) {
+    public Content getContents(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Contents.class)
+    @FacesConverter(forClass = Content.class)
     public static class ContentsControllerConverter implements Converter {
 
         @Override
@@ -222,11 +222,11 @@ public class ContentsController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Contents) {
-                Contents o = (Contents) object;
-                return getStringKey(o.getIdcontents());
+            if (object instanceof Content) {
+                Content o = (Content) object;
+                return getStringKey(o.getContentsId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Contents.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Content.class.getName());
             }
         }
 

@@ -1,9 +1,10 @@
 package controllers;
 
-import entity.Users;
+//import entity.Users;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.UsersFacade;
+import entity.Users;
 import entity.UsersGroup;
 
 import java.io.Serializable;
@@ -291,7 +292,7 @@ public class UsersController implements Serializable {
             }
             if (object instanceof Users) {
                 Users o = (Users) object;
-                return getStringKey(o.getIduser());
+                return getStringKey(o.getUserId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Users.class.getName());
             }

@@ -224,7 +224,7 @@ public class LayoutController implements Serializable {
             }
             if (object instanceof Layout) {
                 Layout o = (Layout) object;
-                return getStringKey(o.getIdlayout());
+                return getStringKey(o.getLayoutId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Layout.class.getName());
             }
