@@ -17,17 +17,17 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditParticipantLabel_idparticipant}" for="idparticipant" />
-                    <h:inputText id="idparticipant" value="#{participantController.selected.idparticipant}" title="#{bundle.EditParticipantTitle_idparticipant}" required="true" requiredMessage="#{bundle.EditParticipantRequiredMessage_idparticipant}"/>
+                    <h:inputText id="idparticipant" value="#{participantController.selected.participantId}" title="#{bundle.EditParticipantTitle_idparticipant}" required="true" requiredMessage="#{bundle.EditParticipantRequiredMessage_idparticipant}"/>
                     <h:outputLabel value="#{bundle.EditParticipantLabel_name}" for="name" />
                     <h:inputText id="name" value="#{participantController.selected.name}" title="#{bundle.EditParticipantTitle_name}" required="true" requiredMessage="#{bundle.EditParticipantRequiredMessage_name}"/>
                     <h:outputLabel value="#{bundle.EditParticipantLabel_photo}" for="photo" />
                     <h:inputText id="photo" value="#{participantController.selected.photo}" title="#{bundle.EditParticipantTitle_photo}" />
                     <h:outputLabel value="#{bundle.EditParticipantLabel_roomcardIdtable1}" for="roomcardIdtable1" />
-                    <h:selectOneMenu id="roomcardIdtable1" value="#{participantController.selected.roomcardIdtable1}" title="#{bundle.EditParticipantTitle_roomcardIdtable1}" required="true" requiredMessage="#{bundle.EditParticipantRequiredMessage_roomcardIdtable1}">
+                    <h:selectOneMenu id="roomcardIdtable1" value="#{participantController.selected.roomcard}" title="#{bundle.EditParticipantTitle_roomcardIdtable1}" required="true" requiredMessage="#{bundle.EditParticipantRequiredMessage_roomcardIdtable1}">
                         <f:selectItems value="#{roomcardController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditParticipantLabel_eventIdevent}" for="eventIdevent" />
-                    <h:selectOneMenu id="eventIdevent" value="#{participantController.selected.eventIdevent}" title="#{bundle.EditParticipantTitle_eventIdevent}" required="true" requiredMessage="#{bundle.EditParticipantRequiredMessage_eventIdevent}">
+                    <h:selectOneMenu id="eventIdevent" value="#{participantController.selected.tblEventeventId}" title="#{bundle.EditParticipantTitle_eventIdevent}" required="true" requiredMessage="#{bundle.EditParticipantRequiredMessage_eventIdevent}">
                         <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

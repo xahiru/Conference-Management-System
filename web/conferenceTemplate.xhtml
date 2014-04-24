@@ -12,18 +12,19 @@
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>Conference Management System</title>
         <style>
-            #headPanel {z-index:2 !important; }
+            #headPanel {z-index:2 !important;}
             #headPanel div{overflow:visible;}
             .ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd{
-                border: none;                
-            }
+                border: none;                  
+            }                
         </style>
     </h:head>
 
-    <h:body>
-        <p:layout fullPage="true"  >
-            <p:layoutUnit id="headPanel" position="north" size="167" resizable="false" closable="false" collapsible="false"  >
-                <div class="main">
+    <h:body >
+        <p:layout fullPage="true">
+
+            <p:layoutUnit id="headPanel" position="north" size="167"  resizable="false" closable="false" collapsible="false"  >
+                <div class="main"  >
 
                     <h:graphicImage url="/resources/image/header2.jpg" alt="banner" height="100" width="1000" /> 
 
@@ -44,7 +45,7 @@
                 </div>
             </p:layoutUnit>
 
-            <p:layoutUnit position="center" >
+            <p:layoutUnit position="center"  >
                 <div class="main">
                     <ui:insert name="content">Content</ui:insert>
                 </div>

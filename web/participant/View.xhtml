@@ -17,15 +17,15 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewParticipantLabel_idparticipant}"/>
-                    <h:outputText value="#{participantController.selected.idparticipant}" title="#{bundle.ViewParticipantTitle_idparticipant}"/>
+                    <h:outputText value="#{participantController.selected.participantId}" title="#{bundle.ViewParticipantTitle_idparticipant}"/>
                     <h:outputText value="#{bundle.ViewParticipantLabel_name}"/>
                     <h:outputText value="#{participantController.selected.name}" title="#{bundle.ViewParticipantTitle_name}"/>
                     <h:outputText value="#{bundle.ViewParticipantLabel_photo}"/>
                     <h:outputText value="#{participantController.selected.photo}" title="#{bundle.ViewParticipantTitle_photo}"/>
                     <h:outputText value="#{bundle.ViewParticipantLabel_roomcardIdtable1}"/>
-                    <h:outputText value="#{participantController.selected.roomcardIdtable1}" title="#{bundle.ViewParticipantTitle_roomcardIdtable1}"/>
+                    <h:outputText value="#{participantController.selected.roomcard}" title="#{bundle.ViewParticipantTitle_roomcardIdtable1}"/>
                     <h:outputText value="#{bundle.ViewParticipantLabel_eventIdevent}"/>
-                    <h:outputText value="#{participantController.selected.eventIdevent}" title="#{bundle.ViewParticipantTitle_eventIdevent}"/>
+                    <h:outputText value="#{participantController.selected.tblEventeventId}" title="#{bundle.ViewParticipantTitle_eventIdevent}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{participantController.destroyAndView}" value="#{bundle.ViewParticipantDestroyLink}"/>

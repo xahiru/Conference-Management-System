@@ -16,11 +16,11 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditContentsLabel_idcontents}" for="idcontents" />
-                    <h:inputText id="idcontents" value="#{contentsController.selected.idcontents}" title="#{bundle.EditContentsTitle_idcontents}" required="true" requiredMessage="#{bundle.EditContentsRequiredMessage_idcontents}"/>
+                    <h:inputText id="idcontents" value="#{contentsController.selected.contentsId}" title="#{bundle.EditContentsTitle_idcontents}" required="true" requiredMessage="#{bundle.EditContentsRequiredMessage_idcontents}"/>
                     <h:outputLabel value="#{bundle.EditContentsLabel_paticipantNotes}" for="paticipantNotes" />
                     <h:inputText id="paticipantNotes" value="#{contentsController.selected.paticipantNotes}" title="#{bundle.EditContentsTitle_paticipantNotes}" />
                     <h:outputLabel value="#{bundle.EditContentsLabel_eventIdevent}" for="eventIdevent" />
-                    <h:selectOneMenu id="eventIdevent" value="#{contentsController.selected.eventIdevent}" title="#{bundle.EditContentsTitle_eventIdevent}" required="true" requiredMessage="#{bundle.EditContentsRequiredMessage_eventIdevent}">
+                    <h:selectOneMenu id="eventIdevent" value="#{contentsController.selected.tblEventeventId}" title="#{bundle.EditContentsTitle_eventIdevent}" required="true" requiredMessage="#{bundle.EditContentsRequiredMessage_eventIdevent}">
                         <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

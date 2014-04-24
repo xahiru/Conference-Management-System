@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data" style="font-size: 12px;">  
+            <p:growl id="messages" showDetail="true"/> 
+            <p:fileUpload fileUploadListener="#{imageStreamer.uploadPicture}"  
+                          mode="advanced"   
+                          update="messages"  
+                          sizeLimit="100000"   
+                          label="choose"
+                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                          />  
+        </h:form> 
+
+        <h:form>
+
+            <h:commandButton type="submit" value="Search" action="#{buildingManagedBean.listApartmentByBuildingID(1)}"/>  
+
+            <p:dataTable id="apartmentDataTable" var="buildingg" value="#{buildingManagedBean.apartmentsByBuildingID}" paginator="true" rows="5"  
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                         rowsPerPageTemplate="5,10,15" style="width: 200px;font-size: 12px;" 
+                         emptyMessage="No apartments found with the given criteria">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Apartment Id"/>
+                    </f:facet>
+                    <h:outputText value="#{buildingg.apartmentId}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Building Name"/>
+                    </f:facet>
+                    <h:outputText value="#{buildingg.apartmentNumber}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Building Address"/>
+                    </f:facet>
+                    <h:outputText value="#{buildingg.floorNumber}"/>
+                </p:column>                
+
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

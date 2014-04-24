@@ -15,7 +15,7 @@
             </ui:define>
 
             <ui:define name="content">
-                <p:panel>
+                <p:panel style="height:485px;">
 
                     <p:dataTable  value="#{eventlistController.items}" var="item" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                   rowsPerPageTemplate="5,10,15"  
@@ -41,20 +41,20 @@
                             <f:facet name="header">
                                 <h:outputText value="Organizer"/>
                             </f:facet>
-                            <h:outputText value="#{eventlistController.getOrganizerName(item.organizerIdorganizer.idorganizer)}"/>
+                            <h:outputText value="#{eventlistController.getOrganizerName(item.tblOrganizerorganizerId.organizerId)}"/>
                         </p:column>
                         
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Time"/>
                             </f:facet>
-                            <h:outputText value="#{eventlistController.getTime(item.bookingBookingRef.bookingRef)}"/>
+                            <h:outputText value="#{eventlistController.getTime(item.bookingBookingRef.bookingId)}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Room"/>
                             </f:facet>
-                            <h:outputText value="#{eventlistController.getRoomName(item.roomIdroom.idroom)}"/>
+                            <h:outputText value="#{eventlistController.getRoomName(item.tblRoomroomId.roomId)}"/>
                         </p:column>
 
                         <p:column>  

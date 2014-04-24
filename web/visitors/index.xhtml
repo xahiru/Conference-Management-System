@@ -16,7 +16,8 @@
 
                 <p:menuitem value="Schedule" outcome="/index" />  
                 <p:menuitem value="Register" outcome="/index" />  
-                <p:menuitem value="Rooms" outcome="/index" /> 
+                <p:menuitem value="Rooms" outcome="/booking/List" />
+                <p:menuitem value="fileUpload" outcome="/fileUpload" /> 
                 <p:menuitem value="newrss" outcome="/newResident" /> 
            
             </ui:define>
@@ -36,13 +37,13 @@
 
             <ui:define name="content"  >
                
-                    <h:panelGrid columns="2" columnClasses="alignTop">
-                        <p:panel style="width:400px;height:485px;" >
+                <h:panelGrid columns="2" columnClasses="alignTop"  >
+                        <p:panel style="width:500px;height:485px; "  >
                             <h3>Todays' Schedule</h3>
                             <h:form>  
-                                <p:dataTable var="event" value="#{visitorIndexController.eventList}">  
+                                <p:dataTable var="event" value="#{visitorIndexController.eventList}" emptyMessage="No event is schedule for today">  
                                     <p:column headerText="Room">  
-                                        <h:outputText value="#{visitorIndexController.getRoomname(event.roomIdroom)}" />  
+                                        <h:outputText value="#{visitorIndexController.getRoomname(event.tblRoomroomId)}" />  
                                     </p:column>  
 
                                     <p:column headerText="Title">  
@@ -54,12 +55,12 @@
                                     </p:column>  
 
                                     <p:column headerText="Organization">  
-                                        <h:outputText value="#{visitorIndexController.getOrganizerName(event.organizerIdorganizer)}" />  
+                                        <h:outputText value="#{visitorIndexController.getOrganizerName(event.tblOrganizerorganizerId)}" />  
                                     </p:column>  
                                 </p:dataTable>  
                             </h:form>  
                         </p:panel>
-                        <p:panel style="width:575px;height:485px;">
+                        <p:panel style="width:475px;height:485px;">
 
                         </p:panel>
 

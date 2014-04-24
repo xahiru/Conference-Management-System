@@ -16,11 +16,11 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewContentsLabel_idcontents}"/>
-                    <h:outputText value="#{contentsController.selected.idcontents}" title="#{bundle.ViewContentsTitle_idcontents}"/>
+                    <h:outputText value="#{contentsController.selected.contentsId}" title="#{bundle.ViewContentsTitle_idcontents}"/>
                     <h:outputText value="#{bundle.ViewContentsLabel_paticipantNotes}"/>
                     <h:outputText value="#{contentsController.selected.paticipantNotes}" title="#{bundle.ViewContentsTitle_paticipantNotes}"/>
                     <h:outputText value="#{bundle.ViewContentsLabel_eventIdevent}"/>
-                    <h:outputText value="#{contentsController.selected.eventIdevent}" title="#{bundle.ViewContentsTitle_eventIdevent}"/>
+                    <h:outputText value="#{contentsController.selected.tblEventeventId}" title="#{bundle.ViewContentsTitle_eventIdevent}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{contentsController.destroyAndView}" value="#{bundle.ViewContentsDestroyLink}"/>
