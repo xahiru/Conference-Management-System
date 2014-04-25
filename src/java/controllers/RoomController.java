@@ -25,11 +25,11 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 
-
-import org.primefaces.event.FileUploadEvent;  
-import org.primefaces.model.UploadedFile;
+import org.primefaces.event.FileUploadEvent;
+//import org.primefaces.model.UploadedFile;
 
 @Named("roomController")
 @SessionScoped
@@ -38,6 +38,7 @@ public class RoomController implements Serializable {
 //    private Part uploadedFile;
     private Room current;
     private DataModel items = null;
+    private Part file;
     @EJB
     private backingbeans.RoomFacade ejbFacade;
     private PaginationHelper pagination;
@@ -77,26 +78,26 @@ public class RoomController implements Serializable {
         return pagination;
     }
 
-    public void handleFileUpload(FileUploadEvent event) {
-
-        InputStream input;
-        FacesMessage msg;
-        try {
-            input = event.getFile().getInputstream();
-             byte[] image = IOUtils.toByteArray(input);
-             
-             current.setFloorPlan(image);
-             
-               msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");  
-        
-        } catch (IOException ex) {
-            Logger.getLogger(RoomController.class.getName()).log(Level.SEVERE, null, ex);
-         msg = new FacesMessage("file upload Failed.");  
-        
-        }
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-            
-    }
+//    public void handleFileUpload(FileUploadEvent event) {
+//
+//        InputStream input;
+//        FacesMessage msg;
+//        try {
+//            input = event.getFile().getInputstream();
+//            byte[] image = IOUtils.toByteArray(input);
+//
+//            current.setFloorPlan(image);
+//
+//            msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(RoomController.class.getName()).log(Level.SEVERE, null, ex);
+//            msg = new FacesMessage("file upload Failed.");
+//
+//        }
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+//
+//    }
 
     public String prepareList() {
         recreateModel();
@@ -116,7 +117,9 @@ public class RoomController implements Serializable {
     }
 
     public String create() {
+        
         try {
+           // upload();
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RoomCreated"));
             return prepareCreate();
@@ -267,9 +270,15 @@ public class RoomController implements Serializable {
         }
 
     }
-    
-    
-    
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
 //     private String destination = "/NetBeansProjects/Conference Management System/pictures/";
 //
 //    public void uploadPicture(FileUploadEvent event) throws IOException {
@@ -313,10 +322,44 @@ public class RoomController implements Serializable {
 //         FacesMessage msg = new FacesMessage("Succesful is uploaded.");  
 //        FacesContext.getCurrentInstance().addMessage(null, msg);  
 //    }
-
-    
 //    public void handleFileUpload(FileUploadEvent event) {  
 //        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");  
 //        FacesContext.getCurrentInstance().addMessage(null, msg);  
-//    }  
+//    } 
+    public String upload() throws IOException {
+        InputStream inputStream = file.getInputStream();
+        String filename = getFilename(file);
+        FileOutputStream outputStream = new FileOutputStream(filename);
+
+        byte[] buffer = new byte[4194304]; //4MB
+        int bytesRead = 0;
+        while (true) {
+            bytesRead = inputStream.read(buffer);
+            if (bytesRead > 0) {
+                outputStream.write(buffer, 0, bytesRead);
+            } else {
+                break;
+            }
+        }
+        current.setFloorPlan(buffer);
+        
+        outputStream.close();
+        inputStream.close();
+        
+        FacesMessage msg = new FacesMessage("Succesful", filename + " is uploaded.");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return "success";
+    }
+
+    private static String getFilename(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.  
+            }
+        }
+        return null;
+    }
+
 }

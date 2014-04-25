@@ -90,15 +90,11 @@
                 </h:form> 
 
 
-                <h:form>  
-
-                    <p:fileUpload fileUploadListener="#{RoomController.handleFileUpload}" mode="advanced"  
-                                  update="messages" auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
-
-                    <p:growl id="messages" showDetail="true"/>  
-
+                <h:form enctype="multipart/form-data">
+                    <h:inputFile value="#{roomController.file}" />
+                    <p:growl id="message" showDetail="true"/>
+                    <p:commandButton value="Submit" ajax="false" actionListener="#{roomController.upload}" update="message"/>
                 </h:form>
-
             </p:panel>
 
 

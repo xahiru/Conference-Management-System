@@ -17,18 +17,10 @@
         <session-timeout>
             30
         </session-timeout>
-    </session-config>  
-    <filter>
-        <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <servlet-name>Faces Servlet</servlet-name>
-    </filter-mapping>     
+    </session-config>
     <welcome-file-list>
         <welcome-file>faces/visitors/index.xhtml</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>    
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>jdbcRealm</realm-name>

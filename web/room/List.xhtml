@@ -81,9 +81,12 @@
                             </p:column>  
                             <p:column>
                                 <f:facet name="header">
-
+                                    <h:outputText value="photo"/>
                                 </f:facet>
-                                
+                                <p:graphicImage value="#{imageStreamer.image}">
+                                        <f:param name="id" value="#{item.roomId}" />
+                                    </p:graphicImage>
+
                             </p:column>  
                             <p:column>  
                                 <h:commandButton value="View" 
