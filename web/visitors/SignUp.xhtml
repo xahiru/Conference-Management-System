@@ -13,13 +13,15 @@
         </ui:define>
 
         <ui:define name="content">
+           <p:panel style="height:455px; "  >
             <h1>New User</h1>
 
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <p:panel>
+                
+             
                     <p:messages closable="true" />  
 
                     <h:panelGrid columns="2" style="width: 300px;margin: 100px auto; position: relative" >
@@ -34,14 +36,16 @@
                     <br />
 
                     <br />
-                </p:panel>
+            
+                
 
                 <br />
 
                 <br />
 
             </h:form>
-        </ui:define>
+            </p:panel>
+        </ui:define>            
     </ui:composition>
 
 </html>
