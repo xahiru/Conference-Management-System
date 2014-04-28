@@ -12,9 +12,11 @@ import entity.Booking;
 import entity.Event;
 import entity.Organizer;
 import entity.Room;
+import entity.Users;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -68,6 +70,13 @@ public class EventlistController implements Serializable {
     }
 
     public PaginationHelper getPagination() {
+       final List<Event> ev;
+       Users  u = usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername());
+       if(JsfUtil.isCoordinator(u))
+       {ev = getFacade().findAll();
+       }else{
+           ev = getFacade().getMyEvents(u);
+       }        
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
@@ -78,13 +87,13 @@ public class EventlistController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().getMyEvents(usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername())));
+                    return new ListDataModel(ev);
                 }
             };
         }
         return pagination;
     }
-
+    
     public String prepareList() {
         recreateModel();
         return "List";
