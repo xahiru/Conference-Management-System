@@ -18,42 +18,46 @@
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListParticipantEmpty}" rendered="#{participantController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{participantController.items.rowCount > 0}">
-                    <h:outputText value="#{participantController.pagination.pageFirstItem + 1}..#{participantController.pagination.pageLastItem + 1}/#{participantController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{participantController.previous}" value="#{bundle.Previous} #{participantController.pagination.pageSize}" rendered="#{participantController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{participantController.next}" value="#{bundle.Next} #{participantController.pagination.pageSize}" rendered="#{participantController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{participantController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+                 <p:dataTable value="#{participantController.items}" var="item" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                  rowsPerPageTemplate="5,10,15"  
+                                  emptyMessage="No Events reserved yet">
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_idparticipant}"/>
+                                <h:outputText value="ID"/>
                             </f:facet>
                             <h:outputText value="#{item.participantId}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_name}"/>
+                                <h:outputText value="Name"/>
                             </f:facet>
                             <h:outputText value="#{item.name}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_photo}"/>
+                                <h:outputText value="Photo"/>
                             </f:facet>
                             <h:outputText value="#{item.photo}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                     <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_roomcardIdtable1}"/>
+                                <h:outputText value="Registration status"/>
+                            </f:facet>
+                            <h:outputText value="#{item.registrationstatus}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Room card"/>
                             </f:facet>
                             <h:outputText value="#{item.roomcard}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipantTitle_eventIdevent}"/>
+                                <h:outputText value="Event"/>
                             </f:facet>
                             <h:outputText value="#{item.tblEventeventId}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
@@ -62,9 +66,9 @@
                             <h:commandLink action="#{participantController.prepareEdit}" value="#{bundle.ListParticipantEditLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{participantController.destroy}" value="#{bundle.ListParticipantDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
+                        </p:column>
+                    </p:dataTable>
+    
                 <br />
                 <h:commandLink action="#{participantController.prepareCreate}" value="#{bundle.ListParticipantCreateLink}"/>
                 <br />
