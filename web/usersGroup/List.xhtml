@@ -24,19 +24,19 @@
                     <h:dataTable value="#{usersGroupController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersGroupTitle_idroles}"/>
+                                <h:outputText value="id"/>
                             </f:facet>
                             <h:outputText value="#{item.groupId}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersGroupTitle_groupname}"/>
+                                <h:outputText value="groupname"/>
                             </f:facet>
                             <h:outputText value="#{item.groupname}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersGroupTitle_username}"/>
+                                <h:outputText value="username"/>
                             </f:facet>
                             <h:outputText value="#{usersGroupController.getUsersGroupsUsername(item.username)}"/>
                         </h:column>
@@ -44,16 +44,16 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{usersGroupController.prepareView}" value="#{bundle.ListUsersGroupViewLink}"/>
+                            <h:commandLink action="#{usersGroupController.prepareView}" value="View"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{usersGroupController.prepareEdit}" value="#{bundle.ListUsersGroupEditLink}"/>
+                            <h:commandLink action="#{usersGroupController.prepareEdit}" value="Edit"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{usersGroupController.destroy}" value="#{bundle.ListUsersGroupDestroyLink}"/>
+                            <h:commandLink action="#{usersGroupController.destroy}" value="Delete"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{usersGroupController.prepareCreate}" value="#{bundle.ListUsersGroupCreateLink}"/>
+                <h:commandLink action="#{usersGroupController.prepareCreate}" value="New Role"/>
                 <br />
                 <br />
                 <h:link outcome="/admin/index" value="Admin Home"/>

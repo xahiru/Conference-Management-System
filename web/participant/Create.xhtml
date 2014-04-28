@@ -6,57 +6,47 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-   <ui:composition template="./../conferenceTemplate.xhtml">
+    <ui:composition template="./../conferenceTemplate.xhtml">
         <ui:define name="options">
 
         </ui:define>
 
         <ui:define name="content">
             <p:panel style="height:485px;">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateParticipantLabel_idparticipant}" for="idparticipant" />
-                    <h:inputText id="idparticipant" value="#{participantController.selected.participantId}" title="#{bundle.CreateParticipantTitle_idparticipant}" required="true" requiredMessage="#{bundle.CreateParticipantRequiredMessage_idparticipant}"/>
-                    <h:outputLabel value="#{bundle.CreateParticipantLabel_name}" for="name" />
-                    <h:inputText id="name" value="#{participantController.selected.name}" title="#{bundle.CreateParticipantTitle_name}" required="true" requiredMessage="#{bundle.CreateParticipantRequiredMessage_name}"/>
-                    <h:outputLabel value="#{bundle.CreateParticipantLabel_photo}" for="photo" />
-                    <h:inputText id="photo" value="#{participantController.selected.photo}" title="#{bundle.CreateParticipantTitle_photo}" />
-                    <h:outputLabel value="#{bundle.CreateParticipantLabel_roomcardIdtable1}" for="roomcardIdtable1" />
-                    <h:selectOneMenu id="roomcardIdtable1" value="#{participantController.selected.roomcard}" title="#{bundle.CreateParticipantTitle_roomcardIdtable1}" required="true" requiredMessage="#{bundle.CreateParticipantRequiredMessage_roomcardIdtable1}">
-                        <f:selectItems value="#{roomcardController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateParticipantLabel_eventIdevent}" for="eventIdevent" />
-                    <h:selectOneMenu id="eventIdevent" value="#{participantController.selected.tblEventeventId}" title="#{bundle.CreateParticipantTitle_eventIdevent}" required="true" requiredMessage="#{bundle.CreateParticipantRequiredMessage_eventIdevent}">
-                        <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{participantController.create}" value="#{bundle.CreateParticipantSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{participantController.prepareList}" value="#{bundle.CreateParticipantShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateParticipantIndexLink}"/>
-            </h:form>
-            
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateRoomcardLabel_idtable1}" for="idtable1" />
-                    <h:inputText id="idtable1" value="#{roomcardController.selected.cardNumber}" title="#{bundle.CreateRoomcardTitle_idtable1}" required="true" requiredMessage="#{bundle.CreateRoomcardRequiredMessage_idtable1}"/>
-                    <h:outputLabel value="#{bundle.CreateRoomcardLabel_roomNumber}" for="roomNumber" />
-                    <h:inputText id="roomNumber" value="#{roomcardController.selected.roomNumber}" title="#{bundle.CreateRoomcardTitle_roomNumber}" required="true" requiredMessage="#{bundle.CreateRoomcardRequiredMessage_roomNumber}"/>
-                    <h:outputLabel value="#{bundle.CreateRoomcardLabel_cardNumber}" for="cardNumber" />
-                    <h:inputText id="cardNumber" value="#{roomcardController.selected.cardNumber}" title="#{bundle.CreateRoomcardTitle_cardNumber}" required="true" requiredMessage="#{bundle.CreateRoomcardRequiredMessage_cardNumber}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{roomcardController.create}" value="#{bundle.CreateRoomcardSaveLink}" />
-                
-            </h:form>
-                </p:panel>
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form enctype="multipart/form-data">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Participant ID" for="idparticipant" />
+                        <h:inputText id="idparticipant" value="#{participantController.selected.participantId}" title="ID" required="true" requiredMessage="Id is required"/>
+                        <h:outputLabel value="#{bundle.CreateParticipantLabel_name}" for="name" />
+                        <h:inputText id="name" value="#{participantController.selected.name}" title="#{bundle.CreateParticipantTitle_name}" required="true" requiredMessage="Title is required"/>
+                        
+                        
+                        <h:inputFile id="filename" value="#{participantController.file}" />
+                        <p:commandButton value="Upload" ajax="false" actionListener="#{participantController.upload}" update="message"/>
+                        
+                        
+                        <h:outputLabel value="Event" for="eventIdevent" />
+                        <h:selectOneMenu id="eventIdevent" value="#{participantController.selected.tblEventeventId}" title="#{bundle.CreateParticipantTitle_eventIdevent}" required="true" requiredMessage="#{bundle.CreateParticipantRequiredMessage_eventIdevent}">
+                            <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                    </h:panelGrid>
+                    <br />
+                    <h:commandLink action="#{participantController.create}" value="#{bundle.CreateParticipantSaveLink}" />
+                    <br />
+                    <br />
+                    <h:commandLink action="#{participantController.prepareList}" value="#{bundle.CreateParticipantShowAllLink}" immediate="true"/>
+                    <br />
+                    <br />
+                    <h:link outcome="/index" value="#{bundle.CreateParticipantIndexLink}"/>
+                </h:form>
+
+
+            </p:panel>
         </ui:define>
     </ui:composition>
 

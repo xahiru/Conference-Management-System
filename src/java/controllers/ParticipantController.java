@@ -4,12 +4,17 @@ import entity.Participant;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.ParticipantFacade;
+import entity.Roomcard;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,15 +22,22 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.Part;
 
 @Named("participantController")
 @SessionScoped
 public class ParticipantController implements Serializable {
 
     private Participant current;
+    private Roomcard currentCard;
+    private Part file;
+
     private DataModel items = null;
     @EJB
     private backingbeans.ParticipantFacade ejbFacade;
+    @EJB
+    private backingbeans.RoomcardFacade roomFacade;
+
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -65,6 +77,14 @@ public class ParticipantController implements Serializable {
     public String prepareList() {
         recreateModel();
         return "List";
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
     }
 
     public String prepareView() {
@@ -230,6 +250,41 @@ public class ParticipantController implements Serializable {
             }
         }
 
+    }
+    public String upload() throws IOException {
+        InputStream inputStream = file.getInputStream();
+        String filename = getFilename(file);
+        FileOutputStream outputStream = new FileOutputStream(filename);
+
+        byte[] buffer = new byte[4194304]; //4MB
+        int bytesRead = 0;
+        while (true) {
+            bytesRead = inputStream.read(buffer);
+            if (bytesRead > 0) {
+                outputStream.write(buffer, 0, bytesRead);
+            } else {
+                break;
+            }
+        }
+        current.setPhoto(buffer);
+        
+        outputStream.close();
+        inputStream.close();
+        
+        FacesMessage msg = new FacesMessage("Succesful", filename + " is uploaded.");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return "success";
+    }
+
+    private static String getFilename(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.  
+            }
+        }
+        return null;
     }
 
 }

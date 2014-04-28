@@ -17,22 +17,22 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditUsersGroupLabel_groupname}" for="groupname" />
+                    <h:outputLabel value="groupname" for="groupname" />
 
                     <h:selectOneMenu id="groupname" value="#{usersGroupController.selected.groupname}" title="#{bundle.EditUsersGroupTitle_groupname}" required="true" requiredMessage="#{bundle.EditUsersGroupRequiredMessage_groupname}">
                         <f:selectItems value="#{usersGroupController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditUsersGroupLabel_username}" for="username" />
+                    <h:outputLabel value="username" for="username" />
                     <h:selectOneMenu id="username" value="#{usersGroupController.selected.username}" title="#{bundle.EditUsersGroupTitle_username}" required="true" requiredMessage="#{bundle.EditUsersGroupRequiredMessage_username}">
                         <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                <h:commandLink action="#{usersGroupController.update}" value="#{bundle.EditUsersGroupSaveLink}"/>
+                <h:commandLink action="#{usersGroupController.update}" value="Update"/>
                 <br />
                 <br />
-                <h:link outcome="View" value="#{bundle.EditUsersGroupViewLink}"/>
+                <h:link outcome="View" value="View"/>
                 <br />
-                <h:commandLink action="#{usersGroupController.prepareList}" value="#{bundle.EditUsersGroupShowAllLink}" immediate="true"/>
+                <h:commandLink action="#{usersGroupController.prepareList}" value="List" immediate="true"/>
                 <br />
                 <br />
                 <h:link outcome="/admin/index" value="Admin Home"/>

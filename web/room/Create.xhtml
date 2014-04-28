@@ -7,7 +7,9 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="./../conferenceTemplate.xhtml">
-        <ui:define name="options">
+        <ui:define name="menubtns">
+            <p:menuitem value="Rooms" outcome="/room/List" />  
+
 
         </ui:define>
 
@@ -17,21 +19,26 @@
 
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
 
-                <h:form>
+                <h:form enctype="multipart/form-data">
                     <h:panelGrid columns="3">
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_number}" for="number" />
+                        <p:growl id="message" showDetail="true"/>
+                        <h:inputFile id="filename" value="#{roomController.file}" />
+                        <p:commandButton value="Upload" ajax="false" actionListener="#{roomController.upload}" update="message"/>
+                        <p:message for="filename"/>
+
+                        <p:outputLabel value="Room Number" for="number" />
                         <p:inputText id="number" value="#{roomController.selected.number}" title="#{bundle.CreateRoomTitle_number}" required="true" requiredMessage="#{bundle.CreateRoomRequiredMessage_number}"/>
                         <p:message for="number"/>
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_name}" for="name" />
+                        <p:outputLabel value="Name" for="name" />
                         <p:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.CreateRoomTitle_name}" />
                         <p:message for="name"/>
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_area}" for="area" />
+                        <p:outputLabel value="Area" for="area" />
                         <p:inputText id="area" value="#{roomController.selected.area}" title="#{bundle.CreateRoomTitle_area}" />
                         <p:message for="area"/>
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_capacity}" for="capacity" />
+                        <p:outputLabel value="Capacity" for="capacity" />
                         <p:inputText id="capacity" value="#{roomController.selected.capacity}" title="#{bundle.CreateRoomTitle_capacity}" />
                         <p:message for="capacity"/>
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_type}" for="type" />
+                        <p:outputLabel value="Type" for="type" />
 
                         <p:selectOneMenu id="type" value="#{roomController.selected.type}" style="width: 178px;" >  
                             <f:selectItem itemLabel="Select One..." itemValue="" />  
@@ -45,14 +52,14 @@
 
                         <p:message for="type"/>
 
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_furnitureMobility}" for="furnitureMobility" />
+                        <p:outputLabel value="Furniture mobility" for="furnitureMobility" />
                         <p:selectOneRadio id="furnitureMobility" value="#{roomController.selected.furnitureMobility}" requiredMessage="Gender must be filled">  
                             <f:selectItem itemLabel="Yes" itemValue="Yes" />  
                             <f:selectItem itemLabel="No" itemValue="No" />  
                         </p:selectOneRadio>  
                         <p:message for="furnitureMobility"/>
 
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_furnitureType}" for="furnitureType" />
+                        <p:outputLabel value="Furniture type" for="furnitureType" />
 
 
                         <p:selectOneMenu id="furnitureType" value="#{roomController.selected.furnitureType}" style="width:178px;" >  
@@ -67,7 +74,7 @@
                         </p:selectOneMenu> 
                         <p:message for="furnitureType"/>
 
-                        <p:outputLabel value="#{bundle.CreateRoomLabel_orientation}" for="orientation" />
+                        <p:outputLabel value="Orientation" for="orientation" />
                         <p:selectOneMenu id="orientation" value="#{roomController.selected.orientation}" style="width:178px;" >  
                             <f:selectItem itemLabel="Select One..." itemValue="" />  
                             <f:selectItem itemLabel="East-to-West" itemValue="East-to-West" />
@@ -79,22 +86,12 @@
 
                     </h:panelGrid>
                     <br />
-                    <h:commandLink action="#{roomController.create}" value="#{bundle.CreateRoomSaveLink}" />
-                    <br />
-                    <br />
-                    <h:commandLink action="#{roomController.prepareList}" value="#{bundle.CreateRoomShowAllLink}" immediate="true"/>
-                    <br />
-                    <br />
-                    <h:link outcome="/index" value="#{bundle.CreateRoomIndexLink}"/>
+                    <h:commandButton action="#{roomController.create}" value="Save" />
 
                 </h:form> 
 
 
-                <h:form enctype="multipart/form-data">
-                    <h:inputFile value="#{roomController.file}" />
-                    <p:growl id="message" showDetail="true"/>
-                    <p:commandButton value="Submit" ajax="false" actionListener="#{roomController.upload}" update="message"/>
-                </h:form>
+
             </p:panel>
 
 

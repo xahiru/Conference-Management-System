@@ -7,7 +7,8 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="./../conferenceTemplate.xhtml">
-        <ui:define name="options">
+        <ui:define name="menubtns">
+            <p:menuitem value="Add Room" outcome="/room/Create" />  
 
         </ui:define>
 
@@ -84,8 +85,8 @@
                                     <h:outputText value="photo"/>
                                 </f:facet>
                                 <p:graphicImage value="#{imageStreamer.image}">
-                                        <f:param name="id" value="#{item.roomId}" />
-                                    </p:graphicImage>
+                                    <f:param name="id" value="#{item.roomId}" />
+                                </p:graphicImage>
 
                             </p:column>  
                             <p:column>  
@@ -118,7 +119,7 @@
                         </p:dataTable>
                     </h:panelGroup>
                     <br />
-                    <h:commandButton action="#{roomController.prepareCreate}" value="#{bundle.ListRoomCreateLink}"/>
+                    <h:commandButton action="#{roomController.prepareCreate}" value="Create New Room"/>
                     <br />
 
                 </h:form>

@@ -25,9 +25,9 @@
                     <p:messages closable="true" />  
 
                     <h:panelGrid columns="2" style="width: 300px;margin: 100px auto; position: relative" >
-                        <p:outputLabel value="#{bundle.CreateUsersLabel_username}" for="username" />
+                        <p:outputLabel value="Username" for="username" />
                         <p:inputText id="username" value="#{usersController.selected.username}" title="#{bundle.CreateUsersTitle_username}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_username}"/>
-                        <p:outputLabel value="#{bundle.CreateUsersLabel_password}" for="password" />
+                        <p:outputLabel value="Password" for="password" />
                         <p:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.CreateUsersTitle_password}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_password}"/>
                         <p:outputLabel id="non" for="signup"/>
                         <p:commandButton id="signup"  action="#{usersController.signup()}" value="Signup" style="margin:10px 40px"/>

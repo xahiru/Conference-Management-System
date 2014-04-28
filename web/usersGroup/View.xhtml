@@ -17,22 +17,22 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewUsersGroupLabel_idroles}"/>
-                    <h:outputText value="#{usersGroupController.selected.groupId}" title="#{bundle.ViewUsersGroupTitle_idroles}"/>
-                    <h:outputText value="#{bundle.ViewUsersGroupLabel_groupname}"/>
-                    <h:outputText value="#{usersGroupController.selected.groupname}" title="#{bundle.ViewUsersGroupTitle_groupname}"/>
-                    <h:outputText value="#{bundle.ViewUsersGroupLabel_username}"/>
-                    <h:outputText value="#{usersGroupController.selected.username}" title="#{bundle.ViewUsersGroupTitle_username}"/>
+                    <h:outputText value="id"/>
+                    <h:outputText value="#{usersGroupController.selected.groupId}" title="id"/>
+                    <h:outputText value="groupname"/>
+                    <h:outputText value="#{usersGroupController.selected.groupname}" title="groupname"/>
+                    <h:outputText value="username"/>
+                    <h:outputText value="#{usersGroupController.selected.username}" title="username"/>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{usersGroupController.destroyAndView}" value="#{bundle.ViewUsersGroupDestroyLink}"/>
+                <h:commandLink action="#{usersGroupController.destroyAndView}" value="Delete"/>
                 <br />
                 <br />
-                <h:link outcome="Edit" value="#{bundle.ViewUsersGroupEditLink}"/>
+                <h:link outcome="Edit" value="EditLink"/>
                 <br />
-                <h:commandLink action="#{usersGroupController.prepareCreate}" value="#{bundle.ViewUsersGroupCreateLink}" />
+                <h:commandLink action="#{usersGroupController.prepareCreate}" value="New" />
                 <br />
-                <h:commandLink action="#{usersGroupController.prepareList}" value="#{bundle.ViewUsersGroupShowAllLink}"/>
+                <h:commandLink action="#{usersGroupController.prepareList}" value="List"/>
                 <br />
                 <br />
                 <h:link outcome="/admin/index" value="Admin Home"/>

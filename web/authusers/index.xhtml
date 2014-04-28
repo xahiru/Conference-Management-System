@@ -60,7 +60,7 @@
 
                             <p:outputLabel  value="Title" />
                             <p:inputText id="title"  value="#{reservationController.title}" title="#{bundle.CreateEventTitle_title}" required="true" requiredMessage="#{bundle.CreateEventRequiredMessage_title}" />
-                            <p:outputLabel  value="#{bundle.CreateEventLabel_description}" for="description" />
+                            <p:outputLabel  value="Description" for="description" />
                             <p:inputText  id="description" value="#{reservationController.description}" title="#{bundle.CreateEventTitle_description}" />
 
                             <p:outputLabel  value="No of Participants" for="numberOfParticipants" />
@@ -76,14 +76,14 @@
                         <h:outputText styleClass="outputLabel1" value="Organizer Info" />
                         <p:separator id="separator3"/>
                         <h:panelGrid columns="2" columnClasses="label, value">
-                            <p:outputLabel value="#{bundle.CreateOrganizerLabel_companyName}" for="companyName" />
+                            <p:outputLabel value="Company Name" for="companyName" />
                             <p:inputText id="companyName" value="#{reservationController.companyName}" title="#{bundle.CreateOrganizerTitle_companyName}" required="true"/>
 
                             <p:outputLabel value="Contact Person" for="contactPersonName" />
                             <p:inputText id="contactPersonName" value="#{reservationController.contactPersonName}" title="#{bundle.CreateOrganizerTitle_contactPersonName}" />
                             <p:outputLabel value="Contact Number" for="contactNumber" />
                             <p:inputText id="contactNumber" value="#{reservationController.contactNumber}" title="#{bundle.CreateOrganizerTitle_contactNumber}" />
-                            <p:outputLabel value="#{bundle.CreateOrganizerLabel_email}" for="email" />
+                            <p:outputLabel value="Email" for="email" />
                             <p:inputText id="email" value="#{reservationController.email}" title="#{bundle.CreateOrganizerTitle_email}" required="true"/>
                             <p:spacer height="10" />
                         </h:panelGrid>

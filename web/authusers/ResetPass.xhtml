@@ -17,10 +17,10 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditUsersLabel_password}" for="password" />
+                    <h:outputLabel value="password" for="password" />
                     <h:inputText id="password" value="#{usersController.newPassword}" title="#{bundle.EditUsersTitle_password}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_password}"/>
                 </h:panelGrid>
-                <h:commandLink action="#{usersController.resetPassword}" value="#{bundle.EditUsersSaveLink}"/>
+                <h:commandLink action="#{usersController.resetPassword}" value="Save"/>
                 <br />
                 
                 

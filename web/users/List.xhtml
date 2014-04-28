@@ -25,19 +25,19 @@
                     <h:dataTable value="#{usersController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_iduser}"/>
+                                <h:outputText value="userid"/>
                             </f:facet>
                             <h:outputText value="#{item.userId}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_username}"/>
+                                <h:outputText value="username"/>
                             </f:facet>
                             <h:outputText value="#{item.username}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_password}"/>
+                                <h:outputText value="passowrd"/>
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
                         </h:column>
@@ -45,11 +45,11 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{usersController.prepareView}" value="#{bundle.ListUsersViewLink}"/>
+                            <h:commandLink action="#{usersController.prepareView}" value="View"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{usersController.prepareEdit}" value="#{bundle.ListUsersEditLink}"/>
+                            <h:commandLink action="#{usersController.prepareEdit}" value="Edit"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{usersController.destroy}" value="#{bundle.ListUsersDestroyLink}"/>
+                            <h:commandLink action="#{usersController.destroy}" value="Delete"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>

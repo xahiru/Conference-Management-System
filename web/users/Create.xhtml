@@ -19,16 +19,16 @@
             </h:panelGroup>
             <h:form>
                 <p:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateUsersLabel_username}" for="username" />
+                    <h:outputLabel value="username" for="username" />
                     <h:inputText id="username" value="#{usersController.selected.username}" title="#{bundle.CreateUsersTitle_username}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_username}"/>
-                    <h:outputLabel value="#{bundle.CreateUsersLabel_password}" for="password" />
+                    <h:outputLabel value="password" for="password" />
                     <h:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.CreateUsersTitle_password}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_password}"/>
                 </p:panelGrid>
                 <br />
-                <h:commandLink action="#{usersController.create}" value="#{bundle.CreateUsersSaveLink}" />
+                <h:commandLink action="#{usersController.create}" value="Save" />
                 <br />
                 <br />
-                <h:commandLink action="#{usersController.prepareList}" value="#{bundle.CreateUsersShowAllLink}" immediate="true"/>
+                <h:commandLink action="#{usersController.prepareList}" value="Show" immediate="true"/>
                 <br />
                 <br />
                 <h:link outcome="/admin/index" value="Admin Home"/>

@@ -17,22 +17,22 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewUsersLabel_iduser}"/>
-                    <h:outputText value="#{usersController.selected.userId}" title="#{bundle.ViewUsersTitle_iduser}"/>
-                    <h:outputText value="#{bundle.ViewUsersLabel_username}"/>
-                    <h:outputText value="#{usersController.selected.username}" title="#{bundle.ViewUsersTitle_username}"/>
-                    <h:outputText value="#{bundle.ViewUsersLabel_password}"/>
-                    <h:outputText value="#{usersController.selected.password}" title="#{bundle.ViewUsersTitle_password}"/>
+                    <h:outputText value="User ID"/>
+                    <h:outputText value="#{usersController.selected.userId}" title="View"/>
+                    <h:outputText value="Password"/>
+                    <h:outputText value="#{usersController.selected.username}" title="username"/>
+                    <h:outputText value="Password"/>
+                    <h:outputText value="#{usersController.selected.password}" title="password"/>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{usersController.destroyAndView}" value="#{bundle.ViewUsersDestroyLink}"/>
+                <h:commandLink action="#{usersController.destroyAndView}" value="Delete"/>
                 <br />
                 <br />
-                <h:link outcome="Edit" value="#{bundle.ViewUsersEditLink}"/>
+                <h:link outcome="Edit" value="Edit"/>
                 <br />
-                <h:commandLink action="#{usersController.prepareCreate}" value="#{bundle.ViewUsersCreateLink}" />
+                <h:commandLink action="#{usersController.prepareCreate}" value="Create" />
                 <br />
-                <h:commandLink action="#{usersController.prepareList}" value="#{bundle.ViewUsersShowAllLink}"/>
+                <h:commandLink action="#{usersController.prepareList}" value="List"/>
                 <br />
                 <br />
                 <h:link outcome="/admin/index" value="Admin Home"/>

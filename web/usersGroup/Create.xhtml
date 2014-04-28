@@ -17,20 +17,20 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateUsersGroupLabel_groupname}" for="groupname" />
-                    <h:selectOneMenu id="groupname" value="#{usersGroupController.selected.groupname}" title="#{bundle.CreateUsersGroupTitle_groupname}" required="true" requiredMessage="#{bundle.CreateUsersGroupRequiredMessage_groupname}">
+                    <h:outputLabel value="groupname" for="groupname" />
+                    <h:selectOneMenu id="groupname" value="#{usersGroupController.selected.groupname}" title="groupname" required="true" requiredMessage="Select a user">
                         <f:selectItems value="#{usersGroupController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateUsersGroupLabel_username}" for="username" />
-                    <h:selectOneMenu id="username" value="#{usersGroupController.selected.username}" title="#{bundle.CreateUsersGroupTitle_username}" required="true" requiredMessage="#{bundle.CreateUsersGroupRequiredMessage_username}">
+                    <h:outputLabel value="username" for="username" />
+                    <h:selectOneMenu id="username" value="#{usersGroupController.selected.username}" title="username" required="true" requiredMessage="Select a group">
                         <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{usersGroupController.create}" value="#{bundle.CreateUsersGroupSaveLink}" />
+                <h:commandLink action="#{usersGroupController.create}" value="Save" />
                 <br />
                 <br />
-                <h:commandLink action="#{usersGroupController.prepareList}" value="#{bundle.CreateUsersGroupShowAllLink}" immediate="true"/>
+                <h:commandLink action="#{usersGroupController.prepareList}" value="List" immediate="true"/>
                 <br />
                 <br />
                 <h:link outcome="/admin/index" value="Admin Home"/>

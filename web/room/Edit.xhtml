@@ -19,25 +19,25 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditRoomLabel_idroom}" for="idroom" />
+                    <h:outputLabel value="idroom" for="idroom" />
                     <h:inputText id="idroom" value="#{roomController.selected.idroom}" title="#{bundle.EditRoomTitle_idroom}" required="true" requiredMessage="#{bundle.EditRoomRequiredMessage_idroom}"/>
-                    <h:outputLabel value="#{bundle.EditRoomLabel_number}" for="number" />
+                    <h:outputLabel value="number" for="number" />
                     <h:inputText id="number" value="#{roomController.selected.number}" title="#{bundle.EditRoomTitle_number}" required="true" requiredMessage="#{bundle.EditRoomRequiredMessage_number}"/>
-                    <h:outputLabel value="#{bundle.EditRoomLabel_name}" for="name" />
+                    <h:outputLabel value="name" for="name" />
                     <h:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.EditRoomTitle_name}" />
-                    <h:outputLabel value="#{bundle.EditRoomLabel_area}" for="area" />
+                    <h:outputLabel value=area" for="area" />
                     <h:inputText id="area" value="#{roomController.selected.area}" title="#{bundle.EditRoomTitle_area}" />
-                    <h:outputLabel value="#{bundle.EditRoomLabel_capacity}" for="capacity" />
+                    <h:outputLabel value=capacity" for="capacity" />
                     <h:inputText id="capacity" value="#{roomController.selected.capacity}" title="#{bundle.EditRoomTitle_capacity}" />
-                    <h:outputLabel value="#{bundle.EditRoomLabel_type}" for="type" />
+                    <h:outputLabel value="type" for="type" />
                     <h:inputText id="type" value="#{roomController.selected.type}" title="#{bundle.EditRoomTitle_type}" />
-                    <h:outputLabel value="#{bundle.EditRoomLabel_furnitureMobility}" for="furnitureMobility" />
+                    <h:outputLabel value="furniture Mobility" for="furnitureMobility" />
                     <h:inputText id="furnitureMobility" value="#{roomController.selected.furnitureMobility}" title="#{bundle.EditRoomTitle_furnitureMobility}" />
-                    <h:outputLabel value="#{bundle.EditRoomLabel_furnitureType}" for="furnitureType" />
+                    <h:outputLabel value="furniture Type" for="furnitureType" />
                     <h:inputText id="furnitureType" value="#{roomController.selected.furnitureType}" title="#{bundle.EditRoomTitle_furnitureType}" />
-                    <h:outputLabel value="#{bundle.EditRoomLabel_orientation}" for="orientation" />
+                    <h:outputLabel value="orientation" for="orientation" />
                     <h:inputText id="orientation" value="#{roomController.selected.orientation}" title="#{bundle.EditRoomTitle_orientation}" />
-                    <h:outputLabel value="#{bundle.EditRoomLabel_floorPlan}" for="floorPlan" />
+                    <h:outputLabel value="floorPlan" for="floorPlan" />
                     <h:inputText id="floorPlan" value="#{roomController.selected.floorPlan}" title="#{bundle.EditRoomTitle_floorPlan}" />
                 </h:panelGrid>
                 <h:commandLink action="#{roomController.update}" value="#{bundle.EditRoomSaveLink}"/>

@@ -10,7 +10,8 @@
 
         <ui:composition template="./../conferenceTemplate.xhtml">
 
-            <ui:define name="options">
+            <ui:define name="menubtns">
+                <p:menuitem value="Book" outcome="/authusers/index" />  
 
             </ui:define>
 
@@ -43,7 +44,7 @@
                             </f:facet>
                             <h:outputText value="#{eventlistController.getOrganizerName(item.tblOrganizerorganizerId.organizerId)}"/>
                         </p:column>
-                        
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Time"/>
