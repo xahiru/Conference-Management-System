@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controllers;
-
 
 import entity.Users;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -25,15 +24,22 @@ public class LoginController implements Serializable {
 
     /**
      * Creates a new instance of LoginController
-     */  
+     */
     public LoginController() {
     }
-    
-    public String logout(){
-          FacesContext context = FacesContext.getCurrentInstance();
-          HttpSession session = (HttpSession)context.getExternalContext().getSession(false);
-          session.invalidate();
-          return "/visitors/index";
-   }
-   
+
+    public String logout() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+        session.invalidate();
+        return "/visitors/index";
+    }
+
+    @PostConstruct
+    public void init() {
+    FacesContext context = FacesContext.getCurrentInstance();
+//        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+//        session.setAttribute("home", "/authusers/index");
+    }
+
 }
