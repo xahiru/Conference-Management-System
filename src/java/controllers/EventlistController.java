@@ -70,13 +70,7 @@ public class EventlistController implements Serializable {
     }
 
     public PaginationHelper getPagination() {
-       final List<Event> ev;
-       Users  u = usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername());
-       if(JsfUtil.isCoordinator(u))
-       {ev = getFacade().findAll();
-       }else{
-           ev = getFacade().getMyEvents(u);
-       }        
+              
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
@@ -87,13 +81,22 @@ public class EventlistController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(ev);
+                    return new ListDataModel(getEventsByMe());
                 }
             };
         }
         return pagination;
     }
     
+  public List<Event> getEventsByMe(){
+//      final List<Event> ev;
+       Users  u = usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername());
+       if(JsfUtil.isCoordinator(u))
+       {return getFacade().findAll();
+       }else{
+           return getFacade().getMyEvents(u);
+       } 
+  }
     public String prepareList() {
         recreateModel();
         return "List";
@@ -274,7 +277,7 @@ public class EventlistController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(getEventsByMe(), true);
     }
 
     public Event getEvent(java.lang.Integer id) {

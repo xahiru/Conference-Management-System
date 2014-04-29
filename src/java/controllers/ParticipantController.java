@@ -4,12 +4,15 @@ import entity.Participant;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.ParticipantFacade;
+import entity.Event;
 import entity.Roomcard;
+import entity.Users;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -37,6 +40,10 @@ public class ParticipantController implements Serializable {
     private backingbeans.ParticipantFacade ejbFacade;
     @EJB
     private backingbeans.RoomcardFacade roomFacade;
+    @EJB
+    private backingbeans.UsersFacade usersFacade;
+    @EJB
+    private backingbeans.EventFacade eventFacade;
 
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -57,6 +64,10 @@ public class ParticipantController implements Serializable {
     }
 
     public PaginationHelper getPagination() {
+
+//        final List<Participant> ev;
+        final Users u = usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername());
+
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
@@ -67,13 +78,22 @@ public class ParticipantController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    if (JsfUtil.isCoordinator(u)) {
+                        return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+
+                    } else {
+                        return new ListDataModel(getFacade().findRangeForSpecificUser(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}, u));
+                    }
+
                 }
             };
         }
         return pagination;
     }
 
+//    public DataModel getParticipantsFromallMyEvents(){
+//        
+//    }
     public String prepareList() {
         recreateModel();
         return "List";
@@ -251,6 +271,7 @@ public class ParticipantController implements Serializable {
         }
 
     }
+
     public String upload() throws IOException {
         InputStream inputStream = file.getInputStream();
         String filename = getFilename(file);
@@ -267,11 +288,11 @@ public class ParticipantController implements Serializable {
             }
         }
         current.setPhoto(buffer);
-        
+
         outputStream.close();
         inputStream.close();
-        
-        FacesMessage msg = new FacesMessage("Succesful", filename + " is uploaded.");  
+
+        FacesMessage msg = new FacesMessage("Succesful", filename + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
         return "success";
