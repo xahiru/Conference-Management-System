@@ -19,11 +19,11 @@
                 <p:menuitem value="Rooms" outcome="/booking/List" />
                 <p:menuitem value="fileUpload" outcome="/fileUpload" /> 
                 <p:menuitem value="newrss" outcome="/newResident" /> 
-           
+
             </ui:define>
 
             <ui:define name="options" >
-                <div >
+                <div >                    
                     <p:submenu label="Login"  style="float: right; " >
                         <p:menuitem value="Admin" outcome="/admin/index" />
                         <p:menuitem value="User" outcome="/authusers/index"  /> 
@@ -36,37 +36,37 @@
             </ui:define>
 
             <ui:define name="content"  >
-               
+
                 <h:panelGrid columns="2" columnClasses="alignTop"  >
-                        <p:panel style="width:500px;height:485px; "  >
-                            <h3>Todays' Schedule</h3>
-                            <h:form>  
-                                <p:dataTable var="event" value="#{visitorIndexController.eventList}" emptyMessage="No event is schedule for today">  
-                                    <p:column headerText="Room">  
-                                        <h:outputText value="#{visitorIndexController.getRoomname(event.tblRoomroomId)}" />  
-                                    </p:column>  
+                    <p:panel style="width:500px;height:485px; "  >
+                        <h3>Todays' Schedule</h3>
+                        <h:form>  
+                            <p:dataTable var="event" value="#{visitorIndexController.eventList}" emptyMessage="No event is schedule for today">  
+                                <p:column headerText="Room">  
+                                    <h:outputText value="#{visitorIndexController.getRoomname(event.tblRoomroomId)}" />  
+                                </p:column>  
 
-                                    <p:column headerText="Title">  
-                                        <h:outputText value="#{event.title}" />  
-                                    </p:column>  
+                                <p:column headerText="Title">  
+                                    <h:outputText value="#{event.title}" />  
+                                </p:column>  
 
-                                    <p:column headerText="Time">  
-                                        <h:outputText value="#{visitorIndexController.getTime(event.bookingBookingRef)}" />  
-                                    </p:column>  
+                                <p:column headerText="Time">  
+                                    <h:outputText value="#{visitorIndexController.getTime(event.bookingBookingRef)}" />  
+                                </p:column>  
 
-                                    <p:column headerText="Organization">  
-                                        <h:outputText value="#{visitorIndexController.getOrganizerName(event.tblOrganizerorganizerId)}" />  
-                                    </p:column>  
-                                </p:dataTable>  
-                            </h:form>  
-                        </p:panel>
-                        <p:panel style="width:475px;height:485px;">
+                                <p:column headerText="Organization">  
+                                    <h:outputText value="#{visitorIndexController.getOrganizerName(event.tblOrganizerorganizerId)}" />  
+                                </p:column>  
+                            </p:dataTable>  
+                        </h:form>  
+                    </p:panel>
+                    <p:panel style="width:475px;height:485px;">
 
-                        </p:panel>
+                    </p:panel>
 
-                    </h:panelGrid>
-               
-    
+                </h:panelGrid>
+
+
 
             </ui:define>
 
