@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
     @NamedQuery(name = "Event.findByEventId", query = "SELECT e FROM Event e WHERE e.eventId = :eventId"),
+//    @NamedQuery(name = "Event.findParticipant", query = "SELECT e.participantCollection. FROM Event e WHERE e.participantCollection.participantId = :pid"), 
+    @NamedQuery(name = "Event.findEventByOpenRegistration", query = "SELECT e FROM Event e WHERE e.openresgistration = TRUE AND e.bookingBookingRef.startTime >= :startTime"), 
     @NamedQuery(name = "Event.findByTitle", query = "SELECT e FROM Event e WHERE e.title = :title"),
     @NamedQuery(name = "Event.findByDescription", query = "SELECT e FROM Event e WHERE e.description = :description"),
     @NamedQuery(name = "Event.findTodaysEvent", query = "SELECT e FROM Event e WHERE  (e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime) OR (e.bookingBookingRef.startTime >= :startTime  AND e.bookingBookingRef.endTime <= :endTime) "),
@@ -44,6 +46,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Event.findEventsByRoomInTimeRange", query = "SELECT e FROM Event e WHERE e.tblRoomroomId = :room AND ((e.bookingBookingRef.startTime <= :startTime  AND e.bookingBookingRef.endTime >= :endTime) OR (e.bookingBookingRef.startTime >= :startTime  AND e.bookingBookingRef.endTime <= :endTime)) "),
     @NamedQuery(name = "Event.findByNumberOfParticipants", query = "SELECT e FROM Event e WHERE e.numberOfParticipants = :numberOfParticipants")})
 public class Event implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "openresgistration")
+    private boolean openresgistration;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -194,6 +200,14 @@ public class Event implements Serializable {
     @Override
     public String toString() {
         return title;
+    }
+
+    public boolean getOpenresgistration() {
+        return openresgistration;
+    }
+
+    public void setOpenresgistration(boolean openresgistration) {
+        this.openresgistration = openresgistration;
     }
     
 }
