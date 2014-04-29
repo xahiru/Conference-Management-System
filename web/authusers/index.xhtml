@@ -12,10 +12,12 @@
 
             <ui:define name="options">
                 <div styleClass="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all" >
-                    <p:menuitem outcome="/authusers/CreateBooking" value="Book"/>
+                   <p:menuitem value="Home" outcome="/visitors/index" />  
+                    <p:menuitem outcome="/authusers/index" value="Book"/>
                     <p:menuitem outcome="/authusers/EventList" value="Events"/>
                     <p:menuitem outcome="/room/List" value="Venue"/>
                     <p:menuitem outcome="/participant/List" value="Participants"/>
+                      <p:menuitem outcome="/rentalRequest/List" value="Reqests"/>
                     <p:menuitem outcome="/contents/List" value="Handout"/>
                     <p:menuitem outcome="/authusers/ResetPass" value="Reset password"/>
                     <p:menuitem  value="Logout"  action="#{loginController.logout()}" style="float: right"/>
@@ -67,8 +69,7 @@
                             <p:inputText id="numberOfParticipants" value="#{reservationController.numberOfParticipants}" title="#{bundle.CreateEventTitle_numberOfParticipants}" />
                             <p:outputLabel  value="Open Registration" for="numberOfParticipants" />
 
-                            <input type="checkbox" name="registration" value="Open registration?" checked="checked" />
-
+                            <h:selectBooleanCheckbox value="#{reservationController.openresgistration}" />
 
                             <p:spacer height="10" />
                         </h:panelGrid>                              
