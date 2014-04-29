@@ -44,7 +44,12 @@
                             </f:facet>
                             <h:outputText value="#{eventlistController.getOrganizerName(item.tblOrganizerorganizerId.organizerId)}"/>
                         </p:column>
-
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Open Registraion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.openresgistration}"/>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Time"/>
