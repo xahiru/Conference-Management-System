@@ -60,6 +60,7 @@ public class ReservationController implements Serializable {
     private String title;
     private String description;
     private Integer numberOfParticipants;
+    private boolean openresgistration;
 
 //    Oragnization
     private String companyName;
@@ -117,6 +118,7 @@ public class ReservationController implements Serializable {
             event.setDescription(description);
             event.setNumberOfParticipants(numberOfParticipants);
             event.setTblOrganizerorganizerId(organizer);
+            event.setOpenresgistration(openresgistration);
 
             eventFacade.create(event);
 
@@ -180,6 +182,14 @@ public class ReservationController implements Serializable {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public boolean isOpenresgistration() {
+        return openresgistration;
+    }
+
+    public void setOpenresgistration(boolean openresgistration) {
+        this.openresgistration = openresgistration;
     }
 
     public String getCurrentDate() {
