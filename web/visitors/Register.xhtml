@@ -13,37 +13,39 @@
         </ui:define>
 
         <ui:define name="content">
-           <p:panel style="height:455px; "  >
-            <h1>New User</h1>
+            <p:panel style="height:455px; "  >
+                <h1>New User</h1>
 
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                
-             
-                    <p:messages closable="true" />  
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+
+
+                    <p:messages id="messege" closable="true" />  
 
                     <h:panelGrid columns="2" style="width: 300px;margin: 100px auto; position: relative" >
-                        <p:outputLabel value="username" for="username" />
-                        <p:inputText id="username" value="#{usersController.selected.username}" title="#{bundle.CreateUsersTitle_username}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_username}"/>
-                        <p:outputLabel value="password" for="password" />
-                        <p:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.CreateUsersTitle_password}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_password}"/>
-                        <p:outputLabel id="non" for="signup"/>
-                        <p:commandButton id="signup"  action="#{usersController.signup()}" value="Signup" style="margin:10px 40px"/>
+                        <p:outputLabel value="participant Id" for="participantId" />
+                        <p:inputText id="participantId" value="#{registrationController.participantId}" title="Participant Id" required="true" requiredMessage="Participant ID id required"/>
+                        <p:outputLabel value="Event" for="Event" />
+                        <h:selectOneMenu id="Event" value="#{registrationController.event}" title="Event" required="true" requiredMessage="Select an event">
+                            <f:selectItems value="#{registrationController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <p:outputLabel id="non" for="Register"/>
+                        <p:commandButton id="Register"  actionListener="#{registrationController.register()}" value="Register" update="messege" style="margin:10px 40px"/>
 
                     </h:panelGrid>
                     <br />
 
                     <br />
-            
-                
 
-                <br />
 
-                <br />
 
-            </h:form>
+                    <br />
+
+                    <br />
+
+                </h:form>
             </p:panel>
         </ui:define>            
     </ui:composition>
