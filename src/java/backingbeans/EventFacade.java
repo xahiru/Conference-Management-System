@@ -50,4 +50,12 @@ public class EventFacade extends AbstractFacade<Event> {
           return em.createNamedQuery("Event.findTodaysEvent").setParameter("startTime", startTtime).setParameter("endTime", endTime).getResultList();
         
     }
+    
+    public List<Event> findUserSpecificRange(int[] range,Users user ) {
+       
+        javax.persistence.Query q = em.createNamedQuery("Event.findMyEvents").setParameter("user", user);
+        q.setMaxResults(range[1] - range[0] + 1);
+        q.setFirstResult(range[0]);
+        return q.getResultList();
+    }
 }
