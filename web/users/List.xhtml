@@ -7,7 +7,13 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="./../conferenceTemplate.xhtml">
+        <ui:define name="menubtns">
+            <p:menuitem value="Users" outcome="/users/List" /> 
+            <p:menuitem value="Group" outcome="/usersGroup/List" /> 
+            <p:menuitem value="Change Password" outcome="/admin/ResetPassword" /> 
 
+            <p:menuitem outcome="/admin/index" value="Admin Home"/>
+        </ui:define>
         <ui:define name="options">
             <h:commandLink action="#{loginController.logout()}" value="Logout"></h:commandLink>
         </ui:define>
@@ -17,47 +23,49 @@
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUsersEmpty}" rendered="#{usersController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{usersController.items.rowCount > 0}">
-                    <h:outputText value="#{usersController.pagination.pageFirstItem + 1}..#{usersController.pagination.pageLastItem + 1}/#{usersController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{usersController.previous}" value="#{bundle.Previous} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{usersController.next}" value="#{bundle.Next} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usersController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="userid"/>
-                            </f:facet>
-                            <h:outputText value="#{item.userId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="username"/>
-                            </f:facet>
-                            <h:outputText value="#{item.username}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="passowrd"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{usersController.prepareView}" value="View"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usersController.prepareEdit}" value="Edit"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usersController.destroy}" value="Delete"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
+                <p:dataTable id="residentDataTable" var="item" value="#{usersController.items}" paginator="true" rows="5"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10,15"  
+                             emptyMessage="No Residents found with the given criteria" >
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="userid"/>
+                        </f:facet>
+                        <h:outputText value="#{item.userId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="username"/>
+                        </f:facet>
+                        <h:outputText value="#{item.username}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="passowrd"/>
+                        </f:facet>
+                        <h:outputText value="#{item.password}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{usersController.prepareView}" value="View"/>
+                        <h:outputText value=" "/>
+
+
+                    </p:column>
+                    <p:column>
+                        <h:commandLink action="#{usersController.prepareEdit}" value="Edit"/>
+                        <h:outputText value=" "/>
+                    </p:column>
+                    <p:column>
+                        <h:commandLink action="#{usersController.destroy}" value="Delete"/>
+                    </p:column>
+                </p:dataTable>
                 <br />
                 <p:commandButton  action="#{usersController.prepareCreate}" value ="New User" />
                 <br />
-                <br />
-                <h:link outcome="/admin/index" value="Admin Home"/>
             </h:form>
         </ui:define>
     </ui:composition>
