@@ -8,7 +8,7 @@
 
     <body>
 
-        <ui:composition template="./../conferenceTemplate.xhtml">
+        <ui:composition template="/conferenceTemplate.xhtml">
 
             <ui:define name="menubtns">
 
@@ -16,20 +16,22 @@
 
                 <p:menuitem value="Schedule" outcome="/index" />  
                 <p:menuitem value="Register" outcome="/visitors/Register" />  
-                <p:menuitem value="Rooms" outcome="/booking/List" />
-                <p:menuitem value="fileUpload" outcome="/fileUpload" /> 
-                <p:menuitem value="newrss" outcome="/newResident" /> 
+                <p:menuitem value="Rooms" outcome="/visitors/RoomList" />
+<!--                <p:menuitem value="fileUpload" outcome="/fileUpload" /> 
+                <p:menuitem value="newrss" outcome="/newResident" /> -->
 
             </ui:define>
 
             <ui:define name="options" >
                 <div >                    
-                    <p:submenu label="Login"  style="float: right; " >
+                    <!--                    <p:submenu label="Login"  style="float: right; " >-->
+                    <p:menuitem value="Sign Up" outcome="/visitors/SignUp"  /> 
+                    <p:submenu label="Login"   >
                         <p:menuitem value="Admin" outcome="/admin/index" />
                         <p:menuitem value="User" outcome="/authusers/index"  /> 
                     </p:submenu>
 
-                    <p:menuitem value="Sign Up" outcome="/visitors/SignUp"  /> 
+
                 </div>
 
 
@@ -61,7 +63,11 @@
                         </h:form>  
                     </p:panel>
                     <p:panel style="width:475px;height:485px;">
-
+                        <p:imageSwitch effect="turnDown">
+                            <ui:repeat value="#{visitorIndexController.images}" var="image">
+                                <p:graphicImage height="470" width="450" value="/resources/image/#{image}" />
+                            </ui:repeat>
+                        </p:imageSwitch>
                     </p:panel>
 
                 </h:panelGrid>
