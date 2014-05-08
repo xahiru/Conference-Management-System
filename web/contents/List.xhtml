@@ -15,7 +15,7 @@
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListContentsEmpty}" rendered="#{contentsController.items.rowCount == 0}"/>
+                <h:outputText escape="false" value="No Handouts" rendered="#{contentsController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{contentsController.items.rowCount > 0}">
                     <h:outputText value="#{contentsController.pagination.pageFirstItem + 1}..#{contentsController.pagination.pageLastItem + 1}/#{contentsController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{contentsController.previous}" value="#{bundle.Previous} #{contentsController.pagination.pageSize}" rendered="#{contentsController.pagination.hasPreviousPage}"/>&nbsp;
@@ -23,19 +23,19 @@
                     <h:dataTable value="#{contentsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListContentsTitle_idcontents}"/>
+                                <h:outputText value="ID"/>
                             </f:facet>
                             <h:outputText value="#{item.contentsId}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListContentsTitle_paticipantNotes}"/>
+                                <h:outputText value="Content Title"/>
                             </f:facet>
                             <h:outputText value="#{item.paticipantNotes}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListContentsTitle_eventIdevent}"/>
+                                <h:outputText value="Event"/>
                             </f:facet>
                             <h:outputText value="#{item.tblEventeventId}"/>
                         </h:column>
@@ -43,19 +43,19 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{contentsController.prepareView}" value="#{bundle.ListContentsViewLink}"/>
+                            <h:commandLink action="#{contentsController.prepareView}" value="View"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{contentsController.prepareEdit}" value="#{bundle.ListContentsEditLink}"/>
+                            <h:commandLink action="#{contentsController.prepareEdit}" value="Edit"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{contentsController.destroy}" value="#{bundle.ListContentsDestroyLink}"/>
+                            <h:commandLink action="#{contentsController.destroy}" value="Delete"/>
                         </h:column>
                     </h:dataTable>
+                   
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{contentsController.prepareCreate}" value="#{bundle.ListContentsCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListContentsIndexLink}"/>
+                 <h:commandButton action="#{contentsController.prepareCreate}" value="Add handout"/>
+                
+                
             </h:form>
         </ui:define>
     </ui:composition>
