@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `confmng`.`tblRoom` (
   `furniture_mobility` VARCHAR(45) NULL DEFAULT NULL,
   `furniture_type` VARCHAR(45) NULL DEFAULT NULL,
   `orientation` VARCHAR(45) NULL DEFAULT NULL,
-  `floor_plan` BLOB NULL,
+  `floor_plan` MEDIUMBLOB NULL,
   PRIMARY KEY (`roomId`),
   UNIQUE INDEX `number_UNIQUE` (`number` ASC))
 ENGINE = InnoDB
@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `confmng`.`tblEvent` (
   `booking_booking_ref` INT(11) NOT NULL,
   `tblOrganizer_organizerId` INT(11) NOT NULL,
   `tblRoom_roomId` INT(11) NOT NULL,
+  `openresgistration` TINYINT(1) NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`eventId`),
   UNIQUE INDEX `idevent_UNIQUE` (`eventId` ASC),
   INDEX `fk_event_booking1_idx` (`booking_booking_ref` ASC),
@@ -138,7 +139,7 @@ DROP TABLE IF EXISTS `confmng`.`tblContent` ;
 
 CREATE TABLE IF NOT EXISTS `confmng`.`tblContent` (
   `contentsId` INT(11) NOT NULL AUTO_INCREMENT,
-  `paticipant_notes` BLOB NULL DEFAULT NULL,
+  `paticipant_notes` LONGBLOB NULL DEFAULT NULL,
   `tblEvent_eventId` INT(11) NOT NULL,
   PRIMARY KEY (`contentsId`),
   INDEX `fk_tblContent_tblEvent1_idx` (`tblEvent_eventId` ASC),
@@ -170,7 +171,7 @@ DROP TABLE IF EXISTS `confmng`.`tblLayout` ;
 
 CREATE TABLE IF NOT EXISTS `confmng`.`tblLayout` (
   `layoutId` INT(11) NOT NULL AUTO_INCREMENT,
-  `photo` BLOB NULL DEFAULT NULL,
+  `photo` MEDIUMBLOB NULL DEFAULT NULL,
   `room_roomId` INT(11) NOT NULL,
   PRIMARY KEY (`layoutId`),
   INDEX `fk_layout_room1_idx` (`room_roomId` ASC),
@@ -191,7 +192,8 @@ CREATE TABLE IF NOT EXISTS `confmng`.`tblRoomcard` (
   `roomcardId` INT(11) NOT NULL AUTO_INCREMENT,
   `room_number` VARCHAR(45) NOT NULL,
   `card_number` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`roomcardId`))
+  PRIMARY KEY (`roomcardId`),
+  UNIQUE INDEX `card_number_UNIQUE` (`card_number` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -203,20 +205,22 @@ DROP TABLE IF EXISTS `confmng`.`tblParticipant` ;
 
 CREATE TABLE IF NOT EXISTS `confmng`.`tblParticipant` (
   `name` VARCHAR(45) NOT NULL,
-  `photo` BLOB NULL DEFAULT NULL,
+  `photo` MEDIUMBLOB NULL DEFAULT NULL,
   `registrationstatus` TINYINT(1) NOT NULL,
   `tblEvent_eventId` INT(11) NOT NULL,
-  `participantId` INT(11) NOT NULL,
+  `participantId` INT(11) NOT NULL AUTO_INCREMENT,
+  `tblRoomcard_roomcardId` INT(11) NULL,
+  INDEX `fk_tblParticipant_tblEvent1_idx` USING BTREE (`tblEvent_eventId` ASC),
+  UNIQUE INDEX `participantId_UNIQUE` (`participantId` ASC),
   PRIMARY KEY (`participantId`),
-  INDEX `fk_tblParticipant_tblEvent1_idx` (`tblEvent_eventId` ASC),
-  INDEX `fk_tblParticipant_tblRoomcard1_idx` (`participantId` ASC),
+  INDEX `fk_tblParticipant_tblRoomcard1_idx` (`tblRoomcard_roomcardId` ASC),
   CONSTRAINT `fk_tblParticipant_tblEvent1`
     FOREIGN KEY (`tblEvent_eventId`)
     REFERENCES `confmng`.`tblEvent` (`eventId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tblParticipant_tblRoomcard1`
-    FOREIGN KEY (`participantId`)
+    FOREIGN KEY (`tblRoomcard_roomcardId`)
     REFERENCES `confmng`.`tblRoomcard` (`roomcardId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
