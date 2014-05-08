@@ -15,23 +15,23 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateContentsLabel_idcontents}" for="idcontents" />
+                    <h:outputLabel value="Id" for="idcontents" />
                     <h:inputText id="idcontents" value="#{contentsController.selected.contentsId}" title="#{bundle.CreateContentsTitle_idcontents}" required="true" requiredMessage="#{bundle.CreateContentsRequiredMessage_idcontents}"/>
-                    <h:outputLabel value="#{bundle.CreateContentsLabel_paticipantNotes}" for="paticipantNotes" />
+                    <h:outputLabel value="Participant Notes" for="paticipantNotes" />
                     <h:inputText id="paticipantNotes" value="#{contentsController.selected.paticipantNotes}" title="#{bundle.CreateContentsTitle_paticipantNotes}" />
-                    <h:outputLabel value="#{bundle.CreateContentsLabel_eventIdevent}" for="eventIdevent" />
+                    <h:outputLabel value="Event" for="eventIdevent" />
                     <h:selectOneMenu id="eventIdevent" value="#{contentsController.selected.tblEventeventId}" title="#{bundle.CreateContentsTitle_eventIdevent}" required="true" requiredMessage="#{bundle.CreateContentsRequiredMessage_eventIdevent}">
-                        <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{eventlistController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{contentsController.create}" value="#{bundle.CreateContentsSaveLink}" />
+                <h:commandButton action="#{contentsController.create}" value="Save" />
                 <br />
                 <br />
-                <h:commandLink action="#{contentsController.prepareList}" value="#{bundle.CreateContentsShowAllLink}" immediate="true"/>
+                <h:commandLink action="#{contentsController.prepareList}" value="List" immediate="true"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.CreateContentsIndexLink}"/>
+                <h:link outcome="/index" value="Home"/>
             </h:form>
         </ui:define>
     </ui:composition>
