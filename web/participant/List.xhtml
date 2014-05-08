@@ -61,19 +61,17 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{participantController.prepareView}" value="#{bundle.ListParticipantViewLink}"/>
+                            <h:commandLink action="#{participantController.prepareView}" value="View"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{participantController.prepareEdit}" value="#{bundle.ListParticipantEditLink}"/>
+                            <h:commandLink action="#{participantController.prepareEdit}" value="Edit"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{participantController.destroy}" value="#{bundle.ListParticipantDestroyLink}"/>
+                            <h:commandLink action="#{participantController.destroy}" value="Delete"/>
                         </p:column>
                     </p:dataTable>
     
                 <br />
-                <h:commandLink action="#{participantController.prepareCreate}" value="#{bundle.ListParticipantCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListParticipantIndexLink}"/>
+                <h:commandButton action="#{participantController.prepareCreate}" value="New"/>
+              
             </h:form>
              </p:panel>
         </ui:define>

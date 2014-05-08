@@ -18,30 +18,28 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewParticipantLabel_idparticipant}"/>
+                    <h:outputText value="ID"/>
                     <h:outputText value="#{participantController.selected.participantId}" title="#{bundle.ViewParticipantTitle_idparticipant}"/>
-                    <h:outputText value="#{bundle.ViewParticipantLabel_name}"/>
+                    <h:outputText value="name"/>
                     <h:outputText value="#{participantController.selected.name}" title="#{bundle.ViewParticipantTitle_name}"/>
-                    <h:outputText value="#{bundle.ViewParticipantLabel_photo}"/>
+                    <h:outputText value="Photo"/>
                     <h:outputText value="#{participantController.selected.photo}" title="#{bundle.ViewParticipantTitle_photo}"/>
-                    <h:outputText value="#{bundle.ViewParticipantLabel_roomcardIdtable1}"/>
+                    <h:outputText value="Roomcard"/>
                     <h:outputText value="#{participantController.selected.roomcard}" title="#{bundle.ViewParticipantTitle_roomcardIdtable1}"/>
-                    <h:outputText value="#{bundle.ViewParticipantLabel_eventIdevent}"/>
+                    <h:outputText value="Event"/>
                     <h:outputText value="#{participantController.selected.tblEventeventId}" title="#{bundle.ViewParticipantTitle_eventIdevent}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{participantController.destroyAndView}" value="#{bundle.ViewParticipantDestroyLink}"/>
                 <br />
                 <br />
-                <h:link outcome="Edit" value="#{bundle.ViewParticipantEditLink}"/>
+                <h:link outcome="Edit" value="Edit"/>
                 <br />
-                <h:commandLink action="#{participantController.prepareCreate}" value="#{bundle.ViewParticipantCreateLink}" />
+                <h:commandLink action="#{participantController.prepareCreate}" value="View" />
                 <br />
-                <h:commandLink action="#{participantController.prepareList}" value="#{bundle.ViewParticipantShowAllLink}"/>
+                <h:commandLink action="#{participantController.prepareList}" value="List"/>
                 <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewParticipantIndexLink}"/>
-
+               
             </h:form>
                 </p:panel>
         </ui:define>

@@ -139,10 +139,10 @@ public class UsersController implements Serializable {
             hashUtil.setBase64(getNewPassword());
             current.setPassword(hashUtil.getBase64());
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
-            return "Edit";
+            JsfUtil.addSuccessMessage("Password changed");
+            return "ResetPassword";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e,"password change failed");
             return null;
         }
     }

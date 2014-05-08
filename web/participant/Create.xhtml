@@ -20,8 +20,8 @@
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Participant ID" for="idparticipant" />
                         <h:inputText id="idparticipant" value="#{participantController.selected.participantId}" title="ID" required="true" requiredMessage="Id is required"/>
-                        <h:outputLabel value="#{bundle.CreateParticipantLabel_name}" for="name" />
-                        <h:inputText id="name" value="#{participantController.selected.name}" title="#{bundle.CreateParticipantTitle_name}" required="true" requiredMessage="Title is required"/>
+                        <h:outputLabel value="Name" for="name" />
+                        <h:inputText id="name" value="#{participantController.selected.name}" title="Name" required="true" requiredMessage="Name is required"/>
                         
                         
                         <h:inputFile id="filename" value="#{participantController.file}" />
@@ -29,20 +29,20 @@
                         
                         
                         <h:outputLabel value="Event" for="eventIdevent" />
-                        <h:selectOneMenu id="eventIdevent" value="#{participantController.selected.tblEventeventId}" title="#{bundle.CreateParticipantTitle_eventIdevent}" required="true" requiredMessage="#{bundle.CreateParticipantRequiredMessage_eventIdevent}">
+                        <h:selectOneMenu id="eventIdevent" value="#{participantController.selected.tblEventeventId}" title="Event" required="true" requiredMessage="Event is required">
                             <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
                         </h:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid columns="2">
                     </h:panelGrid>
                     <br />
-                    <h:commandLink action="#{participantController.create}" value="#{bundle.CreateParticipantSaveLink}" />
+                    <h:commandLink action="#{participantController.create}" value="Save" />
                     <br />
                     <br />
-                    <h:commandLink action="#{participantController.prepareList}" value="#{bundle.CreateParticipantShowAllLink}" immediate="true"/>
+                    <h:commandLink action="#{participantController.prepareList}" value="List" immediate="true"/>
                     <br />
                     <br />
-                    <h:link outcome="/index" value="#{bundle.CreateParticipantIndexLink}"/>
+                    <h:link outcome="/index" value="HOME"/>
                 </h:form>
                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
 
