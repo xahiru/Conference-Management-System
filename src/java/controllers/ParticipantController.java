@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -26,16 +25,19 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.Part;
+import org.apache.commons.io.IOUtils;
+
+import org.primefaces.event.FileUploadEvent;
+//import org.primefaces.model.UploadedFile;
 
 @Named("participantController")
 @SessionScoped
 public class ParticipantController implements Serializable {
 
+//    private Part uploadedFile;
     private Participant current;
-    private Roomcard currentCard;
-    private Part file;
-
     private DataModel items = null;
+    private Part file;
     @EJB
     private backingbeans.ParticipantFacade ejbFacade;
     @EJB
@@ -96,36 +98,28 @@ public class ParticipantController implements Serializable {
 //    }
     public String prepareList() {
         recreateModel();
-        return "List";
-    }
-
-    public Part getFile() {
-        return file;
-    }
-
-    public void setFile(Part file) {
-        this.file = file;
+        return "/participant/List";
     }
 
     public String prepareView() {
         current = (Participant) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "/participant/View";
     }
 
     public String prepareCreate() {
         current = new Participant();
         selectedItemIndex = -1;
-        return "Create";
+        return "/participant/Create";
     }
 
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ParticipantCreated"));
+            JsfUtil.addSuccessMessage("RoomCreated");
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
             return null;
         }
     }
@@ -139,10 +133,10 @@ public class ParticipantController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ParticipantUpdated"));
+            JsfUtil.addSuccessMessage("RoomUpdated");
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
@@ -153,7 +147,7 @@ public class ParticipantController implements Serializable {
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        return "/participant/List";
     }
 
     public String destroyAndView() {
@@ -161,11 +155,11 @@ public class ParticipantController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return "/participant/View";
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return "/participant/List";
         }
     }
 
@@ -270,6 +264,14 @@ public class ParticipantController implements Serializable {
             }
         }
 
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
     }
 
     public String upload() throws IOException {
