@@ -13,6 +13,10 @@
     
     }
     
+.myTable td:nth-child(1) {
+    width: 200px !important;
+}
+    
 
 .main{
     margin:0 auto;
