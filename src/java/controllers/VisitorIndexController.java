@@ -41,6 +41,8 @@ public class VisitorIndexController implements Serializable {
     List<Event> eventList = new ArrayList<Event>();
     PaginationHelper pagination;
 //    private DataModel items = null;
+    private List<String> images;
+
     @EJB
     private backingbeans.EventFacade ef;
     @EJB
@@ -61,7 +63,7 @@ public class VisitorIndexController implements Serializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         String today = dateFormat.format(cal.getTime());
-        
+
         try {
             cal.setTime(dateFormat.parse(today));
 //Date timeat12 = cal.setTime(dateFormat.parse(today));
@@ -78,50 +80,58 @@ public class VisitorIndexController implements Serializable {
         System.out.println(startTime);
         System.err.println(endDate);
         for (Event event : eventList) {
-            System.out.println("Title "+event.getTitle()+" IN "+event.getTblRoomroomId().getName()+"From: "+event.getBookingBookingRef().getStartTime()+" To: "+event.getBookingBookingRef().getEndTime());
+            System.out.println("Title " + event.getTitle() + " IN " + event.getTblRoomroomId().getName() + "From: " + event.getBookingBookingRef().getStartTime() + " To: " + event.getBookingBookingRef().getEndTime());
         }
+        
+        images = new ArrayList<String>();
+        images.add("room1.jpg");
+        images.add("room2.jpg");
+        images.add("room3.jpg");
+        images.add("room4.jpg");
     }
 
-/*
-    public PaginationHelper getPagination() {
-    if (pagination == null) {
-    pagination = new PaginationHelper(10) {
-    @Override
-    public int getItemsCount() {
-    return ef.count();
+    public List<String> getImages() {
+        return images;
     }
-    @Override
-    public DataModel createPageDataModel() {
-    Calendar cal = Calendar.getInstance();
-    Date startTime = cal.getTime();
-    cal.add(Calendar.DATE, 1);
-    Date endDate = cal.getTime();
-    return new ListDataModel(ef.getTodaysEvents(startTime,endDate));
-    }
-    };
-    }
-    return pagination;
-    }
-    public DataModel getItems() {
-    if (items == null) {
-    items = getPagination().createPageDataModel();
-    }
-    return items;
-    }
+    /*
+     public PaginationHelper getPagination() {
+     if (pagination == null) {
+     pagination = new PaginationHelper(10) {
+     @Override
+     public int getItemsCount() {
+     return ef.count();
+     }
+     @Override
+     public DataModel createPageDataModel() {
+     Calendar cal = Calendar.getInstance();
+     Date startTime = cal.getTime();
+     cal.add(Calendar.DATE, 1);
+     Date endDate = cal.getTime();
+     return new ListDataModel(ef.getTodaysEvents(startTime,endDate));
+     }
+     };
+     }
+     return pagination;
+     }
+     public DataModel getItems() {
+     if (items == null) {
+     items = getPagination().createPageDataModel();
+     }
+     return items;
+     }
      */
+
     public List<Event> getEventList() {
         return eventList;
     }
-    
-    
 
     public String getOrganizerName(Organizer r) {
 //        Organizer r = (Organizer) of.find(Integer.valueOf(id));
         return r.getCompanyName();
     }
-    
-    public String getTime(Booking r){
-        
+
+    public String getTime(Booking r) {
+
         Date d = r.getStartTime();
         Calendar c = Calendar.getInstance();
         c.setTime(d);
@@ -133,8 +143,8 @@ public class VisitorIndexController implements Serializable {
         int fm = c.get(Calendar.MINUTE);
         String sTime = String.format("%02d:%02d", s, sm);
         String fTime = String.format("%02d:%02d", f, fm);
-        
-        return sTime+"-"+fTime;
+
+        return sTime + "-" + fTime;
     }
 
     public Date getStartTime(Booking r) {
@@ -151,8 +161,7 @@ public class VisitorIndexController implements Serializable {
 //        Room r = (Room) rf.find(Integer.valueOf(id));
         return r.getName();
     }
-    
-    
+
     /*
      public Event getEvent(java.lang.Integer id) {
      return ef.find(id);
