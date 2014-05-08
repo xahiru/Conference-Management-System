@@ -22,9 +22,9 @@
                     <h:dataTable value="#{rentalRequestController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRentalRequestTitle_idrentalRequest}"/>
+                                <h:outputText value="#{bundle.ListRentalRequestTitle_rentalrequestId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idrentalRequest}"/>
+                            <h:outputText value="#{item.rentalrequestId}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -46,15 +46,15 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRentalRequestTitle_eventIdevent}"/>
+                                <h:outputText value="#{bundle.ListRentalRequestTitle_tblEventeventId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.eventIdevent}"/>
+                            <h:outputText value="#{item.tblEventeventId}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandButton action="#{rentalRequestController.prepareView}" value="Create Request"/>
+                            <h:commandLink action="#{rentalRequestController.prepareView}" value="#{bundle.ListRentalRequestViewLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{rentalRequestController.prepareEdit}" value="#{bundle.ListRentalRequestEditLink}"/>
                             <h:outputText value=" "/>

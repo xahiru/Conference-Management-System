@@ -15,16 +15,16 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditRentalRequestLabel_idrentalRequest}" for="idrentalRequest" />
-                    <h:inputText id="idrentalRequest" value="#{rentalRequestController.selected.idrentalRequest}" title="#{bundle.EditRentalRequestTitle_idrentalRequest}" required="true" requiredMessage="#{bundle.EditRentalRequestRequiredMessage_idrentalRequest}"/>
+                    <h:outputLabel value="#{bundle.EditRentalRequestLabel_rentalrequestId}" for="rentalrequestId" />
+                    <h:inputText id="rentalrequestId" value="#{rentalRequestController.selected.rentalrequestId}" title="#{bundle.EditRentalRequestTitle_rentalrequestId}" required="true" requiredMessage="#{bundle.EditRentalRequestRequiredMessage_rentalrequestId}"/>
                     <h:outputLabel value="#{bundle.EditRentalRequestLabel_requestType}" for="requestType" />
                     <h:inputText id="requestType" value="#{rentalRequestController.selected.requestType}" title="#{bundle.EditRentalRequestTitle_requestType}" required="true" requiredMessage="#{bundle.EditRentalRequestRequiredMessage_requestType}"/>
                     <h:outputLabel value="#{bundle.EditRentalRequestLabel_description}" for="description" />
                     <h:inputText id="description" value="#{rentalRequestController.selected.description}" title="#{bundle.EditRentalRequestTitle_description}" />
                     <h:outputLabel value="#{bundle.EditRentalRequestLabel_qauntity}" for="qauntity" />
                     <h:inputText id="qauntity" value="#{rentalRequestController.selected.qauntity}" title="#{bundle.EditRentalRequestTitle_qauntity}" />
-                    <h:outputLabel value="#{bundle.EditRentalRequestLabel_eventIdevent}" for="eventIdevent" />
-                    <h:selectOneMenu id="eventIdevent" value="#{rentalRequestController.selected.eventIdevent}" title="#{bundle.EditRentalRequestTitle_eventIdevent}" required="true" requiredMessage="#{bundle.EditRentalRequestRequiredMessage_eventIdevent}">
+                    <h:outputLabel value="#{bundle.EditRentalRequestLabel_tblEventeventId}" for="tblEventeventId" />
+                    <h:selectOneMenu id="tblEventeventId" value="#{rentalRequestController.selected.tblEventeventId}" title="#{bundle.EditRentalRequestTitle_tblEventeventId}" required="true" requiredMessage="#{bundle.EditRentalRequestRequiredMessage_tblEventeventId}">
                         <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
