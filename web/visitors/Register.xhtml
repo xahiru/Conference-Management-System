@@ -7,14 +7,33 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="./../conferenceTemplate.xhtml">
+        <ui:define name="menubtns">
 
-        <ui:define name="options">
 
+
+            <p:menuitem value="Schedule" outcome="/index" />  
+            <p:menuitem value="Register" outcome="/visitors/Register" />  
+            <p:menuitem value="Rooms" outcome="/visitors/RoomList" />
+            
         </ui:define>
+        <ui:define name="options" >
+                <div >                    
+                    <!--                    <p:submenu label="Login"  style="float: right; " >-->
+                    <p:menuitem value="Sign Up" outcome="/visitors/SignUp"  /> 
+                    <p:submenu label="Login"   >
+                        <p:menuitem value="Admin" outcome="/admin/index" />
+                        <p:menuitem value="User" outcome="/authusers/index"  /> 
+                    </p:submenu>
+
+
+                </div>
+
+
+            </ui:define>
 
         <ui:define name="content">
             <p:panel style="height:455px; "  >
-                <h1>New User</h1>
+                <h1>Registration</h1>
 
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -28,22 +47,14 @@
                         <p:outputLabel value="participant Id" for="participantId" />
                         <p:inputText id="participantId" value="#{registrationController.participantId}" title="Participant Id" required="true" requiredMessage="Participant ID id required"/>
                         <p:outputLabel value="Event" for="Event" />
-                        <h:selectOneMenu id="Event" value="#{registrationController.event}" title="Event" required="true" requiredMessage="Select an event">
+                        <p:selectOneMenu id="Event" value="#{registrationController.event}" required="true" requiredMessage="Select an event">
                             <f:selectItems value="#{registrationController.itemsAvailableSelectOne}"/>
-                        </h:selectOneMenu>
+                        </p:selectOneMenu>
                         <p:outputLabel id="non" for="Register"/>
                         <p:commandButton id="Register"  actionListener="#{registrationController.register()}" value="Register" update="messege" style="margin:10px 40px"/>
 
                     </h:panelGrid>
-                    <br />
 
-                    <br />
-
-
-
-                    <br />
-
-                    <br />
 
                 </h:form>
             </p:panel>
