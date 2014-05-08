@@ -33,6 +33,10 @@ public class ParticipantFacade extends AbstractFacade<Participant> {
         super(Participant.class);
     }
 
+    /*
+    This method will return the list of all participants entere by a specific user
+    in most cases the logged in user.
+    */
     public List<Participant> findRangeForSpecificUser(int[] range, Users user) {
 
         javax.persistence.Query q = em.createNamedQuery("Participant.findByNameByUser").setParameter("user", user);
