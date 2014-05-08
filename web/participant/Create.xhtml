@@ -44,6 +44,79 @@
                     <br />
                     <h:link outcome="/index" value="#{bundle.CreateParticipantIndexLink}"/>
                 </h:form>
+                   <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+
+                <h:form enctype="multipart/form-data">
+                    <h:panelGrid columns="3">
+                        <p:growl id="message" showDetail="true"/>
+                        <h:inputFile id="filename" value="#{roomController.file}" />
+                        <p:commandButton value="Upload" ajax="false" actionListener="#{roomController.upload}" update="message"/>
+                        <p:message for="filename"/>
+
+                        <p:outputLabel value="Room Number" for="number" />
+                        <p:inputText id="number" value="#{roomController.selected.number}" title="#{bundle.CreateRoomTitle_number}" required="true" requiredMessage="#{bundle.CreateRoomRequiredMessage_number}"/>
+                        <p:message for="number"/>
+                        <p:outputLabel value="Name" for="name" />
+                        <p:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.CreateRoomTitle_name}" />
+                        <p:message for="name"/>
+                        <p:outputLabel value="Area" for="area" />
+                        <p:inputText id="area" value="#{roomController.selected.area}" title="#{bundle.CreateRoomTitle_area}" />
+                        <p:message for="area"/>
+                        <p:outputLabel value="Capacity" for="capacity" />
+                        <p:inputText id="capacity" value="#{roomController.selected.capacity}" title="#{bundle.CreateRoomTitle_capacity}" />
+                        <p:message for="capacity"/>
+                        <p:outputLabel value="Type" for="type" />
+
+                        <p:selectOneMenu id="type" value="#{roomController.selected.type}" style="width: 178px;" >  
+                            <f:selectItem itemLabel="Select One..." itemValue="" />  
+                            <f:selectItem itemLabel="Mulifunctional" itemValue="Mulifunctional" />
+                            <f:selectItem itemLabel="A/V Room" itemValue="A/V Room" />
+                            <f:selectItem itemLabel="Meeting Room" itemValue="Meeting Room" />
+                            <f:selectItem itemLabel="Outdoor" itemValue="Outdoor" />
+                            <f:selectItem itemLabel="Hall" itemValue="Hall" />
+
+                        </p:selectOneMenu>   
+
+                        <p:message for="type"/>
+
+                        <p:outputLabel value="Furniture mobility" for="furnitureMobility" />
+                        <p:selectOneRadio id="furnitureMobility" value="#{roomController.selected.furnitureMobility}" requiredMessage="Gender must be filled">  
+                            <f:selectItem itemLabel="Yes" itemValue="Yes" />  
+                            <f:selectItem itemLabel="No" itemValue="No" />  
+                        </p:selectOneRadio>  
+                        <p:message for="furnitureMobility"/>
+
+                        <p:outputLabel value="Furniture type" for="furnitureType" />
+
+
+                        <p:selectOneMenu id="furnitureType" value="#{roomController.selected.furnitureType}" style="width:178px;" >  
+                            <f:selectItem itemLabel="Select One..." itemValue="" />  
+                            <f:selectItem itemLabel="Official" itemValue="Official" />
+                            <f:selectItem itemLabel="Bamboo" itemValue="Bamboo" />
+                            <f:selectItem itemLabel="Metal" itemValue="Metal" />
+                            <f:selectItem itemLabel="Ordinary" itemValue="Ordinary" />
+                            <f:selectItem itemLabel="Wooden" itemValue="Wooden" />
+                            <f:selectItem itemLabel="Plastic" itemValue="Plastic" />
+                            <f:selectItem itemLabel="Glass" itemValue="Glass" />
+                        </p:selectOneMenu> 
+                        <p:message for="furnitureType"/>
+
+                        <p:outputLabel value="Orientation" for="orientation" />
+                        <p:selectOneMenu id="orientation" value="#{roomController.selected.orientation}" style="width:178px;" >  
+                            <f:selectItem itemLabel="Select One..." itemValue="" />  
+                            <f:selectItem itemLabel="East-to-West" itemValue="East-to-West" />
+                            <f:selectItem itemLabel="West-to-East" itemValue="West-to-East" />
+                            <f:selectItem itemLabel="North-to-South" itemValue="North-to-South" />
+                            <f:selectItem itemLabel="South-to-North" itemValue="South-to-North" />
+                        </p:selectOneMenu> 
+                        <p:message for="orientation"/>
+
+                    </h:panelGrid>
+                    <br />
+                    <h:commandButton action="#{roomController.create}" value="Save" />
+
+                </h:form> 
+
 
 
             </p:panel>
