@@ -11,9 +11,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -44,10 +47,19 @@ public class RoomController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 //     private UploadedFile uploadedFile;
+     private List<String> images;
 
     public RoomController() {
+         images = new ArrayList<String>();
+
+        for (int i = 1; i <= 4; i++) {
+            images.add("room" + i + ".jpg");
+        }
     }
 
+  public List<String> getImages() {
+        return images;
+    }
     public Room getSelected() {
         if (current == null) {
             current = new Room();
@@ -98,7 +110,6 @@ public class RoomController implements Serializable {
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
 //
 //    }
-
     public String prepareList() {
         recreateModel();
         return "/room/List";
@@ -117,14 +128,14 @@ public class RoomController implements Serializable {
     }
 
     public String create() {
-        
+
         try {
-           // upload();
+            // upload();
             getFacade().create(current);
             JsfUtil.addSuccessMessage("RoomCreated");
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
@@ -342,11 +353,11 @@ public class RoomController implements Serializable {
             }
         }
         current.setFloorPlan(buffer);
-        
+
         outputStream.close();
         inputStream.close();
-        
-        FacesMessage msg = new FacesMessage("Succesful", filename + " is uploaded.");  
+
+        FacesMessage msg = new FacesMessage("Succesful", filename + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
         return "success";
