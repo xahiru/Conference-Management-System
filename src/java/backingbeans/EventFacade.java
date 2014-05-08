@@ -6,6 +6,7 @@
 package backingbeans;
 
 import entity.Event;
+import entity.Participant;
 import entity.Room;
 import entity.Users;
 import java.util.ArrayList;
@@ -50,6 +51,12 @@ public class EventFacade extends AbstractFacade<Event> {
           return em.createNamedQuery("Event.findTodaysEvent").setParameter("startTime", startTtime).setParameter("endTime", endTime).getResultList();
         
     }
+    
+     public List<Event> getEventForRegistration(Date startTtime) {
+          return em.createNamedQuery("Event.findEventByOpenRegistration").setParameter("startTime", startTtime).getResultList();
+        
+    }
+    
     
     public List<Event> findUserSpecificRange(int[] range,Users user ) {
        
