@@ -3,15 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-     <ui:composition template="./../conferenceTemplate.xhtml">
+    <ui:composition template="./../conferenceTemplate.xhtml">
 
-            <ui:define name="options">
-                <h:commandLink action="#{loginController.logout()}" value="Logout"></h:commandLink>
-            </ui:define>
+        <ui:define name="menubtns">
+            <p:menuitem value="Users" outcome="/users/List" /> 
+            <p:menuitem value="Group" outcome="/usersGroup/List" /> 
+            <p:menuitem value="Change Password" outcome="/admin/ResetPassword" /> 
 
-            <ui:define name="content">
+            <p:menuitem outcome="/admin/index" value="Admin Home"/>
+        </ui:define>
+
+        <ui:define name="options">
+            <h:commandLink action="#{loginController.logout()}" value="Logout"></h:commandLink>
+        </ui:define>
+
+        <ui:define name="content">
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -21,42 +30,53 @@
                     <h:outputText value="#{usersGroupController.pagination.pageFirstItem + 1}..#{usersGroupController.pagination.pageLastItem + 1}/#{usersGroupController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{usersGroupController.previous}" value="#{bundle.Previous} #{usersGroupController.pagination.pageSize}" rendered="#{usersGroupController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{usersGroupController.next}" value="#{bundle.Next} #{usersGroupController.pagination.pageSize}" rendered="#{usersGroupController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usersGroupController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+                    <p:dataTable id="residentDataTable" var="item" value="#{usersGroupController.items}" paginator="true" rows="5"  
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                 rowsPerPageTemplate="5,10,15"  
+                                 emptyMessage="No Residents found with the given criteria" >
+
+
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="id"/>
                             </f:facet>
                             <h:outputText value="#{item.groupId}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="groupname"/>
                             </f:facet>
                             <h:outputText value="#{item.groupname}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="username"/>
                             </f:facet>
                             <h:outputText value="#{usersGroupController.getUsersGroupsUsername(item.username)}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <h:commandLink action="#{usersGroupController.prepareView}" value="View"/>
+
+                        </p:column>
+                        <p:column>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{usersGroupController.prepareEdit}" value="Edit"/>
+
+                        </p:column>
+                        <p:column>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{usersGroupController.destroy}" value="Delete"/>
-                        </h:column>
-                    </h:dataTable>
+                        </p:column>
+                    </p:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{usersGroupController.prepareCreate}" value="New Role"/>
+                <p:commandButton action="#{usersGroupController.prepareCreate}" value="New Role"/>
                 <br />
                 <br />
-                <h:link outcome="/admin/index" value="Admin Home"/>
+
             </h:form>
         </ui:define>
     </ui:composition>
