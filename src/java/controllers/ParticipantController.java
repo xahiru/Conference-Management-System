@@ -7,6 +7,7 @@ import backingbeans.ParticipantFacade;
 import entity.Event;
 import entity.Roomcard;
 import entity.Users;
+import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,8 @@ import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 //import org.primefaces.model.UploadedFile;
 
 @Named("participantController")
@@ -35,8 +38,11 @@ import org.primefaces.event.FileUploadEvent;
 public class ParticipantController implements Serializable {
 
 //    private Part uploadedFile;
+//    private Roomcard currentCard;
     private Participant current;
     private DataModel items = null;
+    private boolean regstat = false;
+    private StreamedContent pPhoto;
     private Part file;
     @EJB
     private backingbeans.ParticipantFacade ejbFacade;
@@ -46,6 +52,8 @@ public class ParticipantController implements Serializable {
     private backingbeans.UsersFacade usersFacade;
     @EJB
     private backingbeans.EventFacade eventFacade;
+//     @EJB
+//    private backingbeans.RoomcardFacade ejbRoomCardFacade;
 
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -115,11 +123,14 @@ public class ParticipantController implements Serializable {
 
     public String create() {
         try {
+           // ejbRoomCardFacade.create(currentCard);
+            //  current.setRoomcard(currentCard);
+            current.setRegistrationstatus(regstat);
             getFacade().create(current);
             JsfUtil.addSuccessMessage("RoomCreated");
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
@@ -308,6 +319,26 @@ public class ParticipantController implements Serializable {
             }
         }
         return null;
+    }
+
+    public boolean isRegstat() {
+        return regstat;
+    }
+
+    public void setRegstat(boolean regstat) {
+        this.regstat = regstat;
+    }
+
+    public StreamedContent getpPhoto() {
+
+        InputStream is = new ByteArrayInputStream((byte[]) current.getPhoto());
+        pPhoto = new DefaultStreamedContent(is, "image/png");
+
+        return pPhoto;
+    }
+
+    public void setpPhoto(StreamedContent pPhoto) {
+        this.pPhoto = pPhoto;
     }
 
 }

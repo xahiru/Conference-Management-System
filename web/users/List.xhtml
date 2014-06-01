@@ -19,6 +19,7 @@
         </ui:define>
 
         <ui:define name="content">
+             <p:panel style="height:455px; ">
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -67,6 +68,7 @@
                 <p:commandButton  action="#{usersController.prepareCreate}" value ="New User" />
                 <br />
             </h:form>
+             </p:panel>
         </ui:define>
     </ui:composition>
 

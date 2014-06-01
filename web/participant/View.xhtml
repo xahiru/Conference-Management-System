@@ -19,18 +19,20 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputText value="ID"/>
-                    <h:outputText value="#{participantController.selected.participantId}" title="#{bundle.ViewParticipantTitle_idparticipant}"/>
+                    <h:outputText value="#{participantController.selected.participantId}" title="id"/>
                     <h:outputText value="name"/>
-                    <h:outputText value="#{participantController.selected.name}" title="#{bundle.ViewParticipantTitle_name}"/>
-                    <h:outputText value="Photo"/>
-                    <h:outputText value="#{participantController.selected.photo}" title="#{bundle.ViewParticipantTitle_photo}"/>
-                    <h:outputText value="Roomcard"/>
-                    <h:outputText value="#{participantController.selected.roomcard}" title="#{bundle.ViewParticipantTitle_roomcardIdtable1}"/>
+                    <h:outputText value="#{participantController.selected.name}" title="name"/>
+                    <h:outputText value="photo"/>
+
+                    <p:graphicImage id="photo" value="#{imageBean.image}" style="width:20px;width:50px" >
+                            <f:param name="p_id" value="#{participantController.selected.participantId}" />
+                        </p:graphicImage> <h:outputText value="Roomcard"/>
+                    <h:outputText value="#{participantController.selected.roomcard}" title="room card"/>
                     <h:outputText value="Event"/>
-                    <h:outputText value="#{participantController.selected.tblEventeventId}" title="#{bundle.ViewParticipantTitle_eventIdevent}"/>
+                    <h:outputText value="#{participantController.selected.tblEventeventId}" title="event"/>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{participantController.destroyAndView}" value="#{bundle.ViewParticipantDestroyLink}"/>
+                <h:commandLink action="#{participantController.destroyAndView}" value="Delete"/>
                 <br />
                 <br />
                 <h:link outcome="Edit" value="Edit"/>
