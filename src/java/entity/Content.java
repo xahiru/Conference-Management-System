@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -38,6 +40,11 @@ public class Content implements Serializable {
     @Basic(optional = false)
     @Column(name = "contentsId")
     private Integer contentsId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "filename")
+    private String filename;
     @Lob
     @Column(name = "paticipant_notes")
     private byte[] paticipantNotes;
@@ -58,6 +65,14 @@ public class Content implements Serializable {
 
     public void setContentsId(Integer contentsId) {
         this.contentsId = contentsId;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public byte[] getPaticipantNotes() {

@@ -255,6 +255,7 @@ public class ContentsController implements Serializable {
     public String upload() throws IOException {
         InputStream inputStream = file.getInputStream();
         String filename = getFilename(file);
+        current.setFilename(filename);
         FileOutputStream outputStream = new FileOutputStream(filename);
 
         byte[] buffer = new byte[4194304]; //4MB
