@@ -127,7 +127,7 @@ public class ParticipantController implements Serializable {
             //  current.setRoomcard(currentCard);
             current.setRegistrationstatus(regstat);
             getFacade().create(current);
-            JsfUtil.addSuccessMessage("RoomCreated");
+            JsfUtil.addSuccessMessage("Participant added. Participant ID is"+current.getParticipantId()+"\n Please provide the Pariticipant ID to the participant, if the event is open for registration\n so that participant can register themsevlves");
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");

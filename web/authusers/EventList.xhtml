@@ -63,21 +63,21 @@
                                 </p:column>
 
                                 <p:column>  
-                                    <p:commandButton value="View"  
+                                    <h:commandLink value="View"  
                                                      actionListener="#{eventlistController.prepareView}"
-                                                     >  
-                                    </p:commandButton>  
+                                                    />  
+                                      
                                 </p:column> 
                                 <p:column>  
-                                    <p:commandButton value="Update"  
+                                    <h:commandLink value="Update"  
                                                      actionListener="#{eventlistController.prepareEdit }"
                                                      />                         
                                 </p:column> 
                                 <p:column>  
-                                    <p:commandButton value="Delete" 
+                                    <h:commandLink value="Delete" 
                                                      actionListener="#{eventlistController.destroy}"
-                                                     >                                
-                                    </p:commandButton>
+                                                    />                                
+                                    
                                 </p:column>   
 
                             </p:dataTable>

@@ -160,7 +160,7 @@ public class EventlistController implements Serializable {
     }
 
     public String prepareView() {
-        System.out.println("pressview");
+      //  System.out.println("pressedview");
         current = (Event) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";

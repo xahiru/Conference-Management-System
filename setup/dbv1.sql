@@ -139,6 +139,7 @@ DROP TABLE IF EXISTS `confmng`.`tblContent` ;
 
 CREATE TABLE IF NOT EXISTS `confmng`.`tblContent` (
   `contentsId` INT(11) NOT NULL AUTO_INCREMENT,
+`filename` VARCHAR(45) NOT NULL,
   `paticipant_notes` LONGBLOB NULL DEFAULT NULL,
   `tblEvent_eventId` INT(11) NOT NULL,
   PRIMARY KEY (`contentsId`),

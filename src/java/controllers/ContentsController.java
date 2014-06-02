@@ -4,12 +4,16 @@ import entity.Content;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.ContentsFacade;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,6 +21,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.Part;
 
 @Named("contentsController")
 @SessionScoped
@@ -24,8 +29,13 @@ public class ContentsController implements Serializable {
 
     private Content current;
     private DataModel items = null;
+//    private String fname;
+    
+    private Part file;
     @EJB
     private backingbeans.ContentsFacade ejbFacade;
+//    @EJB
+//    private backingbeans.EventFacade eventFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -81,11 +91,12 @@ public class ContentsController implements Serializable {
 
     public String create() {
         try {
+            upload();
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContentsCreated"));
+            JsfUtil.addSuccessMessage("ContentsCreated");
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
@@ -98,11 +109,12 @@ public class ContentsController implements Serializable {
 
     public String update() {
         try {
+            upload();
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContentsUpdated"));
+            JsfUtil.addSuccessMessage("ContentsUpdated");
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
             return null;
         }
     }
@@ -132,9 +144,9 @@ public class ContentsController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContentsDeleted"));
+            JsfUtil.addSuccessMessage("ContentsDeleted");
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
         }
     }
 
@@ -232,4 +244,63 @@ public class ContentsController implements Serializable {
 
     }
 
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
+    public String upload() throws IOException {
+        InputStream inputStream = file.getInputStream();
+        String filename = getFilename(file);
+        FileOutputStream outputStream = new FileOutputStream(filename);
+
+        byte[] buffer = new byte[4194304]; //4MB
+        int bytesRead = 0;
+        while (true) {
+            bytesRead = inputStream.read(buffer);
+            if (bytesRead > 0) {
+                outputStream.write(buffer, 0, bytesRead);
+            } else {
+                break;
+            }
+        }
+        current.setPaticipantNotes(buffer);
+
+        outputStream.close();
+        inputStream.close();
+
+        FacesMessage msg = new FacesMessage("Succesful", filename + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return "success";
+    }
+
+    private static String getFilename(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.  
+            }
+        }
+        return null;
+    }
+    
+//      public  String getEventName(String id){
+//      
+//      return eventFacade.find(Integer.valueOf(id)).getTitle();
+////      return "hell";
+//  }
+//
+//    public String getFname() {
+////        fname =getFilename(current.getPaticipantNotes())
+//        return fname;
+//    }
+//
+//    public void setFname(String fname) {
+//        this.fname = fname;
+//    }
+//      
 }

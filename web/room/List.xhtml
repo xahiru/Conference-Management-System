@@ -21,7 +21,7 @@
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
-                    <h:outputText escape="false" value="#{bundle.ListRoomEmpty}" rendered="#{roomController.items.rowCount == 0}"/>
+                    <h:outputText escape="false" value="Room List is Empty" rendered="#{roomController.items.rowCount == 0}"/>
                     <h:panelGroup rendered="#{roomController.items.rowCount > 0}">
                         <h:outputText value="#{roomController.pagination.pageFirstItem + 1}..#{roomController.pagination.pageLastItem + 1}/#{roomController.pagination.itemsCount}"/>&nbsp;
                         <h:commandLink action="#{roomController.previous}" value="#{bundle.Previous} #{roomController.pagination.pageSize}" rendered="#{roomController.pagination.hasPreviousPage}"/>&nbsp;

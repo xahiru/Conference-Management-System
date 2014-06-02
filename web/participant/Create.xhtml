@@ -30,7 +30,7 @@
                         
                         <h:outputLabel value="Event" for="eventIdevent" />
                         <h:selectOneMenu id="eventIdevent" value="#{participantController.selected.tblEventeventId}" title="Event" required="true" requiredMessage="Event is required">
-                            <f:selectItems value="#{eventController.itemsAvailableSelectOne}"/>
+                            <f:selectItems value="#{eventlistController.eventsByMe}"/>
                         </h:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid columns="2">
