@@ -19,36 +19,33 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="idroom" for="idroom" />
-                    <h:inputText id="idroom" value="#{roomController.selected.idroom}" title="#{bundle.EditRoomTitle_idroom}" required="true" requiredMessage="#{bundle.EditRoomRequiredMessage_idroom}"/>
                     <h:outputLabel value="number" for="number" />
-                    <h:inputText id="number" value="#{roomController.selected.number}" title="#{bundle.EditRoomTitle_number}" required="true" requiredMessage="#{bundle.EditRoomRequiredMessage_number}"/>
+                    <h:inputText id="number" value="#{roomController.selected.number}" title="number" required="true" requiredMessage="Room number is required"/>
                     <h:outputLabel value="name" for="name" />
-                    <h:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.EditRoomTitle_name}" />
-                    <h:outputLabel value=area" for="area" />
-                    <h:inputText id="area" value="#{roomController.selected.area}" title="#{bundle.EditRoomTitle_area}" />
-                    <h:outputLabel value=capacity" for="capacity" />
-                    <h:inputText id="capacity" value="#{roomController.selected.capacity}" title="#{bundle.EditRoomTitle_capacity}" />
+                    <h:inputText id="name" value="#{roomController.selected.name}" title="name" />
+                    <h:outputLabel value="area" for="area" />
+                    <h:inputText id="area" value="#{roomController.selected.area}" title="area" />
+                    <h:outputLabel value="capacity" for="capacity" />
+                    <h:inputText id="capacity" value="#{roomController.selected.capacity}" title="capacity" />
                     <h:outputLabel value="type" for="type" />
-                    <h:inputText id="type" value="#{roomController.selected.type}" title="#{bundle.EditRoomTitle_type}" />
+                    <h:inputText id="type" value="#{roomController.selected.type}" title="type" />
                     <h:outputLabel value="furniture Mobility" for="furnitureMobility" />
-                    <h:inputText id="furnitureMobility" value="#{roomController.selected.furnitureMobility}" title="#{bundle.EditRoomTitle_furnitureMobility}" />
+                    <h:inputText id="furnitureMobility" value="#{roomController.selected.furnitureMobility}" title="furnitureMobility" />
                     <h:outputLabel value="furniture Type" for="furnitureType" />
-                    <h:inputText id="furnitureType" value="#{roomController.selected.furnitureType}" title="#{bundle.EditRoomTitle_furnitureType}" />
+                    <h:inputText id="furnitureType" value="#{roomController.selected.furnitureType}" title="furnitureType" />
                     <h:outputLabel value="orientation" for="orientation" />
-                    <h:inputText id="orientation" value="#{roomController.selected.orientation}" title="#{bundle.EditRoomTitle_orientation}" />
+                    <h:inputText id="orientation" value="#{roomController.selected.orientation}" title="orientation" />
                     <h:outputLabel value="floorPlan" for="floorPlan" />
-                    <h:inputText id="floorPlan" value="#{roomController.selected.floorPlan}" title="#{bundle.EditRoomTitle_floorPlan}" />
+                    <h:inputText id="floorPlan" value="#{roomController.selected.floorPlan}" title="floorPlan" />
                 </h:panelGrid>
-                <h:commandLink action="#{roomController.update}" value="#{bundle.EditRoomSaveLink}"/>
+                <h:commandLink action="#{roomController.update}" value="Save"/>
                 <br />
                 <br />
-                <h:link outcome="View" value="#{bundle.EditRoomViewLink}"/>
+                <h:link outcome="View" value="View"/>
                 <br />
-                <h:commandLink action="#{roomController.prepareList}" value="#{bundle.EditRoomShowAllLink}" immediate="true"/>
+                <h:commandLink action="#{roomController.prepareList}" value="Show All" immediate="true"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.EditRoomIndexLink}" />
             </h:form>
                 </p:panel>
         </ui:define>

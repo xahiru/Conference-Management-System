@@ -80,24 +80,24 @@
                                 </f:facet>
                                 <h:outputText value="#{item.orientation}"/>
                             </p:column>  
-                            <p:column>
+<!--                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="photo"/>
                                 </f:facet>
-<!--                                <p:graphicImage name="#{imageStreamer.image}">
+                                <p:graphicImage name="#{imageStreamer.image}">
                                     <f:param name="id" value="#{item.roomId}" />
-                                </p:graphicImage>-->
+                                </p:graphicImage>
 
-                            </p:column>  
+                            </p:column>  -->
                             <p:column>  
                                 <h:commandButton value="View" 
-                                                 actionListener="#{roomController.prepareView}"
+                                                 action="#{roomController.prepareView}"
                                                  >  
                                 </h:commandButton>  
                             </p:column> 
                             <p:column>  
-                                <h:commandButton value="Update"
-                                                 actionListener="#{roomController.prepareEdit}"
+                                <h:commandButton value="Edit"
+                                                 action="#{roomController.prepareEdit}"
                                                  />                         
                             </p:column> 
                             <p:column>  
@@ -106,16 +106,7 @@
                                                  >                                
                                 </h:commandButton>
                             </p:column>
-                            <!--                            <p:column>
-                                                            <f:facet name="header">
-                                                                <h:outputText value="&nbsp;"/>
-                                                            </f:facet>
-                                                            <h:commandLink action="#{roomController.prepareView}" value="#{bundle.ListRoomViewLink}"/>
-                                                            <h:outputText value=" "/>
-                                                            <h:commandLink action="#{roomController.prepareEdit}" value="#{bundle.ListRoomEditLink}"/>
-                                                            <h:outputText value=" "/>
-                                                            <h:commandLink action="#{roomController.destroy}" value="#{bundle.ListRoomDestroyLink}"/>
-                                                        </p:column>-->
+                          
                         </p:dataTable>
                     </h:panelGroup>
                     <br />

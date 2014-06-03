@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -175,10 +176,10 @@ public class EventlistController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EventCreated"));
+            JsfUtil.addSuccessMessage("EventCreated");
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
             return null;
         }
     }
@@ -191,11 +192,15 @@ public class EventlistController implements Serializable {
 
     public String update() {
         try {
+            if(isRoomAvailable()){
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EventUpdated"));
+            bookingFacade.edit(current.getBookingBookingRef());
+            organizerFacade.edit(current.getTblOrganizerorganizerId());
+            JsfUtil.addSuccessMessage("EventUpdated");
+            }
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
@@ -224,10 +229,12 @@ public class EventlistController implements Serializable {
 
     private void performDestroy() {
         try {
+//            bookingFacade.remove(current.getBookingBookingRef());
+//            organizerFacade.remove(current.getTblOrganizerorganizerId());
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EventDeleted"));
+            JsfUtil.addSuccessMessage("EventDeleted");
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
         }
     }
 
@@ -321,6 +328,23 @@ public class EventlistController implements Serializable {
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Event.class.getName());
             }
+        }
+
+    }
+    
+    public boolean isRoomAvailable() {
+        List<Event> evntList = getFacade().getEventByRoomAndTime(current.getTblRoomroomId(), current.getBookingBookingRef().getStartTime(), current.getBookingBookingRef().getEndTime());
+      
+        if (evntList.isEmpty()) {
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("available"));
+            return true;
+        } else {
+            for (Event event : evntList) {
+                if(event.getEventId() == current.getEventId())
+                    return true;
+            }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Room is not available for the selected time, please select a different time"));
+            return false;
         }
 
     }

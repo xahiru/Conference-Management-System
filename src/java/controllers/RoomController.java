@@ -130,7 +130,7 @@ public class RoomController implements Serializable {
     public String create() {
 
         try {
-            // upload();
+             upload();
             getFacade().create(current);
             JsfUtil.addSuccessMessage("RoomCreated");
             return prepareCreate();

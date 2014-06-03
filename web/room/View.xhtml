@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="./../conferenceTemplate.xhtml">
         <ui:define name="options">
@@ -11,47 +12,47 @@
         </ui:define>
 
         <ui:define name="content">
-        
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewRoomLabel_idroom}"/>
-                    <h:outputText value="#{roomController.selected.idroom}" title="#{bundle.ViewRoomTitle_idroom}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_number}"/>
-                    <h:outputText value="#{roomController.selected.number}" title="#{bundle.ViewRoomTitle_number}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_name}"/>
-                    <h:outputText value="#{roomController.selected.name}" title="#{bundle.ViewRoomTitle_name}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_area}"/>
-                    <h:outputText value="#{roomController.selected.area}" title="#{bundle.ViewRoomTitle_area}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_capacity}"/>
-                    <h:outputText value="#{roomController.selected.capacity}" title="#{bundle.ViewRoomTitle_capacity}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_type}"/>
-                    <h:outputText value="#{roomController.selected.type}" title="#{bundle.ViewRoomTitle_type}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_furnitureMobility}"/>
-                    <h:outputText value="#{roomController.selected.furnitureMobility}" title="#{bundle.ViewRoomTitle_furnitureMobility}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_furnitureType}"/>
-                    <h:outputText value="#{roomController.selected.furnitureType}" title="#{bundle.ViewRoomTitle_furnitureType}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_orientation}"/>
-                    <h:outputText value="#{roomController.selected.orientation}" title="#{bundle.ViewRoomTitle_orientation}"/>
-                    <h:outputText value="#{bundle.ViewRoomLabel_floorPlan}"/>
-                    <h:outputText value="#{roomController.selected.floorPlan}" title="#{bundle.ViewRoomTitle_floorPlan}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{roomController.destroyAndView}" value="#{bundle.ViewRoomDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewRoomEditLink}"/>
-                <br />
-                <h:commandLink action="#{roomController.prepareCreate}" value="#{bundle.ViewRoomCreateLink}" />
-                <br />
-                <h:commandLink action="#{roomController.prepareList}" value="#{bundle.ViewRoomShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewRoomIndexLink}"/>
+            <p:panel style="height:485px;">
 
-            </h:form>
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Room number"/>
+                        <h:outputText value="#{roomController.selected.number}" title="Room number"/>
+                        <h:outputText value="Name"/>
+                        <h:outputText value="#{roomController.selected.name}" title="Name"/>
+                        <h:outputText value="Area"/>
+                        <h:outputText value="#{roomController.selected.area}" title="Area"/>
+                        <h:outputText value="Capacity"/>
+                        <h:outputText value="#{roomController.selected.capacity}" title="Capacity"/>
+                        <h:outputText value="Room Type"/>
+                        <h:outputText value="#{roomController.selected.type}" title="Room type"/>
+                        <h:outputText value="Furniture mobility"/>
+                        <h:outputText value="#{roomController.selected.furnitureMobility}" title="furniture mobilty"/>
+                        <h:outputText value="Furniture type"/>
+                        <h:outputText value="#{roomController.selected.furnitureType}" title="Furniture type"/>
+                        <h:outputText value="Orientation"/>
+                        <h:outputText value="#{roomController.selected.orientation}" title="Orientation"/>
+                        <h:outputText value="Floor plan"/>
+                        <h:outputText value="#{roomController.selected.floorPlan}" title="Floor plan"/>
+                    </h:panelGrid>
+                    <br />
+                    <h:commandLink action="#{roomController.destroyAndView}" value="Delete"/>
+                    <br />
+                    <br />
+                    <h:link outcome="Edit" value="Edit"/>
+                    <br />
+                    <h:commandLink action="#{roomController.prepareCreate}" value="Save" />
+                    <br />
+                    <br/>
+                    <h:commandLink action="#{roomController.prepareList}" value="Show All"/>
+                    <br />
+
+
+                </h:form>
+            </p:panel>
         </ui:define>
     </ui:composition>
 

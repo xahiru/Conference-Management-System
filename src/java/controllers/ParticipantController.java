@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -101,9 +102,7 @@ public class ParticipantController implements Serializable {
         return pagination;
     }
 
-//    public DataModel getParticipantsFromallMyEvents(){
-//        
-//    }
+
     public String prepareList() {
         recreateModel();
         return "/participant/List";

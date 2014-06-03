@@ -16,7 +16,7 @@
                     <p:menuitem outcome="/authusers/EventList" value="Events"/>
                     <p:menuitem outcome="/room/List" value="Venue"/>
                     <p:menuitem outcome="/participant/List" value="Participants"/>
-                    <p:menuitem outcome="/rentalRequest/List" value="Reqests"/>
+                      <p:menuitem outcome="/rentalRequest/List" value="Reqests"/>
                     <p:menuitem outcome="/contents/List" value="Handout"/>
                     <p:menuitem outcome="/authusers/ResetPass" value="Reset password"/>
                     <p:menuitem  value="Logout"  action="#{loginController.logout()}" style="float: right"/>
@@ -37,18 +37,19 @@
 
                         <h:panelGrid columns="4" columnClasses="label, value"> 
                             <h:outputText styleClass="outputLabel1" value='Start time' />
-                            <p:calendar id="startTime" value="#{reservationController.startTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_startTime}" mindate="#{reservationController.currentDate}" />
+                            <p:calendar id="startTime" value="#{eventlistController.selected.bookingBookingRef.startTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="start time is required" mindate="#{reservationController.currentDate}" />
 
-
+                            
                             <h:outputText styleClass="outputLabel1" value='Room' />
-
-                            <p:selectOneMenu id="roomIdroom" value="#{reservationController.room}" required="true" requiredMessage="#{bundle.CreateEventRequiredMessage_roomIdroom}">
+                            
+                            <p:selectOneMenu id="roomIdroom" value="#{eventlistController.selected.tblRoomroomId.name}" required="true" requiredMessage="Room is required">
                                 <f:selectItems value="#{roomController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
 
                             <h:outputText styleClass="outputLabel1" value='End time' />
-                            <p:calendar id="endTime" value="#{reservationController.endTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="#{bundle.CreateBookingTitle_endTime}" mindate="#{reservationController.currentDate}" />
-                      
+                            <p:calendar id="endTime" value="#{eventlistController.selected.bookingBookingRef.endTime}" pattern="MM/dd/yyyy HH:mm:ss" required="true" requiredMessage="End time is required" mindate="#{reservationController.currentDate}" />
+
+                            <p:spacer height="10" />
                         </h:panelGrid>
 
 
@@ -59,15 +60,15 @@
 
 
                             <p:outputLabel  value="Title" />
-                            <p:inputText id="title"  value="#{reservationController.title}" title="#{bundle.CreateEventTitle_title}" required="true" requiredMessage="#{bundle.CreateEventRequiredMessage_title}" />
+                            <p:inputText id="title"  value="#{eventlistController.selected.title}" title="title" required="true" requiredMessage="Event Title is required" />
                             <p:outputLabel  value="Description" for="description" />
-                            <p:inputText  id="description" value="#{reservationController.description}" title="#{bundle.CreateEventTitle_description}" />
+                            <p:inputText  id="description" value="#{eventlistController.selected.description}" title="description" />
 
                             <p:outputLabel  value="No of Participants" for="numberOfParticipants" />
-                            <p:inputText id="numberOfParticipants" value="#{reservationController.numberOfParticipants}" title="#{bundle.CreateEventTitle_numberOfParticipants}" />
+                            <p:inputText id="numberOfParticipants" value="#{eventlistController.selected.numberOfParticipants}" title="participant" />
                             <p:outputLabel  value="Open Registration" for="numberOfParticipants" />
 
-                            <h:selectBooleanCheckbox value="#{reservationController.openresgistration}" />
+                            <h:selectBooleanCheckbox value="#{eventlistController.selected.openresgistration}" />
 
                             <p:spacer height="10" />
                         </h:panelGrid>                              
@@ -76,18 +77,18 @@
                         <p:separator id="separator3"/>
                         <h:panelGrid columns="2" columnClasses="label, value">
                             <p:outputLabel value="Company Name" for="companyName" />
-                            <p:inputText id="companyName" value="#{reservationController.companyName}" title="companyName" required="true"/>
+                            <p:inputText id="companyName" value="#{eventlistController.selected.tblOrganizerorganizerId.companyName}" title="companyName" required="true"/>
 
                             <p:outputLabel value="Contact Person" for="contactPersonName" />
-                            <p:inputText id="contactPersonName" value="#{reservationController.contactPersonName}" title="contactPersonName" />
+                            <p:inputText id="contactPersonName" value="#{eventlistController.selected.tblOrganizerorganizerId.contactPersonName}" title="contactPersonName" />
                             <p:outputLabel value="Contact Number" for="contactNumber" />
-                            <p:inputText id="contactNumber" value="#{reservationController.contactNumber}" title="contactNumber" />
+                            <p:inputText id="contactNumber" value="#{eventlistController.selected.tblOrganizerorganizerId.contactNumber}" title="contactNumber" />
                             <p:outputLabel value="Email" for="email" />
-                            <p:inputText id="email" value="#{reservationController.email}" title="email" required="true"/>
+                            <p:inputText id="email" value="#{eventlistController.selected.tblOrganizerorganizerId.email}" title="email" required="true"/>
                             <p:spacer height="10" />
                         </h:panelGrid>
                         <p:separator id="separator4"/>
-                        <h:commandButton value="Reserve"  actionListener="#{reservationController.reserveEvent()}" /> 
+                        <h:commandButton value="Save"  actionListener="#{eventlistController.update()}" /> 
 
                     </h:form>
 

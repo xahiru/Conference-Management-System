@@ -23,20 +23,19 @@
                     <h:panelGrid columns="3">
                         <p:growl id="message" showDetail="true"/>
                         <h:inputFile id="filename" value="#{roomController.file}" />
-                        <p:commandButton value="Upload" ajax="false" actionListener="#{roomController.upload}" update="message"/>
-                        <p:message for="filename"/>
+                          <p:message for="filename"/>
 
                         <p:outputLabel value="Room Number" for="number" />
-                        <p:inputText id="number" value="#{roomController.selected.number}" title="#{bundle.CreateRoomTitle_number}" required="true" requiredMessage="#{bundle.CreateRoomRequiredMessage_number}"/>
+                        <p:inputText id="number" value="#{roomController.selected.number}" title="number" required="true" requiredMessage="Please select a room"/>
                         <p:message for="number"/>
                         <p:outputLabel value="Name" for="name" />
-                        <p:inputText id="name" value="#{roomController.selected.name}" title="#{bundle.CreateRoomTitle_name}" />
+                        <p:inputText id="name" value="#{roomController.selected.name}" title="name" />
                         <p:message for="name"/>
                         <p:outputLabel value="Area" for="area" />
-                        <p:inputText id="area" value="#{roomController.selected.area}" title="#{bundle.CreateRoomTitle_area}" />
+                        <p:inputText id="area" value="#{roomController.selected.area}" title="area" />
                         <p:message for="area"/>
                         <p:outputLabel value="Capacity" for="capacity" />
-                        <p:inputText id="capacity" value="#{roomController.selected.capacity}" title="#{bundle.CreateRoomTitle_capacity}" />
+                        <p:inputText id="capacity" value="#{roomController.selected.capacity}" title="capacity" />
                         <p:message for="capacity"/>
                         <p:outputLabel value="Type" for="type" />
 

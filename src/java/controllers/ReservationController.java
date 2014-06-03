@@ -122,9 +122,12 @@ public class ReservationController implements Serializable {
 
             eventFacade.create(event);
 
+//             event = null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Booking successful"));
+           
             return "/authusers/EventList";
         }//the success page
-        return "/authusers/CreateBooking";
+        return "/authusers/index";
     }
 
 //    public Booking createBooking(){

@@ -18,10 +18,15 @@
             <ui:define name="content">
                 <p:panel style="height:485px;">
                     <h:form>
-                        <h:panelGroup rendered="#{eventlistController.items.rowCount > 0}">
-                            <h:outputText value="#{eventlistController.pagination.pageFirstItem + 1}..#{roomController.pagination.pageLastItem + 1}/#{roomController.pagination.itemsCount}"/>&nbsp;
-                            <h:commandLink action="#{eventlistController.previous}" value="#{bundle.Previous} #{roomController.pagination.pageSize}" rendered="#{roomController.pagination.hasPreviousPage}"/>&nbsp;
-                            <h:commandLink action="#{eventlistController.next}" value="#{bundle.Next} #{roomController.pagination.pageSize}" rendered="#{roomController.pagination.hasNextPage}"/>&nbsp;
+
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:outputText escape="false" value="Event List is Empty" rendered="#{eventlistController.items.rowCount == 0}"/>
+                        <h:panelGroup  rendered="#{eventlistController.items.rowCount > 0}">
+                            <h:outputText value="#{eventlistController.pagination.pageFirstItem + 1}..#{eventlistController.pagination.pageLastItem + 1}/#{eventlistController.pagination.itemsCount}"/>&nbsp;
+                            <h:commandLink action="#{eventlistController.previous}" value="#{bundle.Previous} #{eventlistController.pagination.pageSize}" rendered="#{eventlistController.pagination.hasPreviousPage}"/>&nbsp;
+                            <h:commandLink action="#{eventlistController.next}" value="#{bundle.Next} #{eventlistController.pagination.pageSize}" rendered="#{eventlistController.pagination.hasNextPage}"/>&nbsp;
 
                             <p:dataTable value="#{eventlistController.items}" var="item" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                          rowsPerPageTemplate="5,10,15"  
@@ -48,7 +53,7 @@
                                     </f:facet>
                                     <h:outputText value="#{eventlistController.getOrganizerName(item.tblOrganizerorganizerId.organizerId)}"/>
                                 </p:column>
-                              
+
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Time"/>
@@ -64,20 +69,20 @@
 
                                 <p:column>  
                                     <h:commandLink value="View"  
-                                                     actionListener="#{eventlistController.prepareView}"
-                                                    />  
-                                      
+                                                   action="#{eventlistController.prepareView}"
+                                                   />  
+
                                 </p:column> 
                                 <p:column>  
-                                    <h:commandLink value="Update"  
-                                                     actionListener="#{eventlistController.prepareEdit }"
-                                                     />                         
+                                    <h:commandLink value="Edit"  
+                                                   action="#{eventlistController.prepareEdit }"
+                                                   />                         
                                 </p:column> 
                                 <p:column>  
                                     <h:commandLink value="Delete" 
-                                                     actionListener="#{eventlistController.destroy}"
-                                                    />                                
-                                    
+                                                   actionListener="#{eventlistController.destroy}"
+                                                   />                                
+
                                 </p:column>   
 
                             </p:dataTable>

@@ -20,6 +20,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import utilpack.HashUtil;
 
 @Named("usersController")
@@ -121,6 +122,10 @@ public class UsersController implements Serializable {
             currentUserGroup.setGroupname("authusers");
             currentUserGroup.setUsername(current);
             groupFacade.create(currentUserGroup);
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+            session.invalidate();
+
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Welcome! Please sign in"));
             return "/visitors/index";
         } catch (Exception e) {
@@ -142,7 +147,7 @@ public class UsersController implements Serializable {
             JsfUtil.addSuccessMessage("Password changed");
             return "ResetPassword";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"password change failed");
+            JsfUtil.addErrorMessage(e, "password change failed");
             return null;
         }
     }
