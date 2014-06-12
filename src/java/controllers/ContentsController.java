@@ -4,6 +4,7 @@ import entity.Content;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.ContentsFacade;
+import entity.Users;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,12 +31,15 @@ public class ContentsController implements Serializable {
     private Content current;
     private DataModel items = null;
 //    private String fname;
-    
+
     private Part file;
     @EJB
     private backingbeans.ContentsFacade ejbFacade;
 //    @EJB
 //    private backingbeans.EventFacade eventFacade;
+    @EJB
+    private backingbeans.UsersFacade usersFacade;
+
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -55,6 +59,8 @@ public class ContentsController implements Serializable {
     }
 
     public PaginationHelper getPagination() {
+        final Users u = usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername());
+
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
@@ -65,7 +71,11 @@ public class ContentsController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    if (JsfUtil.isCoordinator(u)) {
+                        return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    } else {
+                        return new ListDataModel(getFacade().findUserSpecificContent(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}, u));
+                    }
                 }
             };
         }
@@ -114,7 +124,7 @@ public class ContentsController implements Serializable {
             JsfUtil.addSuccessMessage("ContentsUpdated");
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e,"PersistenceErrorOccured");
+            JsfUtil.addErrorMessage(e, "PersistenceErrorOccured");
             return null;
         }
     }
@@ -288,7 +298,7 @@ public class ContentsController implements Serializable {
         }
         return null;
     }
-    
+
 //      public  String getEventName(String id){
 //      
 //      return eventFacade.find(Integer.valueOf(id)).getTitle();

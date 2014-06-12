@@ -7,6 +7,8 @@
 package backingbeans;
 
 import entity.Content;
+import entity.Users;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,15 @@ public class ContentsFacade extends AbstractFacade<Content> {
 
     public ContentsFacade() {
         super(Content.class);
+    }
+    
+     public List<Content> findUserSpecificContent(int[] range, Users user) {
+
+        javax.persistence.Query q = em.createNamedQuery("Content.findUserSpecificContent").setParameter("user", user);
+
+        q.setMaxResults(range[1] - range[0] + 1);
+        q.setFirstResult(range[0]);
+        return q.getResultList();
     }
     
 }

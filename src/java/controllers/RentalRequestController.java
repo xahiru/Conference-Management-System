@@ -4,6 +4,7 @@ import entity.RentalRequest;
 import controllers.util.JsfUtil;
 import controllers.util.PaginationHelper;
 import backingbeans.RentalRequestFacade;
+import entity.Users;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -26,6 +27,8 @@ public class RentalRequestController implements Serializable {
     private DataModel items = null;
     @EJB
     private backingbeans.RentalRequestFacade ejbFacade;
+    @EJB
+    private backingbeans.UsersFacade usersFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -45,6 +48,8 @@ public class RentalRequestController implements Serializable {
     }
 
     public PaginationHelper getPagination() {
+                final Users u = usersFacade.findUsersbyName(controllers.util.JsfUtil.getLoggedinUsername());
+
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
@@ -55,8 +60,14 @@ public class RentalRequestController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
+                    
+                     if (JsfUtil.isCoordinator(u)) {
+                    
                     return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
-                }
+                 } else {
+                        return new ListDataModel(getFacade().findUserSpecificRentalRequest(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}, u));
+                    }
+                     }
             };
         }
         return pagination;

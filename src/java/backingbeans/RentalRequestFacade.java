@@ -7,6 +7,8 @@
 package backingbeans;
 
 import entity.RentalRequest;
+import entity.Users;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,12 @@ public class RentalRequestFacade extends AbstractFacade<RentalRequest> {
     public RentalRequestFacade() {
         super(RentalRequest.class);
     }
-    
+    public List<RentalRequest> findUserSpecificRentalRequest(int[] range, Users user) {
+
+        javax.persistence.Query q = em.createNamedQuery("RentalRequest.findUserSpecificRentalRequest").setParameter("user", user);
+
+        q.setMaxResults(range[1] - range[0] + 1);
+        q.setFirstResult(range[0]);
+        return q.getResultList();
+    }
 }

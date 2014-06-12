@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
 import java.io.Serializable;
@@ -35,11 +34,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RentalRequest.findAll", query = "SELECT r FROM RentalRequest r"),
+    @NamedQuery(name = "RentalRequest.findUserSpecificRentalRequest", query = "SELECT r FROM RentalRequest r WHERE r.tblEventeventId.bookingBookingRef.tblUseruserId = :user"),
     @NamedQuery(name = "RentalRequest.findByRentalrequestId", query = "SELECT r FROM RentalRequest r WHERE r.rentalrequestId = :rentalrequestId"),
     @NamedQuery(name = "RentalRequest.findByRequestType", query = "SELECT r FROM RentalRequest r WHERE r.requestType = :requestType"),
     @NamedQuery(name = "RentalRequest.findByDescription", query = "SELECT r FROM RentalRequest r WHERE r.description = :description"),
     @NamedQuery(name = "RentalRequest.findByQauntity", query = "SELECT r FROM RentalRequest r WHERE r.qauntity = :qauntity")})
 public class RentalRequest implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -150,5 +151,5 @@ public class RentalRequest implements Serializable {
     public String toString() {
         return "entity.RentalRequest[ rentalrequestId=" + rentalrequestId + " ]";
     }
-    
+
 }
